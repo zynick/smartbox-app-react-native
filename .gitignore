@@ -1,6 +1,7 @@
 # React Ignite App
 android/
 ios/
+.env
 
 # OSX
 #
