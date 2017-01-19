@@ -1,4 +1,7 @@
 {
+   "email": "Email",
+   "password": "Password",
+
    "signIn": "Sign In",
    "logOut": "Log Out",
    "loginLogoutExampleTitle": "Login/Logout Redux + Sagas Example",
@@ -11,7 +14,6 @@
    "igniteGenerated": "Ignite Generate Screens",
    "forgotPassword": "Forgot Password",
    "username": "Username",
-   "password": "Password",
    "cancel": "Cancel",
    "welcome": "Welcome",
    "login": "Login",

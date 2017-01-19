@@ -12,24 +12,24 @@ import {
     LayoutAnimation
 } from 'react-native';
 import { connect } from 'react-redux';
-import Styles from './Styles/LoginScreenStyle';
+import Styles from './Styles/LoginScreen2Style';
 import { Images, Metrics } from '../Themes';
 import LoginActions from '../Redux/LoginRedux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import I18n from 'react-native-i18n';
 
-type LoginScreenProps = {
+type LoginScreen2Props = {
     dispatch: () => any,
     fetching: boolean,
     attemptLogin: () => void
 };
 
-class LoginScreen extends React.Component {
+class LoginScreen2 extends React.Component {
 
-    props: LoginScreenProps
+    props: LoginScreen2Props
 
     state: {
-        email: string,
+        username: string,
         password: string,
         visibleHeight: number,
         topLogo: {
@@ -41,11 +41,11 @@ class LoginScreen extends React.Component {
     keyboardDidShowListener: Object
     keyboardDidHideListener: Object
 
-    constructor(props: LoginScreenProps) {
+    constructor(props: LoginScreen2Props) {
         super(props);
         this.state = {
-            // email: 'john@smartboxasia.com',
-            // password: 'password',
+            username: 'reactnative@infinite.red',
+            password: 'password',
             visibleHeight: Metrics.screenHeight,
             topLogo: { width: Metrics.screenWidth }
         }
@@ -92,14 +92,14 @@ class LoginScreen extends React.Component {
     }
 
     handlePressLogin = () => {
-        const { email, password } = this.state;
+        const { username, password } = this.state;
         this.isAttempting = true;
         // attempt a login - a saga is listening to pick it up from here.
-        this.props.attemptLogin(email, password);
+        this.props.attemptLogin(username, password);
     }
 
-    handleChangeEmail = (text) => {
-        this.setState({ email: text });
+    handleChangeUsername = (text) => {
+        this.setState({ username: text });
     }
 
     handleChangePassword = (text) => {
@@ -107,7 +107,7 @@ class LoginScreen extends React.Component {
     }
 
     render() {
-        const { email, password } = this.state;
+        const { username, password } = this.state;
         const { fetching } = this.props;
         const editable = !fetching;
         const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly;
@@ -116,20 +116,20 @@ class LoginScreen extends React.Component {
                 <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
                 <View style={Styles.form}>
                     <View style={Styles.row}>
-                        <Text style={Styles.rowLabel}>{I18n.t('email')}</Text>
+                        <Text style={Styles.rowLabel}>{I18n.t('username')}</Text>
                         <TextInput
-                            ref='email'
+                            ref='username'
                             style={textInputStyle}
-                            // value={email}
+                            value={username}
                             editable={editable}
                             keyboardType='default'
                             returnKeyType='next'
                             autoCapitalize='none'
                             autoCorrect={false}
-                            onChangeText={this.handleChangeEmail}
+                            onChangeText={this.handleChangeUsername}
                             underlineColorAndroid='transparent'
                             onSubmitEditing={() => this.refs.password.focus()}
-                            placeholder='john@smartboxasia.com' />
+                            placeholder={I18n.t('username')} />
                     </View>
         
                     <View style={Styles.row}>
@@ -137,7 +137,7 @@ class LoginScreen extends React.Component {
                         <TextInput
                             ref='password'
                             style={textInputStyle}
-                            // value={password}
+                            value={password}
                             editable={editable}
                             keyboardType='default'
                             returnKeyType='go'
@@ -182,4 +182,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen2);

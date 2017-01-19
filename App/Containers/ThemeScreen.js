@@ -21,7 +21,6 @@ export default class ThemeScreen extends React.Component {
     return (
       <View style={styles.colorContainer} key={`${color}Container`}>
         <View style={styles.backgroundContainer} key={`${color}BackgroundContainer`}>
-          <Image style={styles.backerImage} source={Images.tileBg} key={`${color}BackgroundImage`} />
           <View style={[styles.colorSquare, {backgroundColor: Colors[color]}]} key={`${color}Square`} />
         </View>
         <Text style={styles.colorName} key={`${color}Text`}>{color}</Text>
