@@ -1,9 +1,13 @@
 // @flow
 
 const colors = {
-    darkgreen: '#459E4A',
+    // darkgreen: '#006400',
+    darkgreen: 'darkgreen',
+    white: 'white',
+    normalgreen: '#449d44',
+    background: '#138833',
 
-    background: '#1F0808',
+    // background: '#1F0808',
     clear: 'rgba(0,0,0,0)',
     facebook: '#3b5998',
     transparent: 'rgba(0,0,0,0)',

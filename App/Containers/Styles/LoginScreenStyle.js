@@ -6,7 +6,7 @@ import { Colors, Metrics } from '../../Themes';
 export default StyleSheet.create({
     container: {
         paddingTop: 70,
-        backgroundColor: Colors.background
+        backgroundColor: Colors.snow
     },
     form: {
         backgroundColor: Colors.snow,
@@ -39,8 +39,8 @@ export default StyleSheet.create({
     loginButton: {
         flex: 1,
         borderWidth: 1,
-        borderColor: Colors.charcoal,
-        backgroundColor: Colors.panther,
+        borderColor: Colors.white,
+        backgroundColor: Colors.darkgreen,
         padding: 6
     },
     loginText: {
