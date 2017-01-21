@@ -14,7 +14,7 @@ import {
 import { connect } from 'react-redux';
 import Styles from './Styles/LoginScreen2Style';
 import { Images, Metrics } from '../Themes';
-import LoginActions from '../Redux/LoginRedux';
+import LoginActions from '../Redux/LoginRedux2';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import I18n from 'react-native-i18n';
 
@@ -26,7 +26,7 @@ type LoginScreen2Props = {
 
 class LoginScreen2 extends React.Component {
 
-    props: LoginScreen2Props
+    props: LoginScreen2Props;
 
     state: {
         username: string,
@@ -35,11 +35,11 @@ class LoginScreen2 extends React.Component {
         topLogo: {
             width: number
         }
-    }
+    };
 
-    isAttempting: boolean
-    keyboardDidShowListener: Object
-    keyboardDidHideListener: Object
+    isAttempting: boolean;
+    keyboardDidShowListener: Object;
+    keyboardDidHideListener: Object;
 
     constructor(props: LoginScreen2Props) {
         super(props);
@@ -53,6 +53,7 @@ class LoginScreen2 extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
+        console.tron.log('screen - componentWillReceiveProps', newProps);
         this.forceUpdate();
         // Did the login attempt complete?
         if (this.isAttempting && !newProps.fetching) {
@@ -171,6 +172,7 @@ class LoginScreen2 extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.tron.log(`screen - mapStateToProps: ${JSON.stringify(state.login, null, 2)}`, );
     return {
         fetching: state.login.fetching
     };
@@ -178,7 +180,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        attemptLogin: (username, password) => dispatch(LoginActions.loginRequest(username, password))
+        attemptLogin: (username, password) => {
+            console.tron.log('screen - attemptLogin - dispatch');
+            return dispatch(LoginActions.loginRequest(username, password))
+        }
     };
 };
 

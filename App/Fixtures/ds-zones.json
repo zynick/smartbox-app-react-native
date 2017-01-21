@@ -1,0 +1,21 @@
+[{
+    "id": 1,
+    "name": "Living Room",
+    "groups": [{
+        "id": 1,
+        "name": "yellow",
+        "color": 1
+    }]
+}, {
+    "id": 56153,
+    "name": "Room #56153",
+    "groups": []
+}, {
+    "id": 2,
+    "name": "Dining Area",
+    "groups": []
+}, {
+    "id": 3,
+    "name": "Master Bedroom",
+    "groups": []
+}]

@@ -12,5 +12,19 @@ export default () => {
         search: require('./SearchRedux').reducer
     });
 
-    return configureStore(rootReducer, rootSaga);
+    const store = configureStore(rootReducer, rootSaga);
+
+    // https://github.com/reactjs/react-redux/releases/tag/v2.0.0
+    if (module.hot) {
+        module.hot.accept('../Redux', () => {
+            const nextRootReducer = combineReducers({
+                temperature: require('./TemperatureRedux').reducer,
+                login: require('./LoginRedux').reducer,
+                search: require('./SearchRedux').reducer
+            });
+            store.replaceReducer(nextRootReducer);
+        });
+    }
+
+    return store;
 };

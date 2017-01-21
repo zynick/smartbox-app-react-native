@@ -1,5 +1,7 @@
 // @flow
 
+// https://facebook.github.io/react/docs/react-component.html
+
 import React from 'react';
 import {
     View,
@@ -26,20 +28,21 @@ type LoginScreenProps = {
 
 class LoginScreen extends React.Component {
 
-    props: LoginScreenProps
+    props: LoginScreenProps;
 
     state: {
         email: string,
         password: string,
         visibleHeight: number,
-        topLogo: {
-            width: number
-        }
-    }
+        topLogo: { width: number }
+    };
 
-    isAttempting: boolean
-    keyboardDidShowListener: Object
-    keyboardDidHideListener: Object
+    isAttempting: boolean;
+    keyboardDidShowListener: Object;
+    keyboardDidHideListener: Object;
+
+
+    /* Mounting */
 
     constructor(props: LoginScreenProps) {
         super(props);
@@ -52,14 +55,6 @@ class LoginScreen extends React.Component {
         this.isAttempting = false;
     }
 
-    componentWillReceiveProps(newProps) {
-        this.forceUpdate();
-        // Did the login attempt complete?
-        if (this.isAttempting && !newProps.fetching) {
-            NavigationActions.pop();
-        }
-    }
-
     componentWillMount() {
         // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
         // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
@@ -67,10 +62,34 @@ class LoginScreen extends React.Component {
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
     }
 
+    // componentDidMount() {}
+
+
+    /* Updating */
+
+    componentWillReceiveProps(newProps) {
+        console.tron.log('screen - componentWillReceiveProps', newProps);
+        this.forceUpdate();
+        // Did the login attempt complete?
+        if (this.isAttempting && !newProps.fetching) {
+            NavigationActions.pop();
+        }
+    }
+
+    // shouldComponentUpdate() {}
+    // componentWillUpdate() {}
+    // componentDidUpdate() {}
+
+
+    /* Unmounting */
+
     componentWillUnmount() {
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
     }
+
+
+    /* Others */
 
     keyboardDidShow = (e) => {
         // Animation types easeInEaseOut/linear/spring
@@ -107,7 +126,7 @@ class LoginScreen extends React.Component {
     }
 
     render() {
-        const { email, password } = this.state;
+        // const { email, password } = this.state;
         const { fetching } = this.props;
         const editable = !fetching;
         const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly;
@@ -156,11 +175,6 @@ class LoginScreen extends React.Component {
                                 <Text style={Styles.loginText}>{I18n.t('signIn')}</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={Styles.loginButtonWrapper} onPress={NavigationActions.pop}>
-                            <View style={Styles.loginButton}>
-                                <Text style={Styles.loginText}>{I18n.t('cancel')}</Text>
-                            </View>
-                        </TouchableOpacity>
                     </View>
                 </View>
        
@@ -170,7 +184,9 @@ class LoginScreen extends React.Component {
 
 }
 
+// https://github.com/reactjs/react-redux/blob/master/docs/api.md
 const mapStateToProps = (state) => {
+    console.tron.log('screen - mapStateToProps', state);
     return {
         fetching: state.login.fetching
     };
@@ -178,7 +194,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        attemptLogin: (username, password) => dispatch(LoginActions.loginRequest(username, password))
+        attemptLogin: (username, password) => {
+            console.tron.log('screen - attemptLogin - dispatch');
+            return dispatch(LoginActions.loginRequest(username, password))
+        }
     };
 };
 
