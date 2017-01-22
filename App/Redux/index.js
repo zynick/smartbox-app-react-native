@@ -17,7 +17,7 @@ export default () => {
 
     // https://github.com/reactjs/react-redux/releases/tag/v2.0.0
     if (module.hot) {
-        module.hot.accept('../Redux', () => {
+        module.hot.accept(() => {
             const nextRootReducer = combineReducers({
                 temperature: require('./TemperatureRedux').reducer,
                 login: require('./LoginRedux').reducer,

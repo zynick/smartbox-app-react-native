@@ -8,8 +8,8 @@ import Immutable from 'seamless-immutable';
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-    loginRequest: ['username', 'password'],
-    loginSuccess: ['username'],
+    loginRequest: ['email', 'password'],
+    loginSuccess: ['email'],
     loginFailure: ['error'],
     logout: null
 });
@@ -20,7 +20,7 @@ export default Creators;
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-    username: null,
+    email: null,
     error: null,
     fetching: false
 });
@@ -28,28 +28,20 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 // we're attempting to login
-export const request = (state: Object) => {
-    console.tron.log('loginRedux - request');
-    return state.merge({ fetching: true });
-}
+export const request = (state: Object) =>
+    state.merge({ fetching: true });
 
 // we've successfully logged in
-export const success = (state: Object, { username }: Object) => {
-    console.tron.log('loginRedux - success');
-    return state.merge({ fetching: false, error: null, username });
-}
+export const success = (state: Object, { email }: Object) =>
+    state.merge({ fetching: false, error: null, email });
 
 // we've had a problem logging in
-export const failure = (state: Object, { error }: Object) => {
-    console.tron.log('loginRedux - failure');
-    return state.merge({ fetching: false, error });
-}
+export const failure = (state: Object, { error }: Object) =>
+    state.merge({ fetching: false, error });
 
 // we've logged out
-export const logout = (state: Object) => {
-    console.tron.log('loginRedux - logout');
-    return INITIAL_STATE;
-}
+export const logout = (state: Object) =>
+    INITIAL_STATE;
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -63,7 +55,5 @@ export const reducer = createReducer(INITIAL_STATE, {
 /* ------------- Selectors ------------- */
 
 // Is the current user logged in?
-export const isLoggedIn = (loginState: Object) => {
-    console.tron.log(`loginRedux - isLoggedIn: ${loginState.username}`);
-    return loginState.username !== null;
-}
+export const isLoggedIn = (loginState: Object) =>
+    loginState.email !== null;

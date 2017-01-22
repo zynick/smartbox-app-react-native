@@ -1,16 +1,18 @@
-import { put } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import LoginActions from '../Redux/LoginRedux';
 
 // attempts to login
-export function* login({ username, password }) {
+export function* login(api, action) {
 
-    console.tron.log(`loginSaga args: ${JSON.stringify(arguments)}`);
+    const { email, password } = action;
 
-    if (password === '') {
-        // dispatch failure
-        yield put(LoginActions.loginFailure('WRONG'));
+    const response = yield call(api.login, email, password);
+
+    if (response.ok) {
+        // const { token } = response.data; // TODO save jwt token somewhere
+        yield put(LoginActions.loginSuccess(email));
     } else {
-        // dispatch successful logins
-        yield put(LoginActions.loginSuccess(username));
+        const { message } = response.data.error;
+        yield put(LoginActions.loginFailure(message));
     }
-}
+};

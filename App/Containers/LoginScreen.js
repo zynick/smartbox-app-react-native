@@ -17,11 +17,12 @@ import { connect } from 'react-redux';
 import Styles from './Styles/LoginScreenStyle';
 import { Images, Metrics } from '../Themes';
 import LoginActions from '../Redux/LoginRedux';
-import { Actions as NavigationActions } from 'react-native-router-flux';
+// import { Actions as NavigationActions } from 'react-native-router-flux';
 import I18n from 'react-native-i18n';
 
 type LoginScreenProps = {
     dispatch: () => any,
+    error: string,
     fetching: boolean,
     attemptLogin: () => void
 };
@@ -68,11 +69,17 @@ class LoginScreen extends React.Component {
     /* Updating */
 
     componentWillReceiveProps(newProps) {
-        console.tron.log('loginScreen - componentWillReceiveProps', newProps);
+        // console.tron.log(`loginScreen - componentWillReceiveProps`);
+        const { fetching, error } = newProps;
         this.forceUpdate();
         // Did the login attempt complete?
-        if (this.isAttempting && !newProps.fetching) {
-            NavigationActions.pop();
+        if (this.isAttempting && !fetching) {
+            this.isAttempting = false;
+            if (error) {
+                return console.tron.log(`logain fail: ${error}`);
+            }
+            console.tron.log(`login success`);
+            // NavigationActions.pop();
         }
     }
 
@@ -126,7 +133,7 @@ class LoginScreen extends React.Component {
     }
 
     render() {
-        // const { email, password } = this.state;
+        const { email, password } = this.state;
         const { fetching } = this.props;
         const editable = !fetching;
         const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly;
@@ -139,7 +146,7 @@ class LoginScreen extends React.Component {
                         <TextInput
                             ref='email'
                             style={textInputStyle}
-                            // value={email}
+                            value={email}
                             editable={editable}
                             keyboardType='default'
                             returnKeyType='next'
@@ -148,7 +155,7 @@ class LoginScreen extends React.Component {
                             onChangeText={this.handleChangeEmail}
                             underlineColorAndroid='transparent'
                             onSubmitEditing={() => this.refs.password.focus()}
-                            placeholder='john@smartboxasia.com' />
+                            placeholder='email@example.com' />
                     </View>
         
                     <View style={Styles.row}>
@@ -156,7 +163,7 @@ class LoginScreen extends React.Component {
                         <TextInput
                             ref='password'
                             style={textInputStyle}
-                            // value={password}
+                            value={password}
                             editable={editable}
                             keyboardType='default'
                             returnKeyType='go'
@@ -166,7 +173,7 @@ class LoginScreen extends React.Component {
                             onChangeText={this.handleChangePassword}
                             underlineColorAndroid='transparent'
                             onSubmitEditing={this.handlePressLogin}
-                            placeholder={I18n.t('password')} />
+                            placeholder='password' />
                     </View>
         
                     <View style={[Styles.loginRow]}>
@@ -186,18 +193,15 @@ class LoginScreen extends React.Component {
 
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md
 const mapStateToProps = (state) => {
-    console.tron.log('loginScreen - mapStateToProps', state);
-    return {
-        fetching: state.login.fetching
-    };
+    console.tron.log(`loginscreen mapStateToProps ${JSON.stringify(state,null,2)}`);
+    const { error, fetching } = state.login;
+    return { error, fetching };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        attemptLogin: (username, password) => {
-            console.tron.log('loginScreen - attemptLogin - dispatch');
-            return dispatch(LoginActions.loginRequest(username, password))
-        }
+        attemptLogin: (email, password) =>
+            dispatch(LoginActions.loginRequest(email, password))
     };
 };
 

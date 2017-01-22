@@ -2,7 +2,7 @@
 import apisauce from 'apisauce';
 
 // our "constructor"
-const create = (baseURL = 'http://192.168.1.68:3030/v1') => {
+const create = (baseURL = 'http://api.openweathermap.org/data/2.5/') => {
     // ------
     // STEP 1
     // ------
@@ -14,17 +14,16 @@ const create = (baseURL = 'http://192.168.1.68:3030/v1') => {
         baseURL,
         // here are some default headers
         headers: {
-            'Cache-Control': 'no-cache',
-            'Accept': 'application/json'
+            'Cache-Control': 'no-cache'
         },
-        // 30 second timeout...
-        timeout: 30 * 1000
+        // 10 second timeout...
+        timeout: 10000
     });
 
-    // Force API Key on all requests
-    // api.addRequestTransform((request) => {
-    //     request.params['token'] = 'auth-token-here'
-    // });
+    // Force OpenWeather API Key on all requests
+    api.addRequestTransform((request) => {
+        request.params['APPID'] = '0e44183e8d1018fc92eb3307d885379c'
+    });
 
     // Wrap api's addMonitor to allow the calling code to attach
     // additional monitors in the future.  But only in __DEV__ and only
@@ -47,8 +46,7 @@ const create = (baseURL = 'http://192.168.1.68:3030/v1') => {
     // Since we can't hide from that, we embrace it by getting out of the
     // way at this level.
     //
-    const login = (email, password) =>
-        api.post('/login', { email, password });
+    const getCity = (city) => api.get('weather', { q: city });
 
     // ------
     // STEP 3
@@ -64,7 +62,7 @@ const create = (baseURL = 'http://192.168.1.68:3030/v1') => {
     //
     return {
         // a list of the API functions from step 2
-        login
+        getCity
     };
 };
 
