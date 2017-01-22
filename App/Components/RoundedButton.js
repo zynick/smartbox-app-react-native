@@ -11,7 +11,7 @@ ExamplesRegistry.add('Rounded Button', () =>
         text='real buttons have curves'
         onPress={() => window.alert('Rounded Button Pressed!')}
     />
-)
+);
 
 type RoundedButtonProps = {
     onPress: () => void,
@@ -21,12 +21,12 @@ type RoundedButtonProps = {
 };
 
 export default class RoundedButton extends React.Component {
-    props: RoundedButtonProps
+    props: RoundedButtonProps;
 
     getText() {
         const buttonText = this.props.text || this.props.children || '';
         return buttonText.toUpperCase();
-    }
+    };
 
     render() {
         return (
@@ -34,5 +34,5 @@ export default class RoundedButton extends React.Component {
                 <Text style={styles.buttonText}>{this.getText()}</Text>
             </TouchableOpacity>
         );
-    }
+    };
 };

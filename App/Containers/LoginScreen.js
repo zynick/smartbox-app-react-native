@@ -76,9 +76,9 @@ class LoginScreen extends React.Component {
         if (this.isAttempting && !fetching) {
             this.isAttempting = false;
             if (error) {
-                return console.tron.log(`logain fail: ${error}`);
+                return window.alert(error);
             }
-            console.tron.log(`login success`);
+            return window.alert('login success!');
             // NavigationActions.pop();
         }
     }

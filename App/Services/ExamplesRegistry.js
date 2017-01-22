@@ -10,7 +10,7 @@ let globalExamplesRegistry = [];
 export const addExample = (title: string, usage: () => React$Element<*>) => {
     if (DebugSettings.includeExamples)
         globalExamplesRegistry.push({ title, usage });
-}
+};
 
 const renderExample = (example: Object) => {
     return (
@@ -23,10 +23,10 @@ const renderExample = (example: Object) => {
     );
 };
 
-export const renderExamples = () => R.map(renderExample, globalExamplesRegistry)
+export const renderExamples = () => R.map(renderExample, globalExamplesRegistry);
 
 // Default for readability
 export default {
     render: renderExamples,
     add: addExample
-}
+};
