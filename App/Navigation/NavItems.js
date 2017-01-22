@@ -12,7 +12,7 @@ const openDrawer = () => {
         key: 'drawer',
         open: true
     });
-}
+};
 
 export default {
     backButton() {

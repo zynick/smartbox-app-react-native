@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { ScrollView, Text, Image, View } from 'react-native';
+import { connect } from 'react-redux';
+import LoginActions, { isLoggedIn } from '../Redux/LoginRedux';
 import { Images } from '../Themes';
 import RoundedButton from '../Components/RoundedButton';
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -9,7 +11,31 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 // Styles
 import styles from './Styles/PresentationScreenStyle';
 
-export default class PresentationScreen extends React.Component {
+class PresentationScreen extends React.Component {
+
+    componentWillReceiveProps(nextProps) {
+        // (comment copied from UsageExamplesScreen.js)
+        // Request push premissions only if the user has logged in.
+
+        const { loggedIn } = nextProps;
+
+        // TODO fn doesn't get triggered. need to add script on StartupSagas.js
+        // TODO fn doesn't get triggered. need to add script on StartupSagas.js
+        // TODO fn doesn't get triggered. need to add script on StartupSagas.js
+        console.tron.log(`LOGGED IN?? ${loggedIn}`);
+
+        if (loggedIn) {
+            /*
+             * If you have turned on Push in Xcode, http://i.imgur.com/qFDRhQr.png
+             * uncomment this code below and import at top
+             */
+            // if (__DEV__) console.log('Requesting push notification permissions.')
+            // PushNotification.requestPermissions()
+        } else {
+            NavigationActions.login();
+        }
+    }
+
     render() {
         return (
             <View style={styles.mainContainer}>
@@ -54,4 +80,18 @@ export default class PresentationScreen extends React.Component {
             </View>
         );
     }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        loggedIn: isLoggedIn(state.login)
+    };
 };
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(LoginActions.logouttwo())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PresentationScreen);

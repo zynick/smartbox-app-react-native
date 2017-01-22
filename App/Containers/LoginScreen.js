@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import Styles from './Styles/LoginScreenStyle';
 import { Images, Metrics } from '../Themes';
 import LoginActions from '../Redux/LoginRedux';
-// import { Actions as NavigationActions } from 'react-native-router-flux';
+import { Actions as NavigationActions } from 'react-native-router-flux';
 import I18n from 'react-native-i18n';
 
 type LoginScreenProps = {
@@ -48,11 +48,17 @@ class LoginScreen extends React.Component {
     constructor(props: LoginScreenProps) {
         super(props);
         this.state = {
-            // email: 'john@smartboxasia.com',
+            // email: 'email@example.com',
             // password: 'password',
             visibleHeight: Metrics.screenHeight,
             topLogo: { width: Metrics.screenWidth }
         }
+
+        if (__DEV__) {
+            this.state.email = 'dev@smartboxasia.com';
+            this.state.password = 'ilovesmartbox';
+        }
+
         this.isAttempting = false;
     }
 
@@ -78,8 +84,7 @@ class LoginScreen extends React.Component {
             if (error) {
                 return window.alert(error);
             }
-            return window.alert('login success!');
-            // NavigationActions.pop();
+            NavigationActions.presentationScreen();
         }
     }
 
