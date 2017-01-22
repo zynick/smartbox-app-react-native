@@ -68,7 +68,7 @@ class LoginScreen extends React.Component {
     /* Updating */
 
     componentWillReceiveProps(newProps) {
-        console.tron.log('screen - componentWillReceiveProps', newProps);
+        console.tron.log('loginScreen - componentWillReceiveProps', newProps);
         this.forceUpdate();
         // Did the login attempt complete?
         if (this.isAttempting && !newProps.fetching) {
@@ -186,7 +186,7 @@ class LoginScreen extends React.Component {
 
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md
 const mapStateToProps = (state) => {
-    console.tron.log('screen - mapStateToProps', state);
+    console.tron.log('loginScreen - mapStateToProps', state);
     return {
         fetching: state.login.fetching
     };
@@ -195,7 +195,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         attemptLogin: (username, password) => {
-            console.tron.log('screen - attemptLogin - dispatch');
+            console.tron.log('loginScreen - attemptLogin - dispatch');
             return dispatch(LoginActions.loginRequest(username, password))
         }
     };

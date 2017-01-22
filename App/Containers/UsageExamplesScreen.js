@@ -3,7 +3,7 @@
 import React, { PropTypes } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
-import LoginActions, { isLoggedIn } from '../Redux/LoginRedux';
+import LoginActions, { isLoggedIn } from '../Redux/LogintwoRedux';
 import TemperatureActions from '../Redux/TemperatureRedux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import { Colors, Images, Metrics } from '../Themes';
@@ -50,7 +50,7 @@ class UsageExamplesScreen extends React.Component {
 
     renderLoginButton() {
         return (
-            <RoundedButton onPress={NavigationActions.login2}>
+            <RoundedButton onPress={NavigationActions.logintwo}>
                 {I18n.t('signIn')}
             </RoundedButton>
         );
@@ -151,7 +151,7 @@ UsageExamplesScreen.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        loggedIn: isLoggedIn(state.login),
+        loggedIn: isLoggedIn(state.logintwo),
         temperature: state.temperature.temperature,
         city: state.temperature.city
     }
@@ -159,7 +159,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        logout: () => dispatch(LoginActions.logout()),
+        logout: () => dispatch(LoginActions.logouttwo()),
         requestTemperature: (city) => dispatch(TemperatureActions.temperatureRequest(city))
     }
 }

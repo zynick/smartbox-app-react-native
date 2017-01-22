@@ -1,10 +1,10 @@
 import { put } from 'redux-saga/effects';
 import LoginActions from '../Redux/LoginRedux';
 
-// https://www.npmjs.com/package/redux-saga
-
 // attempts to login
 export function* login({ username, password }) {
+
+    console.tron.log(`loginSaga args: ${JSON.stringify(arguments)}`);
 
     if (password === '') {
         // dispatch failure

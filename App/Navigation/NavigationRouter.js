@@ -12,7 +12,7 @@ import PresentationScreen from '../Containers/PresentationScreen';
 import AllComponentsScreen from '../Containers/AllComponentsScreen';
 import UsageExamplesScreen from '../Containers/UsageExamplesScreen';
 import LoginScreen from '../Containers/LoginScreen';
-import LoginScreen2 from '../Containers/LoginScreen2';
+import LogintwoScreen from '../Containers/LogintwoScreen';
 import ListviewExample from '../Containers/ListviewExample';
 import ListviewGridExample from '../Containers/ListviewGridExample';
 import ListviewSectionsExample from '../Containers/ListviewSectionsExample';
@@ -37,7 +37,7 @@ class NavigationRouter extends Component {
                         <Scene initial key='presentationScreen' component={PresentationScreen} title='SMARTBOX' renderLeftButton={NavItems.hamburgerButton} />
                         <Scene key='componentExamples' component={AllComponentsScreen} title='Components' />
                         <Scene key='usageExamples' component={UsageExamplesScreen} title='Usage' rightTitle='Example' onRight={() => window.alert('Example Pressed')} />
-                        <Scene key='login2' component={LoginScreen2} title='Login' hideNavBar />
+                        <Scene key='logintwo' component={LogintwoScreen} title='Login' hideNavBar />
                         <Scene key='listviewExample' component={ListviewExample} title='Listview Example' />
                         <Scene key='listviewGridExample' component={ListviewGridExample} title='Listview Grid' />
                         <Scene key='listviewSectionsExample' component={ListviewSectionsExample} title='Listview Sections' />

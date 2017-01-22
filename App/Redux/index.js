@@ -9,6 +9,7 @@ export default () => {
     const rootReducer = combineReducers({
         temperature: require('./TemperatureRedux').reducer,
         login: require('./LoginRedux').reducer,
+        logintwo: require('./LogintwoRedux').reducer,
         search: require('./SearchRedux').reducer
     });
 
@@ -20,6 +21,7 @@ export default () => {
             const nextRootReducer = combineReducers({
                 temperature: require('./TemperatureRedux').reducer,
                 login: require('./LoginRedux').reducer,
+                logintwo: require('./LogintwoRedux').reducer,
                 search: require('./SearchRedux').reducer
             });
             store.replaceReducer(nextRootReducer);

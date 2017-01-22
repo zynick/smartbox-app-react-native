@@ -12,21 +12,21 @@ import {
     LayoutAnimation
 } from 'react-native';
 import { connect } from 'react-redux';
-import Styles from './Styles/LoginScreen2Style';
+import Styles from './Styles/LogintwoScreenStyle';
 import { Images, Metrics } from '../Themes';
-import LoginActions from '../Redux/LoginRedux2';
+import LoginActions from '../Redux/LogintwoRedux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 import I18n from 'react-native-i18n';
 
-type LoginScreen2Props = {
+type LogintwoScreenProps = {
     dispatch: () => any,
     fetching: boolean,
     attemptLogin: () => void
 };
 
-class LoginScreen2 extends React.Component {
+class LogintwoScreen extends React.Component {
 
-    props: LoginScreen2Props;
+    props: LogintwoScreenProps;
 
     state: {
         username: string,
@@ -41,7 +41,7 @@ class LoginScreen2 extends React.Component {
     keyboardDidShowListener: Object;
     keyboardDidHideListener: Object;
 
-    constructor(props: LoginScreen2Props) {
+    constructor(props: LogintwoScreenProps) {
         super(props);
         this.state = {
             username: 'reactnative@infinite.red',
@@ -53,7 +53,7 @@ class LoginScreen2 extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        console.tron.log('screen - componentWillReceiveProps', newProps);
+        console.tron.log('logintwoScreen - componentWillReceiveProps', newProps);
         this.forceUpdate();
         // Did the login attempt complete?
         if (this.isAttempting && !newProps.fetching) {
@@ -172,19 +172,19 @@ class LoginScreen2 extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.tron.log(`screen - mapStateToProps: ${JSON.stringify(state.login, null, 2)}`, );
+    console.tron.log(`logintwoScreen - mapStateToProps: ${JSON.stringify(state.logintwo, null, 2)}`, );
     return {
-        fetching: state.login.fetching
+        fetching: state.logintwo.fetching
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         attemptLogin: (username, password) => {
-            console.tron.log('screen - attemptLogin - dispatch');
-            return dispatch(LoginActions.loginRequest(username, password))
+            console.tron.log('logintwoScreen - attemptLogin - dispatch');
+            return dispatch(LoginActions.logintwoRequest(username, password))
         }
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen2);
+export default connect(mapStateToProps, mapDispatchToProps)(LogintwoScreen);
