@@ -1,8 +1,10 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { ScrollView, Image, BackAndroid } from 'react-native';
+import { connect } from 'react-redux';
 import styles from './Styles/DrawerContentStyle';
+import LoginActions from '../Redux/LoginRedux';
 import { Images } from '../Themes';
 import DrawerButton from '../Components/DrawerButton';
 import { Actions as NavigationActions } from 'react-native-router-flux';
@@ -48,6 +50,11 @@ class DrawerContent extends Component {
         NavigationActions.deviceInfo();
     };
 
+    handleLogout = () => {
+        this.toggleDrawer();
+        this.props.logout();
+    };
+
     render() {
         return (
             <ScrollView style={styles.container}>
@@ -57,6 +64,7 @@ class DrawerContent extends Component {
                 <DrawerButton text='API Testing' onPress={this.handlePressAPI} />
                 <DrawerButton text='Themes' onPress={this.handlePressTheme} />
                 <DrawerButton text='Device Info' onPress={this.handlePressDevice} />
+                <DrawerButton text='Logout' onPress={this.handleLogout} />
             </ScrollView>
         );
     }
@@ -67,4 +75,18 @@ DrawerContent.contextTypes = {
     drawer: React.PropTypes.object
 };
 
-export default DrawerContent;
+DrawerContent.propTypes = {
+    logout: PropTypes.func
+};
+
+const mapStateToProps = (state) => {
+    return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(LoginActions.logout())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerContent);

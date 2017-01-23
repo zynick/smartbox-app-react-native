@@ -26,7 +26,7 @@ class RootContainer extends Component {
             </View>
         );
     }
-};
+}
 
 // wraps dispatch to create nicer functions to call within our component
 const mapDispatchToProps = (dispatch) => ({

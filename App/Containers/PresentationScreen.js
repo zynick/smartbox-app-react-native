@@ -11,19 +11,22 @@ import { Actions as NavigationActions } from 'react-native-router-flux';
 // Styles
 import styles from './Styles/PresentationScreenStyle';
 
+type PresentationScreenProps = {
+    loggedIn: boolean
+};
+
 class PresentationScreen extends React.Component {
 
+    props: PresentationScreenProps;
+
+    constructor(props: PresentationScreenProps) {
+        super(props);
+    }
+
     componentWillReceiveProps(nextProps) {
-        // (comment copied from UsageExamplesScreen.js)
+        /* comment copied from UsageExamplesScreen.js */
         // Request push premissions only if the user has logged in.
-
         const { loggedIn } = nextProps;
-
-        // TODO fn doesn't get triggered. need to add script on StartupSagas.js
-        // TODO fn doesn't get triggered. need to add script on StartupSagas.js
-        // TODO fn doesn't get triggered. need to add script on StartupSagas.js
-        console.tron.log(`LOGGED IN?? ${loggedIn}`);
-
         if (loggedIn) {
             /*
              * If you have turned on Push in Xcode, http://i.imgur.com/qFDRhQr.png
@@ -83,6 +86,7 @@ class PresentationScreen extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.tron.log(`PS - mapStateToProps ${state.login}`)
     return {
         loggedIn: isLoggedIn(state.login)
     };
@@ -90,7 +94,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        logout: () => dispatch(LoginActions.logouttwo())
+        logout: () => dispatch(LoginActions.logout())
     };
 };
 

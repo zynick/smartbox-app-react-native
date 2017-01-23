@@ -48,17 +48,11 @@ class LoginScreen extends React.Component {
     constructor(props: LoginScreenProps) {
         super(props);
         this.state = {
-            // email: 'email@example.com',
-            // password: 'password',
+            email: 'dev@smartboxasia.com',
+            password: 'ilovesmartbox',
             visibleHeight: Metrics.screenHeight,
             topLogo: { width: Metrics.screenWidth }
         }
-
-        if (__DEV__) {
-            this.state.email = 'dev@smartboxasia.com';
-            this.state.password = 'ilovesmartbox';
-        }
-
         this.isAttempting = false;
     }
 
@@ -84,7 +78,7 @@ class LoginScreen extends React.Component {
             if (error) {
                 return window.alert(error);
             }
-            NavigationActions.presentationScreen();
+            NavigationActions.presentationScreen({ type: 'replace' });
         }
     }
 
