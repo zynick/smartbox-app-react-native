@@ -23,6 +23,10 @@ class PresentationScreen extends React.Component {
         super(props);
     }
 
+    // componentWillMount() {
+    //     NavigationActions.login();
+    // }
+
     componentWillReceiveProps(nextProps) {
         /* comment copied from UsageExamplesScreen.js */
         // Request push premissions only if the user has logged in.
@@ -86,7 +90,6 @@ class PresentationScreen extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.tron.log(`PS - mapStateToProps ${state.login}`)
     return {
         loggedIn: isLoggedIn(state.login)
     };

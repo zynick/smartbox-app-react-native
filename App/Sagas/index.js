@@ -40,4 +40,4 @@ export default function * root () {
     takeLatest(LoginTypes.LOGIN_REQUEST, login, api),
     takeLatest(TemperatureTypes.TEMPERATURE_REQUEST, getTemperature, weatherApi)
   ];
-};
+}
