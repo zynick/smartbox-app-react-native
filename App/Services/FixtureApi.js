@@ -1,14 +1,30 @@
 // @flow
 
 export default {
-    // Functions return fixtures
+
+    login: (email, password) => {
+        const data = require('../Fixtures/login.json');
+        return { ok: true, data };
+    },
+
+    ds: {
+        zones: () => {
+            const data = require('../Fixtures/ds-zones.json');
+            return { ok: true, data };
+        }
+    },
+
+    gc: {
+        settings: () => {
+            const data = require('../Fixtures/gc-settings.json');
+            return { ok: true, data };
+        }
+    },
+
+    // WeatherApi - Functions return fixtures
     getCity: (city: string) => {
         // This fixture only supports Boise or else returns toronto
-        const boiseData = require('../Fixtures/boise.json');
-        const torontoData = require('../Fixtures/toronto.json');
-        return {
-            ok: true,
-            data: city.toLowerCase() === 'boise' ? boiseData : torontoData
-        };
+        const data = city.toLowerCase() === 'boise' ? require('../Fixtures/boise.json') : require('../Fixtures/toronto.json');
+        return { ok: true, data };
     }
 }
