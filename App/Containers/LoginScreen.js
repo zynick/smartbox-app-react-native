@@ -42,9 +42,6 @@ class LoginScreen extends React.Component {
     keyboardDidShowListener: Object;
     keyboardDidHideListener: Object;
 
-
-    /* Mounting */
-
     constructor(props: LoginScreenProps) {
         super(props);
         this.state = {
@@ -63,11 +60,6 @@ class LoginScreen extends React.Component {
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
     }
 
-    // componentDidMount() {}
-
-
-    /* Updating */
-
     componentWillReceiveProps(newProps) {
         // console.tron.log(`loginScreen - componentWillReceiveProps`);
         const { fetching, error } = newProps;
@@ -82,20 +74,11 @@ class LoginScreen extends React.Component {
         }
     }
 
-    // shouldComponentUpdate() {}
-    // componentWillUpdate() {}
-    // componentDidUpdate() {}
-
-
-    /* Unmounting */
-
     componentWillUnmount() {
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
     }
 
-
-    /* Others */
 
     keyboardDidShow = (e) => {
         // Animation types easeInEaseOut/linear/spring

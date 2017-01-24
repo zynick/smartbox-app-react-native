@@ -2,6 +2,7 @@ import { put, select } from 'redux-saga/effects';
 import TemperatureActions from '../Redux/TemperatureRedux';
 import { is } from 'ramda';
 
+export const selectLogin = (state) => state.login;
 // exported to make available for tests
 export const selectTemperature = (state) => state.temperature.temperature;
 
@@ -32,9 +33,12 @@ export function* startup(action) {
     //     }
     // });
 
-    const temp = yield select(selectTemperature);
+
+    // const login = yield select(selectLogin);
+    // if (login.token) {}
 
     // only fetch new temps when we don't have one yet
+    const temp = yield select(selectTemperature);
     if (!is(Number, temp)) {
         yield put(TemperatureActions.temperatureRequest('San Francisco'));
     }
