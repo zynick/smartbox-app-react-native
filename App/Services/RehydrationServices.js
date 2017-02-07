@@ -32,7 +32,7 @@ const updateReducers = (store: Object) => {
         .catch(() => {
             persistStore(store, config, startup);
             AsyncStorage.setItem('reducerVersion', reducerVersion);
-        })
+        });
 };
 
 export default { updateReducers }

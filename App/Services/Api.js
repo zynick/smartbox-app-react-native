@@ -50,6 +50,20 @@ const create = (baseURL = 'http://192.168.1.68:3030/v1') => {
     const login = (email, password) =>
         api.post('/login', { email, password });
 
+    const ds = {
+        zones: (token) => {
+            console.tron.log('Api - ds.zones');
+            return api.get('/ds/zones', { token });
+        }
+    };
+
+    const gc = {
+        settings: (token) => {
+            console.tron.log('Api - gc.settings');
+            return api.get('/gc/settings', { token });
+        }
+    };
+
     // ------
     // STEP 3
     // ------
@@ -64,7 +78,9 @@ const create = (baseURL = 'http://192.168.1.68:3030/v1') => {
     //
     return {
         // a list of the API functions from step 2
-        login
+        login,
+        ds,
+        gc
     };
 };
 

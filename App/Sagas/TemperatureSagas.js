@@ -16,4 +16,4 @@ export function* getTemperature(api, action) {
     } else {
         yield put(TemperatureActions.temperatureFailure());
     }
-};
+}

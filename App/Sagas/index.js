@@ -11,6 +11,7 @@ import { TemperatureTypes } from '../Redux/TemperatureRedux';
 import { LoginTypes } from '../Redux/LoginRedux';
 import { LogintwoTypes } from '../Redux/LogintwoRedux';
 import { OpenScreenTypes } from '../Redux/OpenScreenRedux';
+import { StructureTypes } from '../Redux/StructureRedux';
 
 /* ------------- Sagas ------------- */
 
@@ -19,6 +20,7 @@ import { login } from './LoginSagas';
 import { logintwo } from './LogintwoSagas';
 import { getTemperature } from './TemperatureSagas';
 import { openScreen } from './OpenScreenSagas';
+import { getStructure } from './StructureSagas';
 
 /* ------------- API ------------- */
 
@@ -38,6 +40,7 @@ export default function * root () {
 
     // some sagas receive extra parameters in addition to an action
     takeLatest(LoginTypes.LOGIN_REQUEST, login, api),
-    takeLatest(TemperatureTypes.TEMPERATURE_REQUEST, getTemperature, weatherApi)
+    takeLatest(TemperatureTypes.TEMPERATURE_REQUEST, getTemperature, weatherApi),
+    takeLatest(StructureTypes.STRUCTURE_REQUEST, getStructure, api)
   ];
 }
