@@ -14,11 +14,11 @@ type DrawerContentProps = {
   loggedIn: boolean,
   structure: any,
   structureKeys: string[],
-}
+};
 
 class DrawerContent extends Component {
 
-  props: DrawerContentProps
+  props: DrawerContentProps;
 
   // constructor (props: DrawerContentProps) {
   //   super(props)
