@@ -26,5 +26,15 @@
       "error",
       { "allow": ["tron"] }
     ]
+  },
+  "globals": {
+    "describe": true,
+    "it": true,
+    "fetch": true,
+    "navigator": true,
+    "__DEV__": true,
+    "XMLHttpRequest": true,
+    "FormData": true,
+    "React$Element": true
   }
 }
