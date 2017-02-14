@@ -2,189 +2,187 @@
 
 // https://facebook.github.io/react/docs/react-component.html
 
-import React from 'react';
+import React from 'react'
 import {
-    View,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    Image,
-    Keyboard,
-    LayoutAnimation
-} from 'react-native';
-import { connect } from 'react-redux';
-import Styles from './Styles/LoginScreenStyle';
-import { Images, Metrics } from '../Themes';
-import LoginActions from '../Redux/LoginRedux';
-import { Actions as NavigationActions } from 'react-native-router-flux';
-import I18n from 'react-native-i18n';
+  View,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Keyboard,
+  LayoutAnimation
+} from 'react-native'
+import { connect } from 'react-redux'
+import Styles from './Styles/LoginScreenStyle'
+import { Images, Metrics } from '../Themes'
+import LoginActions from '../Redux/LoginRedux'
+import { Actions as NavigationActions } from 'react-native-router-flux'
+import I18n from 'react-native-i18n'
 
 type LoginScreenProps = {
-    dispatch: () => any,
-    error: string,
-    fetching: boolean,
-    attemptLogin: () => void
-};
+  dispatch: () => any,
+  error: string,
+  fetching: boolean,
+  attemptLogin: () => void
+}
 
 class LoginScreen extends React.Component {
 
-    props: LoginScreenProps;
+  props: LoginScreenProps
 
-    state: {
-        email: string,
-        password: string,
-        visibleHeight: number,
-        topLogo: { width: number }
-    };
+  state: {
+    email: string,
+    password: string,
+    visibleHeight: number,
+    topLogo: { width: number }
+  }
 
-    isAttempting: boolean;
-    keyboardDidShowListener: Object;
-    keyboardDidHideListener: Object;
+  isAttempting: boolean
+  keyboardDidShowListener: Object
+  keyboardDidHideListener: Object
 
-    constructor(props: LoginScreenProps) {
-        super(props);
-        this.state = {
-            email: 'dev@smartboxasia.com',
-            password: 'ilovesmartbox',
-            visibleHeight: Metrics.screenHeight,
-            topLogo: { width: Metrics.screenWidth }
-        }
-        this.isAttempting = false;
+  constructor (props: LoginScreenProps) {
+    super(props)
+    this.state = {
+      email: 'dev@smartboxasia.com',
+      password: 'ilovesmartbox',
+      visibleHeight: Metrics.screenHeight,
+      topLogo: { width: Metrics.screenWidth }
     }
+    this.isAttempting = false
+  }
 
-    componentWillMount() {
-        // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
-        // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
-        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
-        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+  componentWillMount () {
+    // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
+    // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide)
+  }
+
+  componentWillReceiveProps (newProps) {
+    console.tron.log(`LoginScreen.componentWillReceiveProps() ${JSON.stringify(newProps, null, 2)}`)
+    const { fetching, error } = newProps
+    this.forceUpdate()
+      // Did the login attempt complete?
+    if (this.isAttempting && !fetching) {
+      this.isAttempting = false
+      if (error) {
+        return window.alert(error) // TODO better way to handle error
+      }
+      NavigationActions.presentationScreen({ type: 'replace' })
     }
+  }
 
-    componentWillReceiveProps(newProps) {
-        // console.tron.log(`loginScreen - componentWillReceiveProps`);
-        const { fetching, error } = newProps;
-        this.forceUpdate();
-        // Did the login attempt complete?
-        if (this.isAttempting && !fetching) {
-            this.isAttempting = false;
-            if (error) {
-                return window.alert(error);
-            }
-            NavigationActions.presentationScreen({ type: 'replace' });
-        }
-    }
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove()
+    this.keyboardDidHideListener.remove()
+  }
 
-    componentWillUnmount() {
-        this.keyboardDidShowListener.remove();
-        this.keyboardDidHideListener.remove();
-    }
+  keyboardDidShow = e => {
+    // Animation types easeInEaseOut/linear/spring
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    let newSize = Metrics.screenHeight - e.endCoordinates.height
+    this.setState({
+      visibleHeight: newSize,
+      topLogo: { width: 100, height: 70 }
+    })
+  }
 
+  keyboardDidHide = e => {
+    // Animation types easeInEaseOut/linear/spring
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    this.setState({
+      visibleHeight: Metrics.screenHeight,
+      topLogo: { width: Metrics.screenWidth }
+    })
+  }
 
-    keyboardDidShow = (e) => {
-        // Animation types easeInEaseOut/linear/spring
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-        let newSize = Metrics.screenHeight - e.endCoordinates.height;
-        this.setState({
-            visibleHeight: newSize,
-            topLogo: { width: 100, height: 70 }
-        });
-    }
+  handlePressLogin = () => {
+    const { email, password } = this.state
+    this.isAttempting = true
+      // attempt a login - a saga is listening to pick it up from here.
+    this.props.attemptLogin(email, password)
+  }
 
-    keyboardDidHide = (e) => {
-        // Animation types easeInEaseOut/linear/spring
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-        this.setState({
-            visibleHeight: Metrics.screenHeight,
-            topLogo: { width: Metrics.screenWidth }
-        });
-    }
+  handleChangeEmail = text => {
+    this.setState({ email: text })
+  }
 
-    handlePressLogin = () => {
-        const { email, password } = this.state;
-        this.isAttempting = true;
-        // attempt a login - a saga is listening to pick it up from here.
-        this.props.attemptLogin(email, password);
-    }
+  handleChangePassword = text => {
+    this.setState({ password: text })
+  }
 
-    handleChangeEmail = (text) => {
-        this.setState({ email: text });
-    }
+  render () {
+    const { email, password } = this.state
+    const { fetching } = this.props
+    const editable = !fetching
+    const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly
+    return (
+      <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps>
+        <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
+        <View style={Styles.form}>
+          <View style={Styles.row}>
+            <Text style={Styles.rowLabel}>{I18n.t('email')}</Text>
+            <TextInput
+              ref='email'
+              style={textInputStyle}
+              value={email}
+              editable={editable}
+              keyboardType='default'
+              returnKeyType='next'
+              autoCapitalize='none'
+              autoCorrect={false}
+              onChangeText={this.handleChangeEmail}
+              underlineColorAndroid='transparent'
+              onSubmitEditing={() => this.refs.password.focus()}
+              placeholder='email@example.com' />
+          </View>
 
-    handleChangePassword = (text) => {
-        this.setState({ password: text });
-    }
+          <View style={Styles.row}>
+            <Text style={Styles.rowLabel}>{I18n.t('password')}</Text>
+            <TextInput
+              ref='password'
+              style={textInputStyle}
+              value={password}
+              editable={editable}
+              keyboardType='default'
+              returnKeyType='go'
+              autoCapitalize='none'
+              autoCorrect={false}
+              secureTextEntry
+              onChangeText={this.handleChangePassword}
+              underlineColorAndroid='transparent'
+              onSubmitEditing={this.handlePressLogin}
+              placeholder='password' />
+          </View>
 
-    render() {
-        const { email, password } = this.state;
-        const { fetching } = this.props;
-        const editable = !fetching;
-        const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly;
-        return (
-            <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps>
-                <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
-                <View style={Styles.form}>
-                    <View style={Styles.row}>
-                        <Text style={Styles.rowLabel}>{I18n.t('email')}</Text>
-                        <TextInput
-                            ref='email'
-                            style={textInputStyle}
-                            value={email}
-                            editable={editable}
-                            keyboardType='default'
-                            returnKeyType='next'
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            onChangeText={this.handleChangeEmail}
-                            underlineColorAndroid='transparent'
-                            onSubmitEditing={() => this.refs.password.focus()}
-                            placeholder='email@example.com' />
-                    </View>
-        
-                    <View style={Styles.row}>
-                        <Text style={Styles.rowLabel}>{I18n.t('password')}</Text>
-                        <TextInput
-                            ref='password'
-                            style={textInputStyle}
-                            value={password}
-                            editable={editable}
-                            keyboardType='default'
-                            returnKeyType='go'
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            secureTextEntry
-                            onChangeText={this.handleChangePassword}
-                            underlineColorAndroid='transparent'
-                            onSubmitEditing={this.handlePressLogin}
-                            placeholder='password' />
-                    </View>
-        
-                    <View style={[Styles.loginRow]}>
-                        <TouchableOpacity style={Styles.loginButtonWrapper} onPress={this.handlePressLogin}>
-                            <View style={Styles.loginButton}>
-                                <Text style={Styles.loginText}>{I18n.t('signIn')}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-       
-            </ScrollView>
-        );
-    }
+          <View style={[Styles.loginRow]}>
+            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={this.handlePressLogin}>
+              <View style={Styles.loginButton}>
+                <Text style={Styles.loginText}>{I18n.t('signIn')}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    )
+  }
 
 }
 
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md
 const mapStateToProps = (state) => {
-    console.tron.log(`loginscreen mapStateToProps ${JSON.stringify(state,null,2)}`);
-    const { error, fetching } = state.login;
-    return { error, fetching };
-};
+  console.tron.log(`LoginScreen mapStateToProps() ${JSON.stringify(state.login, null, 2)}`)
+  const { error, fetching } = state.login
+  return { error, fetching }
+}
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        attemptLogin: (email, password) =>
-            dispatch(LoginActions.loginRequest(email, password))
-    };
-};
+  return {
+    attemptLogin: (email, password) =>
+      dispatch(LoginActions.loginRequest(email, password))
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
