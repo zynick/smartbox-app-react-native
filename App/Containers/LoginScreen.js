@@ -70,7 +70,7 @@ class LoginScreen extends React.Component {
       if (error) {
         return window.alert(error) // TODO better way to handle error
       }
-      NavigationActions.presentationScreen({ type: 'replace' })
+      NavigationActions.mainScreen({ type: 'replace' })
     }
   }
 

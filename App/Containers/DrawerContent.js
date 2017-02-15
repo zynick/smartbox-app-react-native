@@ -13,7 +13,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 type DrawerContentProps = {
   loggedIn: boolean,
   structure: any,
-  structureKeys: string[],
+  structureKeys: string[]
 };
 
 class DrawerContent extends Component {
@@ -31,7 +31,7 @@ class DrawerContent extends Component {
   //     }
   // }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     console.tron.log(`DrawerContent.componentWillMount() - nextProps: ${JSON.stringify(nextProps, null, 2)}`)
 
     /* comment copied from UsageExamplesScreen.js */
@@ -57,7 +57,7 @@ class DrawerContent extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', () => {
       if (this.context.drawer.props.open) {
         this.toggleDrawer()
@@ -69,6 +69,11 @@ class DrawerContent extends Component {
 
   toggleDrawer = () => {
     this.context.drawer.toggle()
+  }
+
+  handlePressPresentations = () => {
+    this.toggleDrawer()
+    NavigationActions.presentationScreen()
   }
 
   handlePressComponents = () => {
@@ -101,36 +106,6 @@ class DrawerContent extends Component {
     this.props.logout()
   }
 
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-  // TODO how to do the dynamic drawerbutton????
-
   renderKey = (key: string) => {
     console.tron.log(`DrawerContent.renderKey() key: ${key}`)
     return (<Text key={key}>{key}</Text>)
@@ -141,11 +116,12 @@ class DrawerContent extends Component {
     return this.props.structureKeys.map(key => this.renderKey(key))
   }
 
-  render () {
+  render() {
     console.tron.log(`DrawerContent.render() ${JSON.stringify(this.props.structure, null, 2)}`)
     return (
       <ScrollView style={styles.container}>
         <Image source={Images.logo} style={styles.logo} />
+        <DrawerButton text='PresentationScreen' onPress={this.handlePressPresentations} />
         <DrawerButton text='Component Examples' onPress={this.handlePressComponents} />
         <DrawerButton text='Usage Examples' onPress={this.handlePressUsage} />
         <DrawerButton text='API Testing' onPress={this.handlePressAPI} />
@@ -164,6 +140,7 @@ DrawerContent.contextTypes = {
 }
 
 DrawerContent.propTypes = {
+  getStructure: PropTypes.func,
   logout: PropTypes.func
 }
 

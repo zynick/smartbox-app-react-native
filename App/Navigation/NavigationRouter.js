@@ -8,6 +8,7 @@ import NavItems from './NavItems'
 import CustomNavBar from '../Navigation/CustomNavBar'
 
 // screens identified by the router
+import MainScreen from '../Containers/MainScreen'
 import PresentationScreen from '../Containers/PresentationScreen'
 import AllComponentsScreen from '../Containers/AllComponentsScreen'
 import UsageExamplesScreen from '../Containers/UsageExamplesScreen'
@@ -36,18 +37,27 @@ class NavigationRouter extends Component {
             leftButtonIconStyle={Styles.leftButton}
             rightButtonTextStyle={Styles.rightButton}>
 
-            <Scene key='presentationScreen'
-              title='SMARTBOX'
-              component={PresentationScreen}
-              initial
-              renderLeftButton={NavItems.hamburgerButton} />
-
             <Scene key='login'
               title='Login'
               component={LoginScreen}
               hideNavBar
               type='replace'
               duration={1} />
+
+            <Scene key='mainScreen'
+              title='SMARTBOX'
+              component={MainScreen}
+              initial
+              renderLeftButton={NavItems.hamburgerButton} />
+
+            <Scene key='presentationScreen'
+              title='SMARTBOX'
+              component={PresentationScreen}
+              /*
+              initial
+              renderLeftButton={NavItems.hamburgerButton}
+              */
+              />
 
             <Scene key='componentExamples'
               title='Components'
