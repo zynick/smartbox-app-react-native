@@ -8,11 +8,13 @@ import NavItems from './NavItems'
 import CustomNavBar from '../Navigation/CustomNavBar'
 
 // screens identified by the router
+import LoginScreen from '../Containers/LoginScreen'
 import MainScreen from '../Containers/MainScreen'
+import RoomScreen from '../Containers/RoomScreen'
+
 import PresentationScreen from '../Containers/PresentationScreen'
 import AllComponentsScreen from '../Containers/AllComponentsScreen'
 import UsageExamplesScreen from '../Containers/UsageExamplesScreen'
-import LoginScreen from '../Containers/LoginScreen'
 import ListviewExample from '../Containers/ListviewExample'
 import ListviewGridExample from '../Containers/ListviewGridExample'
 import ListviewSectionsExample from '../Containers/ListviewSectionsExample'
@@ -37,7 +39,7 @@ class NavigationRouter extends Component {
             leftButtonIconStyle={Styles.leftButton}
             rightButtonTextStyle={Styles.rightButton}>
 
-            <Scene key='login'
+            <Scene key='loginScreen'
               title='Login'
               component={LoginScreen}
               hideNavBar
@@ -50,10 +52,13 @@ class NavigationRouter extends Component {
               initial
               renderLeftButton={NavItems.hamburgerButton} />
 
+            <Scene key='roomScreen'
+              title='Room'
+              component={RoomScreen} />
+
             <Scene key='presentationScreen'
               title='SMARTBOX'
-              component={PresentationScreen}
-              />
+              component={PresentationScreen} />
 
             <Scene key='componentExamples'
               title='Components'

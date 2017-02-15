@@ -12,7 +12,7 @@ const colors = {
     background: '#138833'
   },
 
-  list: {
+  roomButton: {
     background: '#999',
     color: '#FFF'
   },

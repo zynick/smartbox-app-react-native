@@ -29,7 +29,7 @@ type LoginScreenProps = {
 
 class LoginScreen extends React.Component {
 
-  props: LoginScreenProps
+  props: LoginScreenProps;
 
   state: {
     email: string,
@@ -40,9 +40,9 @@ class LoginScreen extends React.Component {
 
   isAttempting: boolean
   keyboardDidShowListener: Object
-  keyboardDidHideListener: Object
+  keyboardDidHideListener: Object;
 
-  constructor (props: LoginScreenProps) {
+  constructor(props: LoginScreenProps) {
     super(props)
     this.state = {
       email: 'dev@smartboxasia.com',
@@ -53,18 +53,18 @@ class LoginScreen extends React.Component {
     this.isAttempting = false
   }
 
-  componentWillMount () {
+  componentWillMount() {
     // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
     // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide)
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     console.tron.log(`LoginScreen.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
     const { fetching, error } = newProps
     this.forceUpdate()
-      // Did the login attempt complete?
+    // Did the login attempt complete?
     if (this.isAttempting && !fetching) {
       this.isAttempting = false
       if (error) {
@@ -74,7 +74,7 @@ class LoginScreen extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.keyboardDidShowListener.remove()
     this.keyboardDidHideListener.remove()
   }
@@ -101,7 +101,7 @@ class LoginScreen extends React.Component {
   handlePressLogin = () => {
     const { email, password } = this.state
     this.isAttempting = true
-      // attempt a login - a saga is listening to pick it up from here.
+    // attempt a login - a saga is listening to pick it up from here.
     this.props.attemptLogin(email, password)
   }
 
@@ -113,7 +113,7 @@ class LoginScreen extends React.Component {
     this.setState({ password: text })
   }
 
-  render () {
+  render() {
     const { email, password } = this.state
     const { fetching } = this.props
     const editable = !fetching
@@ -122,6 +122,7 @@ class LoginScreen extends React.Component {
       <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps>
         <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
         <View style={Styles.form}>
+
           <View style={Styles.row}>
             <Text style={Styles.rowLabel}>{I18n.t('email')}</Text>
             <TextInput
@@ -164,6 +165,7 @@ class LoginScreen extends React.Component {
               </View>
             </TouchableOpacity>
           </View>
+
         </View>
       </ScrollView>
     )
@@ -172,16 +174,15 @@ class LoginScreen extends React.Component {
 }
 
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   console.tron.log(`LoginScreen.mapStateToProps() ${JSON.stringify(state.login,null,2)}`)
   const { error, fetching } = state.login
   return { error, fetching }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    attemptLogin: (email, password) =>
-      dispatch(LoginActions.loginRequest(email, password))
+    attemptLogin: (email, password) => dispatch(LoginActions.loginRequest(email, password))
   }
 }
 

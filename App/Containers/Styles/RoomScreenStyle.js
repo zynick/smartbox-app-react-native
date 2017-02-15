@@ -11,10 +11,6 @@ export default StyleSheet.create({
     flex: 1,
     marginTop: Metrics.navBarHeight,
     backgroundColor: Colors.background
-  },
-
-  listView: {
-    marginTop: Metrics.smallMargin
   }
 
 })

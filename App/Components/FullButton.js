@@ -17,10 +17,11 @@ type FullButtonProps = {
   text: string,
   onPress: () => void,
   styles?: Object
-}
+};
 
 export default class FullButton extends React.Component {
-  props: FullButtonProps
+
+  props: FullButtonProps;
 
   render () {
     return (
@@ -29,4 +30,5 @@ export default class FullButton extends React.Component {
       </TouchableOpacity>
     )
   }
+
 }

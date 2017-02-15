@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native'
 import { Fonts, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
+
   button: {
     marginVertical: 5,
     borderTopColor: Colors.fire,
@@ -12,6 +13,7 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     backgroundColor: Colors.ember
   },
+
   buttonText: {
     margin: 18,
     textAlign: 'center',
@@ -19,4 +21,5 @@ export default StyleSheet.create({
     fontSize: Fonts.size.medium,
     fontFamily: Fonts.type.bold
   }
+
 })

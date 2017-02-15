@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Component, PropTypes } from 'react'
-import { ListView, View, Text } from 'react-native'
+import { ListView, View } from 'react-native'
 import { connect } from 'react-redux'
 
 import { isLoggedIn } from '../Redux/LoginRedux'
 import StructureActions, { getStructure } from '../Redux/StructureRedux'
 
-// For empty lists
+import RoomButton from '../Components/RoomButton'
 import AlertMessage from '../Components/AlertMessage'
 
 // external libs
@@ -32,6 +32,8 @@ class MainScreen extends Component {
   constructor(props) {
     super(props)
 
+    console.tron.log(`MainScreen.constructor() ${JSON.stringify(props,null,2)}`)
+
     /* ***********************************************************
      * Teach datasource how to detect if rows are different
      * Make this function fast!  Perhaps something like:
@@ -52,6 +54,7 @@ class MainScreen extends Component {
     const { started, loggedIn, structure, getApiStructure } = this.props
     console.tron.log(`MainScreen.componentWillMount()   started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
 
+    // TODO is this needed? maybe we can remove it?
     if (!started) return
 
     if (!loggedIn) return NavigationActions.login()
@@ -69,7 +72,7 @@ class MainScreen extends Component {
 
     if (!started) return
 
-    if (!loggedIn) return NavigationActions.login()
+    if (!loggedIn) return NavigationActions.loginScreen()
 
     if (structure === null) return getApiStructure()
 
@@ -84,11 +87,13 @@ class MainScreen extends Component {
     return this.state.dataSource.getRowCount() === 0
   }
 
+  navigateRoom() {
+    return 
+  }
+
   renderRow(room) {
     return (
-      <View style={styles.row}>
-        <Text style={styles.label}>{room.name}</Text>
-      </View>
+      <RoomButton text={room.name} onPress={NavigationActions.roomScreen.bind(this, { room })} />
     )
   }
 

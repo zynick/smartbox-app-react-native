@@ -18,10 +18,11 @@ type RoundedButtonProps = {
   text ? : string,
   children ? : string,
   navigator ? : Object
-}
+};
 
 export default class RoundedButton extends React.Component {
-  props: RoundedButtonProps
+
+  props: RoundedButtonProps;
 
   getText () {
     const buttonText = this.props.text || this.props.children || ''
@@ -35,4 +36,5 @@ export default class RoundedButton extends React.Component {
       </TouchableOpacity>
     )
   }
+
 }
