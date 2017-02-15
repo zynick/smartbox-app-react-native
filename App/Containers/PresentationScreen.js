@@ -3,7 +3,6 @@
 import React from 'react'
 import { ScrollView, Text, Image, View } from 'react-native'
 import { connect } from 'react-redux'
-// import LoginActions, { isLoggedIn } from '../Redux/LoginRedux'
 import { Images } from '../Themes'
 import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
@@ -11,39 +10,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 // Styles
 import styles from './Styles/PresentationScreenStyle'
 
-// type PresentationScreenProps = {
-//     loggedIn: boolean
-// }
-
 class PresentationScreen extends React.Component {
-
-  // props: PresentationScreenProps
-
-  // constructor(props: PresentationScreenProps) {
-  //     super(props)
-  // }
-
-  // componentWillMount() {
-  //     if (!this.props.loggedIn) {
-  //         NavigationActions.login()
-  //     }
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //     /* comment copied from UsageExamplesScreen.js */
-  //     // Request push premissions only if the user has logged in.
-  //     const { loggedIn } = nextProps
-  //     if (loggedIn) {
-
-  //          * If you have turned on Push in Xcode, http://i.imgur.com/qFDRhQr.png
-  //          * uncomment this code below and import at top
-
-  //         // if (__DEV__) console.log('Requesting push notification permissions.')
-  //         // PushNotification.requestPermissions()
-  //     } else {
-  //         NavigationActions.login()
-  //     }
-  // }
 
   render () {
     return (
@@ -92,9 +59,7 @@ class PresentationScreen extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    // loggedIn: isLoggedIn(state.login)
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {

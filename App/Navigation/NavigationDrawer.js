@@ -15,8 +15,6 @@ class NavigationDrawer extends Component {
   render () {
     const state = this.props.navigationState
     const children = state.children
-
-    // console.tron.log(`NavigationDrawer render() structure: ${JSON.stringify(this.props.structure,null,2)}`)
     return (
       <Drawer ref='navigation'
         type='displace'
@@ -37,15 +35,11 @@ class NavigationDrawer extends Component {
 }
 
 NavigationDrawer.propTypes = {
-  navigationState: PropTypes.object,
-  structure: PropTypes.object
+  navigationState: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
-  // console.tron.log(`NavigationDrawer mapStateToProps() structure: ${JSON.stringify(state.structure,null,2)}`)
-  return {
-    structure: state.structure
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {

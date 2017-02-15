@@ -53,10 +53,6 @@ class NavigationRouter extends Component {
             <Scene key='presentationScreen'
               title='SMARTBOX'
               component={PresentationScreen}
-              /*
-              initial
-              renderLeftButton={NavItems.hamburgerButton}
-              */
               />
 
             <Scene key='componentExamples'
