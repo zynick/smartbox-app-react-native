@@ -1,21 +1,29 @@
 // @flow
 
-import {Colors} from '../../Themes/'
+import { Colors } from '../../Themes/'
+
+const { navbar } = Colors;
 
 export default {
+
   container: {
     flex: 1
   },
+
   navBar: {
-    backgroundColor: Colors.background
+    backgroundColor: navbar.background
   },
+
   title: {
-    color: Colors.snow
+    color: navbar.color
   },
+
   leftButton: {
-    tintColor: Colors.snow
+    tintColor: navbar.color  // dafuq is tintColor?
   },
+
   rightButton: {
-    color: Colors.snow
+    color: navbar.color
   }
+
 }

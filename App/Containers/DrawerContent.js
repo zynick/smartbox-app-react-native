@@ -1,61 +1,15 @@
 // @flow
 
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, Image, BackAndroid, Text } from 'react-native'
+import { ScrollView, Image, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import styles from './Styles/DrawerContentStyle'
-import LoginActions, { isLoggedIn } from '../Redux/LoginRedux'
-import StructureActions, { getStructure, getStructureKeys } from '../Redux/StructureRedux'
+import LoginActions from '../Redux/LoginRedux'
 import { Images } from '../Themes'
 import DrawerButton from '../Components/DrawerButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
-type DrawerContentProps = {
-  loggedIn: boolean,
-  structure: any,
-  structureKeys: string[]
-};
-
 class DrawerContent extends Component {
-
-  props: DrawerContentProps;
-
-  // constructor (props: DrawerContentProps) {
-  //   super(props)
-  // }
-
-  // componentWillMount() {
-  //     console.tron.log(`DrawerContent.componentWillMount() - loggedIn: ${this.props.loggedIn}`)
-  //     if (!this.props.loggedIn) {
-  //         NavigationActions.login()
-  //     }
-  // }
-
-  componentWillReceiveProps(nextProps) {
-    console.tron.log(`DrawerContent.componentWillMount() - nextProps: ${JSON.stringify(nextProps, null, 2)}`)
-
-    /* comment copied from UsageExamplesScreen.js */
-    // Request push premissions only if the user has logged in.
-    const { loggedIn } = nextProps
-    if (loggedIn) {
-      /*
-       * If you have turned on Push in Xcode, http://i.imgur.com/qFDRhQr.png
-       * uncomment this code below and import at top
-       */
-      // if (__DEV__) console.log('Requesting push notification permissions.')
-      // PushNotification.requestPermissions()
-
-      if (!this.props.structure) {
-        return this.props.getStructure()
-      }
-
-      console.tron.log(`DrawerContent.componentWillMount() HAS STRUCTURE!!!!! ${JSON.stringify(this.props.structure, null, 2)}`)
-
-      // this.forceUpdate() // TODO do i need this?
-    } else {
-      NavigationActions.login()
-    }
-  }
 
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -106,18 +60,7 @@ class DrawerContent extends Component {
     this.props.logout()
   }
 
-  renderKey = (key: string) => {
-    console.tron.log(`DrawerContent.renderKey() key: ${key}`)
-    return (<Text key={key}>{key}</Text>)
-  }
-
-  renderStructures = () => {
-    console.tron.log(`DrawerContent.renderStructures() structureKeys: ${JSON.stringify(this.props.structureKeys, null, 2)}`)
-    return this.props.structureKeys.map(key => this.renderKey(key))
-  }
-
   render() {
-    console.tron.log(`DrawerContent.render() ${JSON.stringify(this.props.structure, null, 2)}`)
     return (
       <ScrollView style={styles.container}>
         <Image source={Images.logo} style={styles.logo} />
@@ -128,7 +71,6 @@ class DrawerContent extends Component {
         <DrawerButton text='Themes' onPress={this.handlePressTheme} />
         <DrawerButton text='Device Info' onPress={this.handlePressDevice} />
         <DrawerButton text='Logout' onPress={this.handleLogout} />
-        {this.renderStructures()}
       </ScrollView>
     )
   }
@@ -136,26 +78,19 @@ class DrawerContent extends Component {
 }
 
 DrawerContent.contextTypes = {
-  drawer: React.PropTypes.object
+  drawer: PropTypes.object
 }
 
 DrawerContent.propTypes = {
-  getStructure: PropTypes.func,
   logout: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
-  console.tron.log(`DrawerContent.mapStateToProps() state.login: ${JSON.stringify(state.login, null, 2)}, state.structure: ${JSON.stringify(state.structure, null, 2)}`)
-  return {
-    loggedIn: isLoggedIn(state.login),
-    structure: getStructure(state.structure),
-    structureKeys: getStructureKeys(state.structure)
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getStructure: () => dispatch(StructureActions.structureRequest()),
     logout: () => dispatch(LoginActions.logout())
   }
 }

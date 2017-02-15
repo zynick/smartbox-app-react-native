@@ -9,6 +9,7 @@ export default {
 
   ds: {
     zones: () => {
+      console.tron.log(`FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFixtureApi ds`)
       const data = require('../Fixtures/ds-zones.json')
       return { ok: true, data }
     }
@@ -16,6 +17,7 @@ export default {
 
   gc: {
     settings: () => {
+      console.tron.log(`FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFixtureApi gc`)
       const data = require('../Fixtures/gc-settings.json')
       return { ok: true, data }
     }

@@ -27,13 +27,13 @@ export const INITIAL_STATE = Immutable({
 
 // request the data from an api
 export const request = state => {
-  // console.tron.log(`StructureRedux request`)
   return state.merge({ fetching: true })
 }
 
 // successful api lookup
 export const success = (state, { structure }) => {
-  // console.tron.log(`StructureRedux success ${JSON.stringify(structure, null, 2)}`)
+  console.tron.log(` ================= STRUCTURE LOADED!!!! ================ ${JSON.stringify(structure, null, 2)}`)
+  // console.tron.log(`StructureRedux.success() ${JSON.stringify(structure, null, 2)}`)
   return state.merge({ fetching: false, structure, error: null })
 }
 
@@ -53,12 +53,12 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 /* ------------- Selectors ------------- */
 
-export const getStructure = (structureState: Object) => {
-  // console.tron.log(`StructureRedux getStructure: ${JSON.stringify(structureState,null,2)}`)
+export const getStructure = structureState => {
+  console.tron.log(`StructureRedux.getStructure(): ${JSON.stringify(structureState,null,2)}`)
   return structureState.structure
 }
 
-export const getStructureKeys = (structureState: Object) => {
+export const getStructureKeys = structureState => {
   // console.tron.log(`StructureRedux.getStructureKeys() structure: ${JSON.stringify(structureState,null,2)}`)
   return R.map(s => s.name, structureState.structure || [])
 }

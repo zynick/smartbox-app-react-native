@@ -10,7 +10,8 @@ export default () => {
     temperature: require('./TemperatureRedux').reducer,
     login: require('./LoginRedux').reducer,
     search: require('./SearchRedux').reducer,
-    structure: require('./StructureRedux').reducer
+    structure: require('./StructureRedux').reducer,
+    startup: require('./StartupRedux').reducer
   })
 
   const store = configureStore(rootReducer, rootSaga)
@@ -22,7 +23,8 @@ export default () => {
         temperature: require('./TemperatureRedux').reducer,
         login: require('./LoginRedux').reducer,
         search: require('./SearchRedux').reducer,
-        structure: require('./StructureRedux').reducer
+        structure: require('./StructureRedux').reducer,
+        startup: require('./StartupRedux').reducer
       })
       store.replaceReducer(nextRootReducer)
     })

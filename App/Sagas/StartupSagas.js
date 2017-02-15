@@ -1,4 +1,5 @@
 import { put, select } from 'redux-saga/effects'
+import StartupActions from '../Redux/StartupRedux'
 import TemperatureActions from '../Redux/TemperatureRedux'
 import { is } from 'ramda'
 
@@ -36,4 +37,6 @@ export function* startup (api, action) {
   if (!is(Number, temp)) {
     yield put(TemperatureActions.temperatureRequest('San Francisco'))
   }
+
+  yield put(StartupActions.startupComplete())
 }

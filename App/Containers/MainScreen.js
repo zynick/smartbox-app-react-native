@@ -1,42 +1,139 @@
 // @flow
 
-import React from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { ListView, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
-import { Metrics } from '../Themes'
+
+import { isLoggedIn } from '../Redux/LoginRedux'
+import StructureActions, { getStructure } from '../Redux/StructureRedux'
+
+// For empty lists
+import AlertMessage from '../Components/AlertMessage'
+
 // external libs
-import Icon from 'react-native-vector-icons/FontAwesome'
-import Animatable from 'react-native-animatable'
+// import Icon from 'react-native-vector-icons/FontAwesome'
+// import Animatable from 'react-native-animatable'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // Styles
 import styles from './Styles/MainScreenStyle'
 
 // I18n
-import I18n from 'react-native-i18n'
+// import I18n from 'react-native-i18n'
 
-class MainScreen extends React.Component {
 
-  render() {
+
+class MainScreen extends Component {
+
+  state: {
+    dataSource: Object
+  };
+
+  constructor(props) {
+    super(props)
+
+    /* ***********************************************************
+     * Teach datasource how to detect if rows are different
+     * Make this function fast!  Perhaps something like:
+     *   (r1, r2) => r1.id !== r2.id}
+     *************************************************************/
+    const rowHasChanged = (r1, r2) => r1.name !== r2.name
+
+    // DataSource configured
+    const ds = new ListView.DataSource({ rowHasChanged })
+
+    // Datasource is always in state
+    this.state = {
+      dataSource: ds.cloneWithRows([])
+    }
+  }
+
+  componentWillMount() {
+    const { started, loggedIn, structure, getApiStructure } = this.props
+    console.tron.log(`MainScreen.componentWillMount()   started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
+
+    if (!started) return
+
+    if (!loggedIn) return NavigationActions.login()
+
+    if (structure === null) return getApiStructure()
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(structure)
+    })
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { started, loggedIn, structure, getApiStructure } = newProps
+    console.tron.log(`MainScreen.componentWillReceiveProps()   rows:${this.noRowData()}, started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
+
+    if (!started) return
+
+    if (!loggedIn) return NavigationActions.login()
+
+    if (structure === null) return getApiStructure()
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(structure)
+    })
+  }
+
+  // Used for friendly AlertMessage
+  // returns true if the dataSource is empty
+  noRowData() {
+    return this.state.dataSource.getRowCount() === 0
+  }
+
+  renderRow(room) {
     return (
-      <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-          <Text>MainScreen Container</Text>
-        </KeyboardAvoidingView>
-      </ScrollView>
+      <View style={styles.row}>
+        <Text style={styles.label}>{room.name}</Text>
+      </View>
     )
   }
 
+  render() {
+    console.tron.log(`MainScreen.render() - : ${this.noRowData()}`)
+    const loading = !this.props.started;
+    return (
+      <View style={styles.container}>
+        <AlertMessage title='Loading...' show={loading} />
+        <AlertMessage title='No rooms loaded. Is your home configuration setup correctly?' show={this.noRowData()} />
+        <ListView
+          contentContainerStyle={styles.listView}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow}
+          pageSize={15}
+          enableEmptySections={true}
+        />
+      </View>
+    )
+  }
 }
 
-const mapStateToProps = (state) => {
-  return {}
+MainScreen.propTypes = {
+  getApiStructure: PropTypes.func,
+  loggedIn: PropTypes.bool,
+  structure: PropTypes.array,
+  started: PropTypes.bool
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {}
+const mapStateToProps = state => {
+  // console.tron.log(`MainScreen.mapStateToProps()`)
+  return {
+    loggedIn: isLoggedIn(state.login),
+    structure: getStructure(state.structure),
+    started: state.startup.started
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getApiStructure: () => {
+      console.tron.log(`MainScreen.mapDispatchToProps: calling getApiStructure()`)
+      return dispatch(StructureActions.structureRequest())
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen)

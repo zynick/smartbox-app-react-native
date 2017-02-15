@@ -26,7 +26,7 @@ type AlertMessageProps = {
   icon?: string,
   style?: Object,
   show?: bool
-}
+};
 
 export default class AlertMessage extends React.Component {
   static defaultProps: { show: boolean }
