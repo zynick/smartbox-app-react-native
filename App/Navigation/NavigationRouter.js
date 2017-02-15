@@ -56,8 +56,10 @@ class NavigationRouter extends Component {
               title='Room'
               component={RoomScreen} />
 
+
+
             <Scene key='presentationScreen'
-              title='SMARTBOX'
+              title='Presentation'
               component={PresentationScreen} />
 
             <Scene key='componentExamples'

@@ -3,17 +3,13 @@
 import React, { Component, PropTypes } from 'react'
 import { ListView, View } from 'react-native'
 import { connect } from 'react-redux'
+import { Actions as NavigationActions } from 'react-native-router-flux'
 
 import { isLoggedIn } from '../Redux/LoginRedux'
 import StructureActions, { getStructure } from '../Redux/StructureRedux'
 
-import RoomButton from '../Components/RoomButton'
 import AlertMessage from '../Components/AlertMessage'
-
-// external libs
-// import Icon from 'react-native-vector-icons/FontAwesome'
-// import Animatable from 'react-native-animatable'
-import { Actions as NavigationActions } from 'react-native-router-flux'
+import RoomButton from '../Components/RoomButton'
 
 // Styles
 import styles from './Styles/MainScreenStyle'
@@ -87,13 +83,11 @@ class MainScreen extends Component {
     return this.state.dataSource.getRowCount() === 0
   }
 
-  navigateRoom() {
-    return 
-  }
-
   renderRow(room) {
+    const options = { title: room.name, room }
+    const navigate = NavigationActions.roomScreen.bind(this, options)
     return (
-      <RoomButton text={room.name} onPress={NavigationActions.roomScreen.bind(this, { room })} />
+      <RoomButton text={room.name} onPress={navigate} />
     )
   }
 
@@ -109,8 +103,7 @@ class MainScreen extends Component {
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
           pageSize={15}
-          enableEmptySections={true}
-        />
+          enableEmptySections={true} />
       </View>
     )
   }

@@ -1,17 +1,12 @@
 // @flow
 
-import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { ListView, View } from 'react-native'
 import { connect } from 'react-redux'
+import { Actions as NavigationActions } from 'react-native-router-flux'
 
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
-// import { Metrics } from '../Themes'
-
-// external libs
-// import Icon from 'react-native-vector-icons/FontAwesome'
-// import Animatable from 'react-native-animatable'
-// import { Actions as NavigationActions } from 'react-native-router-flux'
+import AlertMessage from '../Components/AlertMessage'
+import RoomButton from '../Components/RoomButton'
 
 // Styles
 import styles from './Styles/RoomScreenStyle'
@@ -21,21 +16,52 @@ import styles from './Styles/RoomScreenStyle'
 
 class RoomScreen extends Component {
 
+  state: {
+    dataSource: Object
+  };
+
   constructor(props) {
     super(props)
-    console.tron.log(`RoomScreen ${JSON.stringify(props,null,2)}`)
+
+    const rowHasChanged = (r1, r2) => r1.name !== r2.name
+    const ds = new ListView.DataSource({ rowHasChanged })
+    const items = props.room.items || []
+    this.state = {
+      dataSource: ds.cloneWithRows(items)
+    }
+  }
+
+  noRowData() {
+    return this.state.dataSource.getRowCount() === 0
+  }
+
+  renderRow(item) {
+    const text = `${item.name} (${item.type})`
+    const options = { title: item.name, item, room: {} }
+    const navigate = NavigationActions.roomScreen.bind(this, options)
+    return (
+      <RoomButton text={text} onPress={navigate} />
+    )
   }
 
   render() {
     return (
-      <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-          <Text>RoomScreen Container</Text>
-        </KeyboardAvoidingView>
-      </ScrollView>
+      <View style={styles.container}>
+        <AlertMessage title="There's nothing in this room" show={this.noRowData()} />
+        <ListView
+          contentContainerStyle={styles.listView}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow}
+          pageSize={15}
+          enableEmptySections={true} />
+      </View>
     )
   }
 
+}
+
+RoomScreen.propTypes = {
+  room: PropTypes.object
 }
 
 const mapStateToProps = state => {
