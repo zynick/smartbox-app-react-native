@@ -7,26 +7,16 @@ export default {
     return { ok: true, data }
   },
 
-  ds: {
-    zones: () => {
-      console.tron.log(`FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFixtureApi ds`)
-      const data = require('../Fixtures/ds-zones.json')
-      return { ok: true, data }
-    }
-  },
-
-  gc: {
-    settings: () => {
-      console.tron.log(`FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFixtureApi gc`)
-      const data = require('../Fixtures/gc-settings.json')
-      return { ok: true, data }
-    }
+  structure: () => {
+    console.tron.log(`FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFixtureApi structure`)
+    const data = require('../Fixtures/structure.json')
+    return { ok: true, data }
   },
 
   // WeatherApi - Functions return fixtures
   getCity: (city: string) => {
     // This fixture only supports Boise or else returns toronto
-    const data = city.toLowerCase() === 'boise' ? require('../Fixtures/boise.json') : require('../Fixtures/toronto.json')
+    const data = city.toLowerCase() === 'boise' ? require('../Fixtures/city-boise.json') : require('../Fixtures/city-toronto.json')
     return { ok: true, data }
   }
 }

@@ -3,6 +3,7 @@ import API from '../Services/Api'
 import WeatherAPI from '../Services/WeatherApi'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugSettings from '../Config/DebugSettings'
+import ApiConfig from '../Config/ApiConfig'
 
 /* ------------- Types ------------- */
 
@@ -24,7 +25,7 @@ import { getStructure } from './StructureSagas'
 
 // The API we use is only used from Sagas, so we create it here and pass along
 // to the sagas which need it.
-const api = DebugSettings.useFixtures ? FixtureAPI : API.create()
+const api = DebugSettings.useFixtures ? FixtureAPI : API.create(ApiConfig.smartboxBaseURL)
 const weatherApi = DebugSettings.useFixtures ? FixtureAPI : WeatherAPI.create()
 
 /* ------------- Connect Types To Sagas ------------- */
