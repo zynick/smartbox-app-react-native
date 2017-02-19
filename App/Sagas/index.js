@@ -30,7 +30,7 @@ const weatherApi = DebugSettings.useFixtures ? FixtureAPI : WeatherAPI.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
-export default function * root () {
+export default function* root() {
   yield [
     // some sagas only receive an action
     takeLatest(OpenScreenTypes.OPEN_SCREEN, openScreen),

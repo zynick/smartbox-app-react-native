@@ -1,8 +1,6 @@
 // @flow
 
-// https://www.npmjs.com/package/reduxsauce
 import { createReducer, createActions } from 'reduxsauce'
-// https://www.npmjs.com/package/seamless-immutable
 import Immutable from 'seamless-immutable'
 
 /* ------------- Types and Action Creators ------------- */
