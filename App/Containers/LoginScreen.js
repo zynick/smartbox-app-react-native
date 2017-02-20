@@ -6,12 +6,15 @@ import React from 'react'
 import {
   View,
   ScrollView,
+  KeyboardAvoidingView,
   Text,
   TextInput,
   TouchableOpacity,
   Image,
   Keyboard,
-  LayoutAnimation
+  LayoutAnimation,
+  Dimensions,
+  StatusBar
 } from 'react-native'
 import { connect } from 'react-redux'
 import Styles from './Styles/LoginScreenStyle'
@@ -34,23 +37,23 @@ class LoginScreen extends React.Component {
   state: {
     email: string,
     password: string,
-    visibleHeight: number,
-    topLogo: { width: number }
+    error: string,
+    scrollViewHeight: number,
+    scrollableHeight: number
   }
 
-  isAttempting: boolean
+  isAttemptLogin: boolean
   keyboardDidShowListener: Object
   keyboardDidHideListener: Object;
 
   constructor(props: LoginScreenProps) {
     super(props)
     this.state = {
-      email: 'dev@smartboxasia.com',
-      password: 'ilovesmartbox',
-      visibleHeight: Metrics.screenHeight,
-      topLogo: { width: Metrics.screenWidth }
+      error: ' ',
+      scrollViewHeight: Metrics.screenHeight,
+      scrollableHeight: Metrics.screenHeight
     }
-    this.isAttempting = false
+    this.isAttemptLogin = false
   }
 
   componentWillMount() {
@@ -64,11 +67,12 @@ class LoginScreen extends React.Component {
     console.tron.log(`LoginScreen.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
     const { fetching, error } = newProps
     this.forceUpdate()
+
     // Did the login attempt complete?
-    if (this.isAttempting && !fetching) {
-      this.isAttempting = false
+    if (this.isAttemptLogin && !fetching) {
+      this.isAttemptLogin = false
       if (error) {
-        return window.alert(error) // TODO better way to handle error
+        return this.setState({ error, password: '' })
       }
       NavigationActions.mainScreen({ type: 'replace' })
     }
@@ -83,25 +87,21 @@ class LoginScreen extends React.Component {
     // Animation types easeInEaseOut/linear/spring
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     let newSize = Metrics.screenHeight - e.endCoordinates.height
-    this.setState({
-      visibleHeight: newSize,
-      topLogo: { width: 100, height: 70 }
-    })
+    console.tron.log(` ####### keyboardShow scrollViewHeight:${newSize}`)
+    this.setState({ scrollViewHeight: newSize })
   }
 
   keyboardDidHide = e => {
     // Animation types easeInEaseOut/linear/spring
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-    this.setState({
-      visibleHeight: Metrics.screenHeight,
-      topLogo: { width: Metrics.screenWidth }
-    })
+    console.tron.log(` ####### keyboardHide scrollViewHeight:${Metrics.screenHeight}`)
+    this.setState({ scrollViewHeight: Metrics.screenHeight })
   }
 
   handlePressLogin = () => {
     const { email, password } = this.state
-    this.isAttempting = true
-    // attempt a login - a saga is listening to pick it up from here.
+    this.setState({ error: ' ' })
+    this.isAttemptLogin = true
     this.props.attemptLogin(email, password)
   }
 
@@ -113,61 +113,117 @@ class LoginScreen extends React.Component {
     this.setState({ password: text })
   }
 
+  setScrollViewHeight(event) {
+    // const keyboardHeight = event.nativeEvent.layout.height
+    // const scrollViewHeight = this.state.scrollViewHeight
+    // const windowHeight = Dimensions.get('window').height // - StatusBar.currentHeight - scrollViewHeight
+    // console.tron.log(`^^^^^^^^^^^^^^ keyboard:${keyboardHeight}, scrollable:${scrollViewHeight} => window:${windowHeight}`)
+    // this.setState({ scrollViewHeight:  })
+
+    // TODO set dynamic height for scrollViewHeight and scrollableHeight
+    // TODO set dynamic height for scrollViewHeight and scrollableHeight
+    // TODO set dynamic height for scrollViewHeight and scrollableHeight
+    // TODO set dynamic height for scrollViewHeight and scrollableHeight
+    // TODO set dynamic height for scrollViewHeight and scrollableHeight
+    // TODO set dynamic height for scrollViewHeight and scrollableHeight
+    // TODO set dynamic height for scrollViewHeight and scrollableHeight
+    // TODO set dynamic height for scrollViewHeight and scrollableHeight
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+    // TODO test this shit in iOS??
+  }
+
+  setScrollableHeight(event) {
+    const flexboxHeight = event.nativeEvent.layout.height;
+    const windowHeight = Dimensions.get('window').height // - StatusBar.currentHeight;
+    const scrollableHeight = flexboxHeight > windowHeight ? flexboxHeight : windowHeight;
+    console.tron.log(`$$$$$$$$$$$$$$$$$$  flex:${flexboxHeight}, window:${windowHeight} => scrollable:${scrollableHeight}`)
+    // this.setState({ scrollableHeight })
+  }
+
   render() {
-    const { email, password } = this.state
+    const { email, password, error } = this.state
     const { fetching } = this.props
     const editable = !fetching
-    const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly
+    const inputTextStyle = editable ? Styles.inputEdit : Styles.inputRead
+
     return (
-      <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps>
-        <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
-        <View style={Styles.form}>
+      <KeyboardAvoidingView behavior='position' onLayout={event => this.setScrollViewHeight(event)}>
+        <ScrollView style={[Styles.container, { height: this.state.scrollViewHeight }]}
+          contentContainerStyle={[Styles.flexContainer]}
+          // contentContainerStyle={[Styles.flexContainer, { height: this.state.scrollableHeight }]}
+          keyboardShouldPersistTaps>
 
-          <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>{I18n.t('email')}</Text>
-            <TextInput
-              ref='email'
-              style={textInputStyle}
-              value={email}
-              editable={editable}
-              keyboardType='default'
-              returnKeyType='next'
-              autoCapitalize='none'
-              autoCorrect={false}
-              onChangeText={this.handleChangeEmail}
-              underlineColorAndroid='transparent'
-              onSubmitEditing={() => this.refs.password.focus()}
-              placeholder='email@example.com' />
-          </View>
 
-          <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>{I18n.t('password')}</Text>
-            <TextInput
-              ref='password'
-              style={textInputStyle}
-              value={password}
-              editable={editable}
-              keyboardType='default'
-              returnKeyType='go'
-              autoCapitalize='none'
-              autoCorrect={false}
-              secureTextEntry
-              onChangeText={this.handleChangePassword}
-              underlineColorAndroid='transparent'
-              onSubmitEditing={this.handlePressLogin}
-              placeholder='password' />
-          </View>
+          {/*
+          <View style={[Styles.flexContainer]}>
+          */}
+          {/* <View style={[Styles.flexContainer, { height: this.state.scrollableHeight }]}> */}
 
-          <View style={[Styles.loginRow]}>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={this.handlePressLogin}>
-              <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>{I18n.t('signIn')}</Text>
+            <View style={Styles.flexBox} onLayout={event => this.setScrollableHeight(event)}>
+                <Image source={Images.logo} style={Styles.logo} />
+
+              <View style={Styles.row}>
+                <Text style={Styles.error}>{error}</Text>
               </View>
-            </TouchableOpacity>
-          </View>
 
-        </View>
-      </ScrollView>
+              <View style={Styles.row}>
+                <Text style={Styles.label}>{I18n.t('email')}</Text>
+                <TextInput
+                  ref='email'
+                  style={[Styles.input, inputTextStyle]}
+                  value={email}
+                  editable={editable}
+                  keyboardType='default'
+                  returnKeyType='next'
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  onChangeText={this.handleChangeEmail}
+                  underlineColorAndroid='transparent'
+                  onSubmitEditing={() => this.refs.password.focus()}
+                  />
+              </View>
+
+              <View style={Styles.row}>
+                <Text style={Styles.label}>{I18n.t('password')}</Text>
+                <TextInput
+                  ref='password'
+                  style={[Styles.input, inputTextStyle]}
+                  value={password}
+                  editable={editable}
+                  keyboardType='default'
+                  returnKeyType='go'
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  secureTextEntry
+                  onChangeText={this.handleChangePassword}
+                  underlineColorAndroid='transparent'
+                  onSubmitEditing={this.handlePressLogin}
+                  />
+              </View>
+
+              <View style={Styles.row}>
+                <TouchableOpacity onPress={this.handlePressLogin}>
+                  <View style={Styles.button}>
+                    <Text style={Styles.buttonText}>{I18n.t('signIn')}</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+          {/*
+          </View>
+          */}
+
+        </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 

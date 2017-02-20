@@ -27,8 +27,7 @@ class MainScreen extends Component {
 
   constructor(props) {
     super(props)
-
-    console.tron.log(`MainScreen.constructor() ${JSON.stringify(props,null,2)}`)
+    // console.tron.log(`MainScreen.constructor() ${JSON.stringify(props,null,2)}`)
 
     /* ***********************************************************
      * Teach datasource how to detect if rows are different
@@ -48,9 +47,9 @@ class MainScreen extends Component {
 
   componentWillMount() {
     const { started, loggedIn, structure, getApiStructure } = this.props
-    console.tron.log(`MainScreen.componentWillMount()   started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
+    // console.tron.log(`MainScreen.componentWillMount()   started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
 
-    // TODO is this needed? maybe we can remove it?
+    // TODO is this started variable needed? maybe we can remove it?
     if (!started) return
 
     if (!loggedIn) return NavigationActions.login()
@@ -64,7 +63,7 @@ class MainScreen extends Component {
 
   componentWillReceiveProps(newProps) {
     const { started, loggedIn, structure, getApiStructure } = newProps
-    console.tron.log(`MainScreen.componentWillReceiveProps()   rows:${this.noRowData()}, started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
+    // console.tron.log(`MainScreen.componentWillReceiveProps()   rows:${this.noRowData()}, started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
 
     if (!started) return
 
@@ -92,7 +91,7 @@ class MainScreen extends Component {
   }
 
   render() {
-    console.tron.log(`MainScreen.render() - : ${this.noRowData()}`)
+    // console.tron.log(`MainScreen.render() - : ${this.noRowData()}`)
     const loading = !this.props.started;
     return (
       <View style={styles.container}>
@@ -128,7 +127,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getApiStructure: () => {
-      console.tron.log(`MainScreen.mapDispatchToProps: calling getApiStructure()`)
+      // console.tron.log(`MainScreen.mapDispatchToProps: calling getApiStructure()`)
       return dispatch(StructureActions.structureRequest())
     }
   }

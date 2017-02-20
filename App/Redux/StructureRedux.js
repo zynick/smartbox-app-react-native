@@ -32,7 +32,6 @@ export const request = state => {
 
 // successful api lookup
 export const success = (state, { structure }) => {
-  console.tron.log(` ================= STRUCTURE LOADED!!!! ================ ${JSON.stringify(structure, null, 2)}`)
   // console.tron.log(`StructureRedux.success() ${JSON.stringify(structure, null, 2)}`)
   return state.merge({ fetching: false, structure, error: null })
 }
@@ -54,7 +53,7 @@ export const reducer = createReducer(INITIAL_STATE, {
 /* ------------- Selectors ------------- */
 
 export const getStructure = structureState => {
-  console.tron.log(`StructureRedux.getStructure(): ${JSON.stringify(structureState,null,2)}`)
+  // console.tron.log(`StructureRedux.getStructure(): ${JSON.stringify(structureState,null,2)}`)
   return structureState.structure
 }
 

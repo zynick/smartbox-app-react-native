@@ -3,52 +3,74 @@
 import { StyleSheet } from 'react-native'
 import { Colors, Metrics } from '../../Themes'
 
+const { login: loginColors } = Colors
+
 export default StyleSheet.create({
+
   container: {
-    paddingTop: 70,
-    backgroundColor: Colors.snow
+    // paddingTop: 250,
+    // backgroundColor: Colors.background
   },
-  form: {
-    backgroundColor: Colors.snow,
-    margin: Metrics.baseMargin,
-    borderRadius: 4
-  },
-  row: {
-    paddingVertical: Metrics.doubleBaseMargin,
-    paddingHorizontal: Metrics.doubleBaseMargin
-  },
-  rowLabel: {
-    color: Colors.charcoal
-  },
-  textInput: {
-    height: 40,
-    color: Colors.coal
-  },
-  textInputReadonly: {
-    height: 40,
-    color: Colors.steel
-  },
-  loginRow: {
-    paddingBottom: Metrics.doubleBaseMargin,
-    paddingHorizontal: Metrics.doubleBaseMargin,
-    flexDirection: 'row'
-  },
-  loginButtonWrapper: {
-    flex: 1
-  },
-  loginButton: {
+
+  flexContainer: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: Colors.white,
-    backgroundColor: Colors.darkgreen,
-    padding: 6
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.frost
   },
-  loginText: {
-    textAlign: 'center',
-    color: Colors.silver
+
+  flexBox: {
+    width: Metrics.boxWidth,
+    padding: Metrics.baseMargin,
+    borderRadius: Metrics.buttonRadius,
+    backgroundColor: Colors.ember
   },
-  topLogo: {
+
+  row: {
+    padding: Metrics.baseMargin
+  },
+
+  logo: {
     alignSelf: 'center',
-    resizeMode: 'contain'
+  },
+
+  error: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: loginColors.error
+  },
+
+  label: {
+    color: loginColors.label,
+    paddingBottom: Metrics.smallMargin
+  },
+
+  input: {
+    backgroundColor: loginColors.inputBackground,
+    paddingVertical: 0,
+    paddingHorizontal: Metrics.baseMargin,
+    borderBottomWidth: 1,
+    borderColor: loginColors.inputLine
+  },
+
+  inputEdit: {
+    color: loginColors.input,
+  },
+
+  inputRead: {
+    color: loginColors.inputReadOnly,
+  },
+
+  button: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: loginColors.button,
+    height: Metrics.buttonHeight,
+    borderRadius: Metrics.buttonRadius
+  },
+
+  buttonText: {
+    color: loginColors.buttonText
   }
 })
