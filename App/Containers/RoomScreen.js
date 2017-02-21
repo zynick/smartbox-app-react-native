@@ -18,7 +18,8 @@ import styles from './Styles/RoomScreenStyle'
 class RoomScreen extends Component {
 
   state: {
-    dataSource: Object
+    dataSource: Object,
+    listDS: Object
   };
 
   constructor(props) {
@@ -26,12 +27,21 @@ class RoomScreen extends Component {
 
     console.tron.log(`RoomScreen.constructor()`);
 
-    const rowHasChanged = (r1, r2) => r1.name !== r2.name
+    const rowHasChanged = (r1, r2) => r1.name !== r2.name // TODO fix this
     const ds = new ListView.DataSource({ rowHasChanged })
     const items = props.room.items || []
     this.state = {
+      listDs: ds,   // FIXME dangerous!!!!!!!!!
       dataSource: ds.cloneWithRows(items)
     }
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.tron.log(`RoomScreen.componentWillReceiveProps()`);
+    const items = newProps.room.items || []
+    this.setState({
+      dataSource: this.state.listDs.cloneWithRows(items)
+    })
   }
 
   noRowData() {
