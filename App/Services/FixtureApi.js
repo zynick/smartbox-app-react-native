@@ -8,7 +8,7 @@ export default {
   },
 
   structure: () => {
-    console.tron.log(`FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFixtureApi structure`)
+    // console.tron.log(`FixtureApi structure()`)
     const data = require('../Fixtures/structure.json')
     return { ok: true, data }
   },

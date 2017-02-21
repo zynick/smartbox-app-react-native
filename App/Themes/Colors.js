@@ -24,7 +24,7 @@ const colors = {
     background: '#138833'
   },
 
-  roomButton: {
+  roomRow: {
     background: '#999',
     color: '#FFF'
   },

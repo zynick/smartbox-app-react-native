@@ -1,36 +1,10 @@
 [{
   "name": "Living Room",
   "items": [{
-    "scenes": {
-      "scene0": {
-        "name": "Lights Off"
-      },
-      "scene5": {
-        "name": "Living Lights On"
-      },
-      "scene17": {
-        "name": "Movie Mode"
-      },
-      "scene19": {
-        "name": "Living 5%"
-      },
-      "scene40": {
-        "name": "Living Fade Off"
-      }
-    },
-    "devices": [{
-      "dSID": "303505d7f8000040000374d5",
-      "name": "Living Room Lights"
-    }],
-    "groupId": 1,
-    "type": "digitalstrom",
-    "zoneId": 1
-  }, {
     "name": "TV",
     "commands": [
       "tv_onoff"
-    ],
-    "type": "globalcache"
+    ]
   }]
 }, {
   "name": "Dining Area",
@@ -54,8 +28,7 @@
       "dining_28",
       "dining_29",
       "dining_30"
-    ],
-    "type": "globalcache"
+    ]
   }]
 }, {
   "name": "Master Bedroom",
@@ -88,7 +61,6 @@
       "office_20_swing",
       "office_25_swing",
       "office_30_swing"
-    ],
-    "type": "globalcache"
+    ]
   }]
 }]

@@ -2,18 +2,18 @@
 
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
-import styles from './Styles/RoomButtonStyle'
+import styles from './Styles/RoomRowStyle'
 
-type RoomButtonProps = {
+type RoomRowProps = {
   text ? : string,
   children ? : string,
   onPress: () => void,
   styles ? : Object
 };
 
-export default class RoomButton extends React.Component {
+export default class RoomRow extends React.Component {
 
-  props: RoomButtonProps;
+  props: RoomRowProps;
 
   getText() {
     return this.props.text || this.props.children || ''
@@ -21,8 +21,8 @@ export default class RoomButton extends React.Component {
 
   render() {
     return (
-      <TouchableOpacity style={[styles.button, this.props.styles]} onPress={this.props.onPress}>
-        <Text style={styles.buttonText}>{this.getText()}</Text>
+      <TouchableOpacity style={styles.container} onPress={this.props.onPress}>
+        <Text style={styles.text}>{this.getText()}</Text>
       </TouchableOpacity>
     )
   }
@@ -30,12 +30,12 @@ export default class RoomButton extends React.Component {
 }
 
 // // Prop type warnings
-// RoomButton.propTypes = {
+// RoomRow.propTypes = {
 //   someProperty: React.PropTypes.object,
 //   someSetting: React.PropTypes.bool.isRequired
 // }
 //
 // // Defaults for props
-// RoomButton.defaultProps = {
+// RoomRow.defaultProps = {
 //   someSetting: false
 // }

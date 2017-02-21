@@ -9,7 +9,7 @@ import { isLoggedIn } from '../Redux/LoginRedux'
 import StructureActions, { getStructure } from '../Redux/StructureRedux'
 
 import AlertMessage from '../Components/AlertMessage'
-import RoomButton from '../Components/RoomButton'
+import RoomRow from '../Components/RoomRow'
 
 // Styles
 import styles from './Styles/MainScreenStyle'
@@ -48,6 +48,7 @@ class MainScreen extends Component {
   componentWillMount() {
     const { started, loggedIn, structure, getApiStructure } = this.props
     // console.tron.log(`MainScreen.componentWillMount()   started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
+    console.tron.log(`structure:\n${JSON.stringify(structure,null,2)}`)
 
     // TODO is this started variable needed? maybe we can remove it?
     if (!started) return
@@ -64,6 +65,7 @@ class MainScreen extends Component {
   componentWillReceiveProps(newProps) {
     const { started, loggedIn, structure, getApiStructure } = newProps
     // console.tron.log(`MainScreen.componentWillReceiveProps()   rows:${this.noRowData()}, started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
+    console.tron.log(`structure:\n${JSON.stringify(structure,null,2)}`)
 
     if (!started) return
 
@@ -82,11 +84,11 @@ class MainScreen extends Component {
     return this.state.dataSource.getRowCount() === 0
   }
 
-  renderRow(room) {
+  renderRoomRow(room) {
     const options = { title: room.name, room }
     const navigate = NavigationActions.roomScreen.bind(this, options)
     return (
-      <RoomButton text={room.name} onPress={navigate} />
+      <RoomRow text={room.name} onPress={navigate} />
     )
   }
 
@@ -100,7 +102,7 @@ class MainScreen extends Component {
         <ListView
           contentContainerStyle={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
+          renderRow={this.renderRoomRow}
           pageSize={15}
           enableEmptySections={true} />
       </View>
@@ -126,10 +128,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getApiStructure: () => {
-      // console.tron.log(`MainScreen.mapDispatchToProps: calling getApiStructure()`)
-      return dispatch(StructureActions.structureRequest())
-    }
+    getApiStructure: () => dispatch(StructureActions.structureRequest())
   }
 }
 

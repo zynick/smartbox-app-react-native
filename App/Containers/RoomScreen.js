@@ -1,12 +1,13 @@
 // @flow
 
 import React, { Component, PropTypes } from 'react'
-import { ListView, View } from 'react-native'
+import { ListView, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { Actions as NavigationActions } from 'react-native-router-flux'
+// import { Actions as NavigationActions } from 'react-native-router-flux'
 
 import AlertMessage from '../Components/AlertMessage'
-import RoomButton from '../Components/RoomButton'
+import DigitalStromRow from '../Components/DigitalStromRow'
+import GlobalCacheRow from '../Components/GlobalCacheRow'
 
 // Styles
 import styles from './Styles/RoomScreenStyle'
@@ -23,6 +24,8 @@ class RoomScreen extends Component {
   constructor(props) {
     super(props)
 
+    console.tron.log(`RoomScreen.constructor()`);
+
     const rowHasChanged = (r1, r2) => r1.name !== r2.name
     const ds = new ListView.DataSource({ rowHasChanged })
     const items = props.room.items || []
@@ -36,12 +39,26 @@ class RoomScreen extends Component {
   }
 
   renderRow(item) {
-    const text = `${item.name} (${item.type})`
-    const options = { title: item.name, item, room: {} }
-    const navigate = NavigationActions.roomScreen.bind(this, options)
-    return (
-      <RoomButton text={text} onPress={navigate} />
-    )
+    switch (item.type) {
+      case 'digitalstrom':
+        return (
+          <DigitalStromRow item={item} />
+        )
+      case 'globalcache':
+        return (
+          <GlobalCacheRow item={item} />
+        )
+      default:
+        return (
+          <Text>{item.type}</Text>
+        )
+    }
+    // const text = `${item.name} (${item.type})`
+    // const options = { title: item.name, item, room: {} }
+    // const navigate = NavigationActions.roomScreen.bind(this, options)
+    // return (
+    //   <RoomRow text={text} onPress={navigate} />
+    // )
   }
 
   render() {

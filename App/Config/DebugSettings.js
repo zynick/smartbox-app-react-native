@@ -1,5 +1,5 @@
 const SETTINGS = {
-  useFixtures: false,
+  useFixtures: true,
   yellowBox: __DEV__,
   reduxLogging: __DEV__,
   includeExamples: __DEV__,

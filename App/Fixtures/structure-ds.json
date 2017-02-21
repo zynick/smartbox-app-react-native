@@ -1,0 +1,28 @@
+[{
+  "zoneID": 1,
+  "name": "Living Room",
+  "groups": [{
+    "id": 1,
+    "scenes": {
+      "scene0": {
+        "name": "Lights Off"
+      },
+      "scene5": {
+        "name": "Living Lights On"
+      },
+      "scene17": {
+        "name": "Movie Mode"
+      },
+      "scene19": {
+        "name": "Living 5%"
+      },
+      "scene40": {
+        "name": "Living Fade Off"
+      }
+    },
+    "devices": [{
+      "dSID": "303505d7f8000040000374d5",
+      "name": "Living Room Lights"
+    }]
+  }]
+}]
