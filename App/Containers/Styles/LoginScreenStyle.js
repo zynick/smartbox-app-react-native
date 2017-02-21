@@ -7,23 +7,15 @@ const { login: loginColors } = Colors
 
 export default StyleSheet.create({
 
-  container: {
-    // paddingTop: 250,
-    // backgroundColor: Colors.background
-  },
-
   flexContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.frost
+    justifyContent: 'center'
   },
 
   flexBox: {
     width: Metrics.boxWidth,
-    padding: Metrics.baseMargin,
-    borderRadius: Metrics.buttonRadius,
-    backgroundColor: Colors.ember
+    padding: Metrics.baseMargin
   },
 
   row: {

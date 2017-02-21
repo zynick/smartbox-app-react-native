@@ -1,6 +1,12 @@
 // @flow
 
-// https://facebook.github.io/react/docs/react-component.html
+/**
+ * 2016-02-21 was trying to tune the login sreen but it was so hassle
+ * couldn't able to make the scrollbar scorll most probably due to conflicting
+ * attribute when using scrollview + flex + keyboard switching all together..
+ * spent too much time on this, moving on, come back to this later.
+ * does not support potrait mode, but who cares
+ */
 
 import React from 'react'
 import {
@@ -10,11 +16,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Image,
-  Keyboard,
-  LayoutAnimation,
-  Dimensions,
-  StatusBar
+  Image
 } from 'react-native'
 import { connect } from 'react-redux'
 import Styles from './Styles/LoginScreenStyle'
@@ -38,8 +40,7 @@ class LoginScreen extends React.Component {
     email: string,
     password: string,
     error: string,
-    scrollViewHeight: number,
-    scrollableHeight: number
+    scrollViewHeight: number
   }
 
   isAttemptLogin: boolean
@@ -50,17 +51,9 @@ class LoginScreen extends React.Component {
     super(props)
     this.state = {
       error: ' ',
-      scrollViewHeight: Metrics.screenHeight,
-      scrollableHeight: Metrics.screenHeight
+      scrollViewHeight: Metrics.screenHeight
     }
     this.isAttemptLogin = false
-  }
-
-  componentWillMount() {
-    // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
-    // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide)
   }
 
   componentWillReceiveProps(newProps) {
@@ -78,26 +71,6 @@ class LoginScreen extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove()
-    this.keyboardDidHideListener.remove()
-  }
-
-  keyboardDidShow = e => {
-    // Animation types easeInEaseOut/linear/spring
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-    let newSize = Metrics.screenHeight - e.endCoordinates.height
-    console.tron.log(` ####### keyboardShow scrollViewHeight:${newSize}`)
-    this.setState({ scrollViewHeight: newSize })
-  }
-
-  keyboardDidHide = e => {
-    // Animation types easeInEaseOut/linear/spring
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-    console.tron.log(` ####### keyboardHide scrollViewHeight:${Metrics.screenHeight}`)
-    this.setState({ scrollViewHeight: Metrics.screenHeight })
-  }
-
   handlePressLogin = () => {
     const { email, password } = this.state
     this.setState({ error: ' ' })
@@ -113,41 +86,6 @@ class LoginScreen extends React.Component {
     this.setState({ password: text })
   }
 
-  setScrollViewHeight(event) {
-    // const keyboardHeight = event.nativeEvent.layout.height
-    // const scrollViewHeight = this.state.scrollViewHeight
-    // const windowHeight = Dimensions.get('window').height // - StatusBar.currentHeight - scrollViewHeight
-    // console.tron.log(`^^^^^^^^^^^^^^ keyboard:${keyboardHeight}, scrollable:${scrollViewHeight} => window:${windowHeight}`)
-    // this.setState({ scrollViewHeight:  })
-
-    // TODO set dynamic height for scrollViewHeight and scrollableHeight
-    // TODO set dynamic height for scrollViewHeight and scrollableHeight
-    // TODO set dynamic height for scrollViewHeight and scrollableHeight
-    // TODO set dynamic height for scrollViewHeight and scrollableHeight
-    // TODO set dynamic height for scrollViewHeight and scrollableHeight
-    // TODO set dynamic height for scrollViewHeight and scrollableHeight
-    // TODO set dynamic height for scrollViewHeight and scrollableHeight
-    // TODO set dynamic height for scrollViewHeight and scrollableHeight
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-    // TODO test this shit in iOS??
-  }
-
-  setScrollableHeight(event) {
-    const flexboxHeight = event.nativeEvent.layout.height;
-    const windowHeight = Dimensions.get('window').height // - StatusBar.currentHeight;
-    const scrollableHeight = flexboxHeight > windowHeight ? flexboxHeight : windowHeight;
-    console.tron.log(`$$$$$$$$$$$$$$$$$$  flex:${flexboxHeight}, window:${windowHeight} => scrollable:${scrollableHeight}`)
-    // this.setState({ scrollableHeight })
-  }
-
   render() {
     const { email, password, error } = this.state
     const { fetching } = this.props
@@ -155,20 +93,15 @@ class LoginScreen extends React.Component {
     const inputTextStyle = editable ? Styles.inputEdit : Styles.inputRead
 
     return (
-      <KeyboardAvoidingView behavior='position' onLayout={event => this.setScrollViewHeight(event)}>
+      <KeyboardAvoidingView behavior='padding'>
         <ScrollView style={[Styles.container, { height: this.state.scrollViewHeight }]}
           contentContainerStyle={[Styles.flexContainer]}
-          // contentContainerStyle={[Styles.flexContainer, { height: this.state.scrollableHeight }]}
           keyboardShouldPersistTaps>
 
+          <View>
+            <View style={Styles.flexBox}>
 
-          {/*
-          <View style={[Styles.flexContainer]}>
-          */}
-          {/* <View style={[Styles.flexContainer, { height: this.state.scrollableHeight }]}> */}
-
-            <View style={Styles.flexBox} onLayout={event => this.setScrollableHeight(event)}>
-                <Image source={Images.logo} style={Styles.logo} />
+              <Image source={Images.logo} style={Styles.logo} />
 
               <View style={Styles.row}>
                 <Text style={Styles.error}>{error}</Text>
@@ -217,10 +150,7 @@ class LoginScreen extends React.Component {
                 </TouchableOpacity>
               </View>
             </View>
-
-          {/*
           </View>
-          */}
 
         </ScrollView>
       </KeyboardAvoidingView>
