@@ -2,18 +2,18 @@
 
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
-import styles from './Styles/RoomRowStyle'
+import styles from './Styles/RoomComponentStyle'
 
-type RoomRowProps = {
+type RoomComponentProps = {
   text ? : string,
   children ? : string,
   onPress: () => void,
   styles ? : Object
 };
 
-export default class RoomRow extends React.Component {
+export default class RoomComponent extends React.Component {
 
-  props: RoomRowProps;
+  props: RoomComponentProps;
 
   getText() {
     return this.props.text || this.props.children || ''
@@ -30,12 +30,12 @@ export default class RoomRow extends React.Component {
 }
 
 // // Prop type warnings
-// RoomRow.propTypes = {
+// RoomComponent.propTypes = {
 //   someProperty: React.PropTypes.object,
 //   someSetting: React.PropTypes.bool.isRequired
 // }
 //
 // // Defaults for props
-// RoomRow.defaultProps = {
+// RoomComponent.defaultProps = {
 //   someSetting: false
 // }

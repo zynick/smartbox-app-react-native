@@ -38,6 +38,7 @@ const colors = {
   coal: '#2d2d2d',
   darkgreen: 'darkgreen',
   // darkgreen: '#006400',
+  darkYellow: '#990',
   ember: 'rgba(164, 0, 48, 0.5)',
   error: 'rgba(200, 0, 0, 0.8)',
   facebook: '#3b5998',
@@ -51,7 +52,7 @@ const colors = {
   steel: '#CCCCCC',
   transparent: 'rgba(0,0,0,0)',
   white: 'white',
-  windowTint: 'rgba(0, 0, 0, 0.4)',
+  windowTint: 'rgba(0, 0, 0, 0.4)'
 }
 
 export default colors

@@ -9,7 +9,7 @@ import { isLoggedIn } from '../Redux/LoginRedux'
 import StructureActions, { getStructure } from '../Redux/StructureRedux'
 
 import AlertMessage from '../Components/AlertMessage'
-import RoomRow from '../Components/RoomRow'
+import RoomComponent from '../Components/RoomComponent'
 
 // Styles
 import styles from './Styles/MainScreenStyle'
@@ -84,11 +84,11 @@ class MainScreen extends Component {
     return this.state.dataSource.getRowCount() === 0
   }
 
-  renderRoomRow(room) {
+  renderRoomComponent(room) {
     const options = { title: room.name, room }
     const navigate = NavigationActions.roomScreen.bind(this, options)
     return (
-      <RoomRow text={room.name} onPress={navigate} />
+      <RoomComponent text={room.name} onPress={navigate} />
     )
   }
 
@@ -102,7 +102,7 @@ class MainScreen extends Component {
         <ListView
           contentContainerStyle={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRoomRow}
+          renderRow={this.renderRoomComponent}
           pageSize={15}
           enableEmptySections={true} />
       </View>

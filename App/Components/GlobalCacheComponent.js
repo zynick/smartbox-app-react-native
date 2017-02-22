@@ -2,21 +2,21 @@
 
 import React from 'react'
 import { View, Text } from 'react-native'
-import styles from './Styles/GlobalCacheRowStyle'
+import styles from './Styles/GlobalCacheComponentStyle'
 
-type GlobalCacheRowProps = {
+type GlobalCacheComponentProps = {
   item: Object
 };
 
-export default class GlobalCacheRow extends React.Component {
+export default class GlobalCacheComponent extends React.Component {
 
-  props: GlobalCacheRowProps;
+  props: GlobalCacheComponentProps;
 
   render () {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>GlobalCacheRow Component</Text>
+        <Text style={styles.text}>GlobalCacheComponent Component</Text>
         <Text style={styles.description}>{this.props.item.name}</Text>
       </View>
     )
@@ -24,12 +24,12 @@ export default class GlobalCacheRow extends React.Component {
 }
 
 // // Prop type warnings
-// GlobalCacheRow.propTypes = {
+// GlobalCacheComponent.propTypes = {
 //   someProperty: React.PropTypes.object,
 //   someSetting: React.PropTypes.bool.isRequired
 // }
 //
 // // Defaults for props
-// GlobalCacheRow.defaultProps = {
+// GlobalCacheComponent.defaultProps = {
 //   someSetting: false
 // }

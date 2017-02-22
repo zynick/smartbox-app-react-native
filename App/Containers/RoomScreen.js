@@ -6,8 +6,8 @@ import { connect } from 'react-redux'
 // import { Actions as NavigationActions } from 'react-native-router-flux'
 
 import AlertMessage from '../Components/AlertMessage'
-import DigitalStromRow from '../Components/DigitalStromRow'
-import GlobalCacheRow from '../Components/GlobalCacheRow'
+import DigitalStromComponent from '../Components/DigitalStromComponent'
+import GlobalCacheComponent from '../Components/GlobalCacheComponent'
 
 // Styles
 import styles from './Styles/RoomScreenStyle'
@@ -24,20 +24,19 @@ class RoomScreen extends Component {
 
   constructor(props) {
     super(props)
-
-    console.tron.log(`RoomScreen.constructor()`);
+    // console.tron.log(`RoomScreen.constructor()`);
 
     const rowHasChanged = (r1, r2) => r1.name !== r2.name // TODO fix this
     const ds = new ListView.DataSource({ rowHasChanged })
     const items = props.room.items || []
     this.state = {
-      listDs: ds,   // FIXME dangerous!!!!!!!!!
+      listDs: ds,   // FIXME (quick hack!) dangerous! move it off from state (props better)
       dataSource: ds.cloneWithRows(items)
     }
   }
 
   componentWillReceiveProps(newProps) {
-    console.tron.log(`RoomScreen.componentWillReceiveProps()`);
+    // console.tron.log(`RoomScreen.componentWillReceiveProps()`);
     const items = newProps.room.items || []
     this.setState({
       dataSource: this.state.listDs.cloneWithRows(items)
@@ -52,11 +51,11 @@ class RoomScreen extends Component {
     switch (item.type) {
       case 'digitalstrom':
         return (
-          <DigitalStromRow item={item} />
+          <DigitalStromComponent item={item} />
         )
       case 'globalcache':
         return (
-          <GlobalCacheRow item={item} />
+          <GlobalCacheComponent item={item} />
         )
       default:
         return (
@@ -67,7 +66,7 @@ class RoomScreen extends Component {
     // const options = { title: item.name, item, room: {} }
     // const navigate = NavigationActions.roomScreen.bind(this, options)
     // return (
-    //   <RoomRow text={text} onPress={navigate} />
+    //   <RoomComponent text={text} onPress={navigate} />
     // )
   }
 

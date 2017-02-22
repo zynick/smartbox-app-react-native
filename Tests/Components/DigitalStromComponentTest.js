@@ -1,9 +1,9 @@
 import test from 'ava'
 import React from 'react'
 import { shallow } from 'enzyme'
-import RoomRow from '../../App/Components/RoomRow'
+import DigitalStromComponent from '../../App/Components/DigitalStromComponent'
 
-const wrapper = shallow(<RoomRow />)
+const wrapper = shallow(<DigitalStromComponent />)
 
 test('component exists', t => {
   t.is(wrapper.length, 1) // exists
@@ -13,7 +13,7 @@ test('component structure', t => {
   t.is(wrapper.name(), 'View') // the right root component
   t.is(wrapper.children().length, 1) // has 1 child
   t.is(wrapper.children().first().name(), 'Text') // that child is Text
-  t.true(wrapper.children().first().containsMatchingElement('RoomRow Component')) // That the Component Text is included
+  t.true(wrapper.children().first().containsMatchingElement('DigitalStromComponent Component')) // That the Component Text is included
 })
 
 // test('some other things here', t => {
