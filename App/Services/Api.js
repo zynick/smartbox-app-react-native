@@ -52,13 +52,16 @@ const create = (baseURL = 'http://localhost:3030/v1') => {
   const login = (email, password) => api.post('/login', { email, password })
 
   const structure = token => {
-    console.tron.log(`Api - structure`)
-    const axiosConfig = {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }
+    console.tron.display({ name:'Api.structure()' })
+    const Authorization = `Bearer ${token}`;
+    const axiosConfig = { headers: { Authorization } }
     return api.get('/structure', null, axiosConfig);
+  }
+
+  const callScene = (token, id, groupID, sceneNumber) => {
+    const Authorization = `Bearer ${token}`;
+    const axiosConfig = { headers: { Authorization } }
+    return api.get('/callScene', { id, groupID, sceneNumber }, axiosConfig);
   }
 
   // ------
@@ -75,7 +78,8 @@ const create = (baseURL = 'http://localhost:3030/v1') => {
   //
   return {
     login,
-    structure
+    structure,
+    callScene
   }
 }
 

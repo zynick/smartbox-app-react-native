@@ -27,7 +27,7 @@ class MainScreen extends Component {
 
   constructor(props) {
     super(props)
-    // console.tron.log(`MainScreen.constructor() ${JSON.stringify(props,null,2)}`)
+      // console.tron.log(`MainScreen.constructor() ${JSON.stringify(props,null,2)}`)
 
     /* ***********************************************************
      * Teach datasource how to detect if rows are different
@@ -46,9 +46,13 @@ class MainScreen extends Component {
   }
 
   componentWillMount() {
-    const { started, loggedIn, structure, getApiStructure } = this.props
+    const { started, loggedIn, structure, getApiStructure } = this.props;
     // console.tron.log(`MainScreen.componentWillMount()   started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
-    console.tron.log(`structure:\n${JSON.stringify(structure,null,2)}`)
+    console.tron.display({
+      name: 'MainScreen',
+      preview: 'componentWillMount()',
+      value: { structure }
+    });
 
     // TODO is this started variable needed? maybe we can remove it?
     if (!started) return
@@ -63,8 +67,14 @@ class MainScreen extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { started, loggedIn, structure, getApiStructure } = newProps
+    const { started, loggedIn, structure, getApiStructure } = newProps;
     // console.tron.log(`MainScreen.componentWillReceiveProps()   rows:${this.noRowData()}, started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
+    console.tron.display({
+      name: 'MainScreen',
+      preview: 'componentWillReceiveProps()',
+      value: { structure, newProps }
+    });
+
     console.tron.log(`structure:\n${JSON.stringify(structure,null,2)}`)
 
     if (!started) return

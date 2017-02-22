@@ -5,6 +5,7 @@ import { ListView, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 // import { Actions as NavigationActions } from 'react-native-router-flux'
 
+import { getToken } from '../Redux/LoginRedux'
 import AlertMessage from '../Components/AlertMessage'
 import DigitalStromComponent from '../Components/DigitalStromComponent'
 import GlobalCacheComponent from '../Components/GlobalCacheComponent'
@@ -38,6 +39,7 @@ class RoomScreen extends Component {
   componentWillReceiveProps(newProps) {
     // console.tron.log(`RoomScreen.componentWillReceiveProps()`);
     const items = newProps.room.items || []
+    console.tron.log(`$$$$$$$$$$$$$$$$$$$$$$$$ ${JSON.stringify(newProps,null,2)}`)
     this.setState({
       dataSource: this.state.listDs.cloneWithRows(items)
     })
@@ -51,11 +53,11 @@ class RoomScreen extends Component {
     switch (item.type) {
       case 'digitalstrom':
         return (
-          <DigitalStromComponent item={item} />
+          <DigitalStromComponent item={item} token={this.props.token} />
         )
       case 'globalcache':
         return (
-          <GlobalCacheComponent item={item} />
+          <GlobalCacheComponent item={item} token={this.props.token} />
         )
       default:
         return (
@@ -77,7 +79,7 @@ class RoomScreen extends Component {
         <ListView
           contentContainerStyle={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
+          renderRow={this.renderRow.bind(this)}
           pageSize={15}
           enableEmptySections={true} />
       </View>
@@ -87,11 +89,15 @@ class RoomScreen extends Component {
 }
 
 RoomScreen.propTypes = {
+  token: PropTypes.string,
   room: PropTypes.object
 }
 
 const mapStateToProps = state => {
-  return {}
+  // console.tron.log(`RoomScreen.mapStateToProps() ${state.login.token}`)
+  return {
+    token: getToken(state.login)
+  };
 }
 
 const mapDispatchToProps = dispatch => {

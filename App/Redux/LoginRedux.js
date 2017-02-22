@@ -58,3 +58,8 @@ export const isLoggedIn = (loginState: Object) => {
   // console.tron.log(`LoginRedux isLoggedIn: ${JSON.stringify(loginState,null,2)}`)
   return loginState.email !== null
 }
+
+export const getToken = (loginState: Object) => {
+  // console.tron.log(`LoginRedux.getToken(): ${JSON.stringify(loginState,null,2)}`)
+  return loginState.token;
+}

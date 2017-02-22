@@ -6,11 +6,12 @@ import styles from './Styles/DigitalStromComponentStyle'
 import DigitalStromLight from './DigitalStromLight'
 
 type DigitalStromComponentProps = {
-  item: Object
-    // text ? : string,
-    // children ? : string,
-    // onPress: () => void,
-    // styles ? : Object
+  item: Object,
+  token: String,
+  // text ? : string,
+  // children ? : string,
+  // onPress: () => void,
+  // styles ? : Object
 };
 
 
@@ -27,11 +28,11 @@ export default class DigitalStromComponent extends React.Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item, token } = this.props;
     switch (item.groupId) {
       case 1: // light
         return (
-          <DigitalStromLight item={item} />
+          <DigitalStromLight item={item} token={token} />
         )
       default:
         return this.renderDefault()
