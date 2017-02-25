@@ -11,7 +11,8 @@ export default () => {
     login: require('./LoginRedux').reducer,
     search: require('./SearchRedux').reducer,
     structure: require('./StructureRedux').reducer,
-    startup: require('./StartupRedux').reducer
+    startup: require('./StartupRedux').reducer,
+    digitalstrom: require('./DigitalStromRedux').reducer
   })
 
   const store = configureStore(rootReducer, rootSaga)
@@ -24,7 +25,8 @@ export default () => {
         login: require('./LoginRedux').reducer,
         search: require('./SearchRedux').reducer,
         structure: require('./StructureRedux').reducer,
-        startup: require('./StartupRedux').reducer
+        startup: require('./StartupRedux').reducer,
+        digitalstrom: require('./DigitalStromRedux').reducer
       })
       store.replaceReducer(nextRootReducer)
     })

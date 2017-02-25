@@ -1,17 +1,25 @@
 // @flow
 
-import React from 'react'
+import React, { Component, PropTypes} from 'react'
 import { View, Text } from 'react-native'
-import styles from './Styles/DigitalStromLightStyle'
+import { connect } from 'react-redux'
 
-type DigitalStromLightProps = {
-  item: Object,
-  token: String,
-};
+import { getToken } from '../Redux/LoginRedux'
+// import { Actions as NavigationActions } from 'react-native-router-flux'
 
-export default class DigitalStromLight extends React.Component {
+// Styles
+import styles from './Styles/DigitalStromLightContainerStyle'
 
-  props: DigitalStromLightProps;
+class DigitalStromLightContainer extends Component {
+
+  // constructor (props) {
+  //   super(props)
+  //   this.state = {}
+  // }
+
+  constructor(props) {
+    super(props)
+  }
 
   render() {
     const { item, token } = this.props
@@ -22,11 +30,11 @@ export default class DigitalStromLight extends React.Component {
       scene17 = { name: '[Preset 2]' },
       scene18 = { name: '[Preset 3]' },
       scene19 = { name: '[Preset 4]' }
-    } = scenes;
+    } = scenes
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>DigitalStrom Light</Text>
+        <Text style={styles.text}>DigitalStrom Light Container</Text>
         <Text style={styles.description}>Token: {token}</Text>
         <Text style={styles.description}>==============</Text>
         <Text style={styles.description}>Zone: {zoneId}</Text>
@@ -41,16 +49,21 @@ export default class DigitalStromLight extends React.Component {
       </View>
     )
   }
-
 }
 
-// // Prop type warnings
-// DigitalStromLight.propTypes = {
-//   someProperty: React.PropTypes.object,
-//   someSetting: React.PropTypes.bool.isRequired
-// }
-//
-// // Defaults for props
-// DigitalStromLight.defaultProps = {
-//   someSetting: false
-// }
+DigitalStromLightContainer.propTypes = {
+  token: PropTypes.string,
+  item: PropTypes.object
+}
+
+const mapStateToProps = (state) => {
+  return {
+    token: getToken(state.login)
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DigitalStromLightContainer)

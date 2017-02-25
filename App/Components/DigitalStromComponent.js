@@ -3,11 +3,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import styles from './Styles/DigitalStromComponentStyle'
-import DigitalStromLight from './DigitalStromLight'
+import DigitalStromLightContainer from '../Containers/DigitalStromLightContainer'
 
 type DigitalStromComponentProps = {
   item: Object,
-  token: String,
   // text ? : string,
   // children ? : string,
   // onPress: () => void,
@@ -28,11 +27,11 @@ export default class DigitalStromComponent extends React.Component {
   }
 
   render() {
-    const { item, token } = this.props;
+    const { item } = this.props;
     switch (item.groupId) {
       case 1: // light
         return (
-          <DigitalStromLight item={item} token={token} />
+          <DigitalStromLightContainer item={item} />
         )
       default:
         return this.renderDefault()

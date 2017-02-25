@@ -1,5 +1,6 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
+import querystringify from 'querystringify'
 
 /**
  * https://github.com/skellock/apisauce
@@ -61,7 +62,14 @@ const create = (baseURL = 'http://localhost:3030/v1') => {
   const callScene = (token, id, groupID, sceneNumber) => {
     const Authorization = `Bearer ${token}`;
     const axiosConfig = { headers: { Authorization } }
-    return api.get('/callScene', { id, groupID, sceneNumber }, axiosConfig);
+
+    const query = { id, groupID, sceneNumber };
+    const string = querystringify.stringify(query);
+    const path = `/json/zone/callScene?${string}`;
+
+    console.tron.log(` ############### Api.js ${path}`);
+
+    return api.get('/ds/api', { path }, axiosConfig);
   }
 
   // ------

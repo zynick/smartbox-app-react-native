@@ -9,7 +9,6 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // paddingTop: Metrics.titlePadding
     backgroundColor: Colors.darkYellow, // TODO change
     minHeight: 160, // TODO move to Metrics?
     margin: Metrics.smallMargin

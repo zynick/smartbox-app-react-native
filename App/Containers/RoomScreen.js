@@ -39,7 +39,6 @@ class RoomScreen extends Component {
   componentWillReceiveProps(newProps) {
     // console.tron.log(`RoomScreen.componentWillReceiveProps()`);
     const items = newProps.room.items || []
-    console.tron.log(`$$$$$$$$$$$$$$$$$$$$$$$$ ${JSON.stringify(newProps,null,2)}`)
     this.setState({
       dataSource: this.state.listDs.cloneWithRows(items)
     })
@@ -53,7 +52,7 @@ class RoomScreen extends Component {
     switch (item.type) {
       case 'digitalstrom':
         return (
-          <DigitalStromComponent item={item} token={this.props.token} />
+          <DigitalStromComponent item={item} />
         )
       case 'globalcache':
         return (
