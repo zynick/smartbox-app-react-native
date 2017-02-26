@@ -1,14 +1,15 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
-import querystringify from 'querystringify'
 
 /**
  * https://github.com/skellock/apisauce
  */
 
 // our "constructor"
-const create = (baseURL = 'http://localhost:3030/v1') => {
+const create = (baseURL) => {
+
   console.tron.log(`Api baseURL: ${baseURL}`)
+
   // ------
   // STEP 1
   // ------
@@ -50,26 +51,28 @@ const create = (baseURL = 'http://localhost:3030/v1') => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const login = (email, password) => api.post('/login', { email, password })
+  const login = (email, password) => api.post('/v1/login', { email, password })
 
   const structure = token => {
-    console.tron.display({ name:'Api.structure()' })
-    const Authorization = `Bearer ${token}`;
-    const axiosConfig = { headers: { Authorization } }
-    return api.get('/structure', null, axiosConfig);
+    console.tron.log('Api.structure()')
+    const axiosConfig = { headers: { Authorization: `Bearer ${token}` } }
+    return api.get('/v1/structure', null, axiosConfig);
   }
 
   const callScene = (token, id, groupID, sceneNumber) => {
-    const Authorization = `Bearer ${token}`;
-    const axiosConfig = { headers: { Authorization } }
+    console.tron.log(`Api.callScene() ${token}, ${id}, ${groupID}, ${sceneNumber}`)
 
-    const query = { id, groupID, sceneNumber };
-    const string = querystringify.stringify(query);
-    const path = `/json/zone/callScene?${string}`;
+    const axiosConfig = {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    }
 
-    console.tron.log(` ############### Api.js ${path}`);
+    const path = '/json/zone/callScene'
+    const parameters = { id, groupID, sceneNumber }
 
-    return api.get('/ds/api', { path }, axiosConfig);
+    return api.post('/v1/ds/api', { path, parameters }, axiosConfig)
   }
 
   // ------

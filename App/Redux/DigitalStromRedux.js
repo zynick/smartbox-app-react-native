@@ -17,7 +17,6 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  data: null,
   payload: null,
   error: null,
   fetching: false
@@ -26,8 +25,8 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 // request the data from an api
-export const request = (state, { data }) =>
-  state.merge({ fetching: true, data, payload: null })
+export const request = (state, action) =>
+  state.merge({ fetching: true, payload: null })
 
 // successful api lookup
 export const success = (state, action) => {
@@ -42,7 +41,7 @@ export const failure = state =>
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.Digital_Strom_REQUEST]: request,
-  [Types.Digital_Strom_SUCCESS]: success,
-  [Types.Digital_Strom_FAILURE]: failure
+  [Types.DIGITAL_STROM_REQUEST]: request,
+  [Types.DIGITAL_STROM_SUCCESS]: success,
+  [Types.DIGITAL_STROM_FAILURE]: failure
 })

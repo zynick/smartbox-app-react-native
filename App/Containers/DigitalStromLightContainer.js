@@ -1,14 +1,16 @@
 // @flow
 
-import React, { Component, PropTypes} from 'react'
-import { View, Text } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { View, Text, TouchableOpacity, Button } from 'react-native'
 import { connect } from 'react-redux'
 
-import { getToken } from '../Redux/LoginRedux'
+// import { getToken } from '../Redux/LoginRedux'
+import DigitalStromActions from '../Redux/DigitalStromRedux'
 // import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // Styles
 import styles from './Styles/DigitalStromLightContainerStyle'
+
 
 class DigitalStromLightContainer extends Component {
 
@@ -21,8 +23,17 @@ class DigitalStromLightContainer extends Component {
     super(props)
   }
 
+  onPress() {
+    console.tron.log(`DigitalStromLightContainer.onPress() ${JSON.stringify(this.props.item,null,2)}`)
+    const { zoneId, groupId } = this.props.item
+    const action = { zoneId, groupId, sceneNumber: 18 }
+    this.props.callScene(action)
+  }
+
   render() {
-    const { item, token } = this.props
+    // console.tron.log('DigitalStromLightContainer.render(): onPress:' + this.onPress);
+
+    const { item } = this.props
     const { zoneId, scenes, devices } = item
     const {
       scene0 = { name: '[Preset Off]' },
@@ -35,8 +46,6 @@ class DigitalStromLightContainer extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>DigitalStrom Light Container</Text>
-        <Text style={styles.description}>Token: {token}</Text>
-        <Text style={styles.description}>==============</Text>
         <Text style={styles.description}>Zone: {zoneId}</Text>
         <Text style={styles.description}>==============</Text>
         <Text style={styles.description}>{scene5.name}</Text>
@@ -46,24 +55,30 @@ class DigitalStromLightContainer extends Component {
         <Text style={styles.description}>{scene0.name}</Text>
         <Text style={styles.description}>==============</Text>
         <Text style={styles.description}>Total Deivce: {devices.length}</Text>
+        <Text style={styles.description}>==============</Text>
+        <TouchableOpacity onPress={this.onPress.bind(this)}>
+          <Text style={styles.text}>* TEST *</Text>
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
 DigitalStromLightContainer.propTypes = {
-  token: PropTypes.string,
-  item: PropTypes.object
+  item: PropTypes.object,
+  callScene: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
   return {
-    token: getToken(state.login)
+    // token: getToken(state.login)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    callScene: (action) => dispatch(DigitalStromActions.digitalStromRequest(action))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DigitalStromLightContainer)

@@ -3,18 +3,21 @@ import DigitalStromActions from '../Redux/DigitalStromRedux'
 
 export const selectLogin = state => state.login
 
-export function* callScene(api, id, groupID, sceneNumber, action) {
-  console.tron.log(`DigitalStromSaga action:${JSON.stringify(action,null,2)}`)
+export function* callScene(api, action) {
+
+  // TODO check what's inside action, so is it next time we can just pass in 'apiName' in action
+  console.tron.log(`DigitalStromSaga action: ${JSON.stringify(action,null,2)}`)
 
   const { token } = yield select(selectLogin)
-  // const { data } = action
+  const { zoneId, groupId, sceneNumber } = action.data
 
-  const res = yield call(api.callScene, token, id, groupID, sceneNumber)
+  const res = yield call(api.callScene, token, zoneId, groupId, sceneNumber)
 
   // success?
   if (res.ok) {
-    yield put(DigitalStromActions.digitalstromSuccess(res.data))
+    yield put(DigitalStromActions.digitalStromSuccess(res.data))
   } else {
-    yield put(DigitalStromActions.digitalstromFailure())
+    yield put(DigitalStromActions.digitalStromFailure())
   }
+
 }

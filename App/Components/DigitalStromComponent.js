@@ -21,7 +21,7 @@ export default class DigitalStromComponent extends React.Component {
   renderDefault() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>DigitalStromComponent Component (?)</Text>
+        <Text style={styles.text}>Unrecognized DigitalStromComponent</Text>
       </View>
     )
   }

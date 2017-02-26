@@ -12,6 +12,7 @@ import { TemperatureTypes } from '../Redux/TemperatureRedux'
 import { LoginTypes } from '../Redux/LoginRedux'
 import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
 import { StructureTypes } from '../Redux/StructureRedux'
+import { DigitalStromTypes } from '../Redux/DigitalStromRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -20,6 +21,7 @@ import { login } from './LoginSagas'
 import { getTemperature } from './TemperatureSagas'
 import { openScreen } from './OpenScreenSagas'
 import { getStructure } from './StructureSagas'
+import { callScene } from './DigitalStromSagas'
 
 /* ------------- API ------------- */
 
@@ -39,6 +41,7 @@ export default function* root() {
     takeLatest(StartupTypes.STARTUP, startup, api),
     takeLatest(LoginTypes.LOGIN_REQUEST, login, api),
     takeLatest(TemperatureTypes.TEMPERATURE_REQUEST, getTemperature, weatherApi),
-    takeLatest(StructureTypes.STRUCTURE_REQUEST, getStructure, api)
+    takeLatest(StructureTypes.STRUCTURE_REQUEST, getStructure, api),
+    takeLatest(DigitalStromTypes.DIGITAL_STROM_REQUEST, callScene, api)
   ]
 }
