@@ -1,26 +1,30 @@
 // @flow
 
 import { StyleSheet } from 'react-native'
-import { Fonts, Colors, Metrics } from '../../Themes/'
-
-const { roomRow: roomRowColor } = Colors
-const { roomRow: roomRowMetric } = Metrics
+import { Fonts, Metrics } from '../../Themes/'
 
 export default StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: roomRowColor.background,
-    height: roomRowMetric.height,
-    margin: Metrics.smallMargin,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 80,
+
+    marginTop: Metrics.smallMargin,
+    marginBottom: Metrics.smallMargin,
+    marginLeft: Metrics.baseMargin,
+    marginRight: Metrics.baseMargin,
+
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#666'
   },
 
-  text: {
-    color: roomRowColor.color,
+  title: {
+    color: '#666',
     margin: Metrics.smallMargin,
-    fontSize: Fonts.size.regular
+    fontSize: Fonts.size.h6
   }
 
 })

@@ -77,23 +77,31 @@ class DigitalStromLightContainer extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>DigitalStrom Light Container</Text>
-        <Text style={styles.description}>Device: {devices.length}</Text>
+        <View style={styles.row}>
+          <Text style={styles.title}>Lights</Text>
+          <Text style={styles.button}>Device: {devices.length}</Text>
+        </View>
+
         <TouchableOpacity onPress={this.onPressPreset1.bind(this)}>
-          <Text style={styles.text}>* {scene5.name} *</Text>
+          <Text style={styles.button}>* {scene5.name} *</Text>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={this.onPressPreset2.bind(this)}>
-          <Text style={styles.text}>* {scene17.name} *</Text>
+          <Text style={styles.button}>* {scene17.name} *</Text>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={this.onPressPreset3.bind(this)}>
-          <Text style={styles.text}>* {scene18.name} *</Text>
+          <Text style={styles.button}>* {scene18.name} *</Text>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={this.onPressPreset4.bind(this)}>
-          <Text style={styles.text}>* {scene19.name} *</Text>
+          <Text style={styles.button}>* {scene19.name} *</Text>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={this.onPressOff.bind(this)}>
-          <Text style={styles.text}>* {scene0.name} *</Text>
+          <Text style={styles.button}>* {scene0.name} *</Text>
         </TouchableOpacity>
+
       </View>
     )
   }

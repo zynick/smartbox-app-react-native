@@ -24,11 +24,6 @@ const colors = {
     background: '#138833'
   },
 
-  roomRow: {
-    background: '#999',
-    color: '#FFF'
-  },
-
 
 
   bloodOrange: '#fb5f26',

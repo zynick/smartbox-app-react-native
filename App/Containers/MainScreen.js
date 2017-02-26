@@ -11,7 +11,6 @@ import StructureActions, { getStructure } from '../Redux/StructureRedux'
 import AlertMessage from '../Components/AlertMessage'
 import RoomComponent from '../Components/RoomComponent'
 
-// Styles
 import styles from './Styles/MainScreenStyle'
 
 // I18n
@@ -27,8 +26,6 @@ class MainScreen extends Component {
 
   constructor(props) {
     super(props)
-      // console.tron.log(`MainScreen.constructor() ${JSON.stringify(props,null,2)}`)
-
     /* ***********************************************************
      * Teach datasource how to detect if rows are different
      * Make this function fast!  Perhaps something like:
@@ -47,11 +44,8 @@ class MainScreen extends Component {
 
   componentWillMount() {
     const { started, loggedIn, structure, getApiStructure } = this.props
-    // console.tron.log(`MainScreen.componentWillMount()   started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
-    // console.tron.display({ name: 'MainScreen', preview: 'componentWillMount()', value: { structure } });
 
-    // TODO is this started variable needed? maybe we can remove it?
-    if (!started) return
+    if (!started) return // TODO is this started variable needed? maybe we can remove it?
 
     if (!loggedIn) return NavigationActions.login()
 
@@ -64,8 +58,6 @@ class MainScreen extends Component {
 
   componentWillReceiveProps(newProps) {
     const { started, loggedIn, structure, getApiStructure } = newProps;
-    // console.tron.log(`MainScreen.componentWillReceiveProps()   rows:${this.noRowData()}, started:${started}, loggedIn:${loggedIn}, structure:${structure}`)
-    // console.tron.display({ name: 'MainScreen', preview: 'componentWillReceiveProps()', value: { structure, newProps } });
 
     if (!started) return
 
@@ -93,7 +85,6 @@ class MainScreen extends Component {
   }
 
   render() {
-    // console.tron.log(`MainScreen.render() - : ${this.noRowData()}`)
     const loading = !this.props.started;
     return (
       <View style={styles.container}>
@@ -118,7 +109,6 @@ MainScreen.propTypes = {
 }
 
 const mapStateToProps = state => {
-  // console.tron.log(`MainScreen.mapStateToProps()`)
   return {
     loggedIn: isLoggedIn(state.login),
     structure: getStructure(state.structure),

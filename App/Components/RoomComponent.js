@@ -22,7 +22,7 @@ export default class RoomComponent extends React.Component {
   render() {
     return (
       <TouchableOpacity style={styles.container} onPress={this.props.onPress}>
-        <Text style={styles.text}>{this.getText()}</Text>
+        <Text style={styles.title}>{this.getText()}</Text>
       </TouchableOpacity>
     )
   }

@@ -7,10 +7,6 @@ const { width, height } = Dimensions.get('window')
 // Used via Metrics.baseMargin
 const metrics = {
 
-  roomRow: {
-    height: 80
-  },
-
   boxWidth: 280,
 
   marginHorizontal: 10,

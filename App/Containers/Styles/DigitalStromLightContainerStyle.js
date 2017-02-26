@@ -1,7 +1,7 @@
 // @flow
 
 import { StyleSheet } from 'react-native'
-import { Fonts, Colors, Metrics } from '../../Themes/'
+import { Fonts, Metrics } from '../../Themes/'
 
 export default StyleSheet.create({
 
@@ -9,19 +9,43 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.darkYellow, // TODO change
-    minHeight: 160, // TODO move to Metrics?
-    margin: Metrics.smallMargin
+    minHeight: 160,
+
+    marginTop: Metrics.smallMargin,
+    marginBottom: Metrics.smallMargin,
+    marginLeft: Metrics.baseMargin,
+    marginRight: Metrics.baseMargin,
+
+    padding: Metrics.smallMargin,
+
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#666'
   },
 
-  text: {
-    color: Colors.white, // TODO change
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'stretch'
+  },
+
+  title: {
+    color: '#666',
     margin: Metrics.smallMargin,
-    fontSize: Fonts.size.regular
+    fontSize: Fonts.size.h6
   },
 
   description: {
-    color: Colors.white
+    color: '#666',
+    margin: Metrics.smallMargin,
+    fontSize: Fonts.size.medium
+  },
+
+  button: {
+    color: '#666',
+    margin: Metrics.baseMargin,
+    fontSize: Fonts.size.regular
   }
 
 })
