@@ -1,59 +1,72 @@
 // @flow
 
 import React, { Component, PropTypes } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Vibration } from 'react-native'
 import { connect } from 'react-redux'
-import uuidV4 from 'uuid/v4'
-
-// import { getToken } from '../Redux/LoginRedux'
 import DsCallSceneActions from '../Redux/DsCallSceneRedux'
-// import { Actions as NavigationActions } from 'react-native-router-flux'
-
-// Styles
 import styles from './Styles/DigitalStromLightContainerStyle'
+
+const pattern = [300, 50]
 
 
 class DigitalStromLightContainer extends Component {
 
   constructor(props) {
     super(props)
-
-    this.props.id = uuidV4()
-
-    console.tron.log(`DigitalStromLightContainer.constructor() ${JSON.stringify(props,null,2)}`)
+    // console.tron.log(`DigitalStromLightContainer.constructor() ${JSON.stringify(props,null,2)}`)
   }
 
+  isAttemptCall: boolean;
+
   componentWillReceiveProps(newProps) {
+    // console.tron.log(`DigitalStromLightContainer.componentWillReceiveProps() newProps: ${JSON.stringify(newProps,null,2)}`)
+    if (this.isAttemptCall && !newProps.fetching) {
+      this.isAttemptCall = false
+      if (newProps.success) {
+        // do something here to indicate success if needed
+      }
+    }
+
     console.tron.log(`DigitalStromLightContainer.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
   }
 
   onPressPreset1() {
     const { zoneId, groupId } = this.props.item
+    this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 5)
+    Vibration.vibrate(pattern)
   }
 
   onPressPreset2() {
     const { zoneId, groupId } = this.props.item
+    this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 17)
+    Vibration.vibrate(pattern)
   }
 
   onPressPreset3() {
     const { zoneId, groupId } = this.props.item
+    this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 18)
+    Vibration.vibrate(pattern)
   }
 
   onPressPreset4() {
     const { zoneId, groupId } = this.props.item
+    this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 19)
+    Vibration.vibrate(pattern)
   }
 
   onPressOff() {
     const { zoneId, groupId } = this.props.item
+    this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 0)
+    Vibration.vibrate(pattern)
   }
 
   render() {
-    const { scenes } = this.props.item
+    const { scenes, devices } = this.props.item
     const {
       scene0 = { name: 'Off' },
       scene5 = { name: 'Preset 1' },
@@ -65,6 +78,7 @@ class DigitalStromLightContainer extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>DigitalStrom Light Container</Text>
+        <Text style={styles.description}>Device: {devices.length}</Text>
         <TouchableOpacity onPress={this.onPressPreset1.bind(this)}>
           <Text style={styles.text}>* {scene5.name} *</Text>
         </TouchableOpacity>
@@ -86,21 +100,23 @@ class DigitalStromLightContainer extends Component {
 }
 
 DigitalStromLightContainer.propTypes = {
-  id: PropTypes.string,
   item: PropTypes.object,
-  callScene: PropTypes.func
+  callScene: PropTypes.func,
+  success: PropTypes.bool
 }
 
 const mapStateToProps = (state) => {
+  // console.tron.log(`DigitalStromLightContainer.mapStateToProps() ${JSON.stringify(state,null,2)}`)
+  console.tron.log(`DigitalStromLightContainer.mapStateToProps() ${JSON.stringify(state.dsCallScene.payload,null,2)}`)
   return {
-    // token: getToken(state.login)
+    success: state.dsCallScene.success
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     callScene: (zoneId, groupId, sceneNumber) =>
-      dispatch(DsCallSceneActions.DsCallSceneRequest(zoneId, groupId, sceneNumber))
+      dispatch(DsCallSceneActions.dsCallSceneRequest(zoneId, groupId, sceneNumber))
   }
 }
 

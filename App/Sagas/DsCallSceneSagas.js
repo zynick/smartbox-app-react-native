@@ -18,8 +18,8 @@ export function* callScene(api, action) {
       ? data.error.message
       : 'Unable to connect to SMARTBOX Server';
 
-    yield put(DsCallSceneActions.DsCallSceneFailure(message))
+    return yield put(DsCallSceneActions.dsCallSceneFailure(message))
   }
 
-  yield put(DsCallSceneActions.DsCallSceneSuccess(res.data))
+  yield put(DsCallSceneActions.dsCallSceneSuccess(res.data.ok))
 }

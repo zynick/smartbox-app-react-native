@@ -26,7 +26,7 @@ test('success path', t => {
   // Step 1: hit the api
   step()
   // Second step successful return and data!
-  t.deepEqual(step(response), put(DsCallSceneActions.DsCallSceneuccess(21)))
+  t.deepEqual(step(response), put(DsCallSceneActions.dsCallSceneuccess(21)))
 })
 
 test('failure path', t => {
@@ -35,5 +35,5 @@ test('failure path', t => {
   // Step 1: hit the api
   step()
   // Second step failed response
-  t.deepEqual(step(response), put(DsCallSceneActions.DsCallSceneFailure()))
+  t.deepEqual(step(response), put(DsCallSceneActions.dsCallSceneFailure()))
 })
