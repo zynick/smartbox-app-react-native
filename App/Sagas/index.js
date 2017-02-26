@@ -1,4 +1,4 @@
-import { takeLatest } from 'redux-saga'
+import { takeLatest, takeEvery } from 'redux-saga'
 import API from '../Services/Api'
 import WeatherAPI from '../Services/WeatherApi'
 import FixtureAPI from '../Services/FixtureApi'
@@ -12,7 +12,7 @@ import { TemperatureTypes } from '../Redux/TemperatureRedux'
 import { LoginTypes } from '../Redux/LoginRedux'
 import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
 import { StructureTypes } from '../Redux/StructureRedux'
-import { DigitalStromTypes } from '../Redux/DigitalStromRedux'
+import { DsCallSceneTypes } from '../Redux/DsCallSceneRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -21,7 +21,7 @@ import { login } from './LoginSagas'
 import { getTemperature } from './TemperatureSagas'
 import { openScreen } from './OpenScreenSagas'
 import { getStructure } from './StructureSagas'
-import { callScene } from './DigitalStromSagas'
+import { callScene } from './DsCallSceneSagas'
 
 /* ------------- API ------------- */
 
@@ -42,6 +42,6 @@ export default function* root() {
     takeLatest(LoginTypes.LOGIN_REQUEST, login, api),
     takeLatest(TemperatureTypes.TEMPERATURE_REQUEST, getTemperature, weatherApi),
     takeLatest(StructureTypes.STRUCTURE_REQUEST, getStructure, api),
-    takeLatest(DigitalStromTypes.DIGITAL_STROM_REQUEST, callScene, api)
+    takeEvery(DsCallSceneTypes.DS_CALL_SCENE_REQUEST, callScene, api)
   ]
 }

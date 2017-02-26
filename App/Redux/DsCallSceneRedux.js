@@ -6,12 +6,12 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  digitalStromRequest: ['data'],
-  digitalStromSuccess: ['payload'],
-  digitalStromFailure: null
+  DsCallSceneRequest: ['zoneId', 'groupId', 'sceneNumber'],
+  DsCallSceneSuccess: ['payload'],
+  DsCallSceneFailure: ['error']
 })
 
-export const DigitalStromTypes = Types
+export const DsCallSceneTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
@@ -26,7 +26,7 @@ export const INITIAL_STATE = Immutable({
 
 // request the data from an api
 export const request = (state, action) =>
-  state.merge({ fetching: true, payload: null })
+  state.merge({ fetching: true, error: null, payload: null })
 
 // successful api lookup
 export const success = (state, action) => {
@@ -35,13 +35,15 @@ export const success = (state, action) => {
 }
 
 // Something went wrong somewhere.
-export const failure = state =>
-  state.merge({ fetching: false, error: true, payload: null })
+export const failure = (state, action) => {
+  const { error } = action
+  return state.merge({ fetching: false, error, payload: null })
+}
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.DIGITAL_STROM_REQUEST]: request,
-  [Types.DIGITAL_STROM_SUCCESS]: success,
-  [Types.DIGITAL_STROM_FAILURE]: failure
+  [Types.DS_CALL_SCENE_REQUEST]: request,
+  [Types.DS_CALL_SCENE_SUCCESS]: success,
+  [Types.DS_CALL_SCENE_FAILURE]: failure
 })

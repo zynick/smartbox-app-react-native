@@ -60,7 +60,7 @@ const create = (baseURL) => {
   }
 
   const callScene = (token, id, groupID, sceneNumber) => {
-    console.tron.log(`Api.callScene() ${token}, ${id}, ${groupID}, ${sceneNumber}`)
+    // console.tron.log(`Api.callScene() ${token}, ${id}, ${groupID}, ${sceneNumber}`)
 
     const axiosConfig = {
       headers: {

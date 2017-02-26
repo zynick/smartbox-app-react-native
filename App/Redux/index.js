@@ -12,7 +12,7 @@ export default () => {
     search: require('./SearchRedux').reducer,
     structure: require('./StructureRedux').reducer,
     startup: require('./StartupRedux').reducer,
-    digitalstrom: require('./DigitalStromRedux').reducer
+    DsCallScene: require('./DsCallSceneRedux').reducer
   })
 
   const store = configureStore(rootReducer, rootSaga)
@@ -26,7 +26,7 @@ export default () => {
         search: require('./SearchRedux').reducer,
         structure: require('./StructureRedux').reducer,
         startup: require('./StartupRedux').reducer,
-        digitalstrom: require('./DigitalStromRedux').reducer
+        DsCallScene: require('./DsCallSceneRedux').reducer
       })
       store.replaceReducer(nextRootReducer)
     })
