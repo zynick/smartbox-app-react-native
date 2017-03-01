@@ -1,14 +1,14 @@
 import { call, put, select } from 'redux-saga/effects'
-import DsCallSceneActions from '../Redux/DsCallSceneRedux'
+import GcSendCommandActions from '../Redux/GcSendCommandRedux'
 
 export const selectLogin = state => state.login
 
-export function* callScene(api, action) {
+export function* sendCommand(api, action) {
 
   const { token } = yield select(selectLogin)
-  const { zoneId, groupId, sceneNumber } = action
+  const { command } = action
 
-  const res = yield call(api.ds.callScene, token, zoneId, groupId, sceneNumber)
+  const res = yield call(api.gc.command, token, command)
 
   if (!res.ok) {
     // TODO process what happens if token expired
@@ -18,8 +18,8 @@ export function* callScene(api, action) {
       ? data.error.message
       : 'Unable to connect to SMARTBOX Server';
 
-    return yield put(DsCallSceneActions.dsCallSceneFailure(message))
+    return yield put(GcSendCommandActions.gcSendCommandFailure(message))
   }
 
-  yield put(DsCallSceneActions.dsCallSceneSuccess(res.data.ok))
+  yield put(GcSendCommandActions.gcSendCommandSuccess())
 }

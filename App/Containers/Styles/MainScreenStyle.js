@@ -1,7 +1,7 @@
 // @flow
 
 import { StyleSheet } from 'react-native'
-import { ApplicationStyles, Metrics, Colors } from '../../Themes/'
+import { ApplicationStyles, Metrics } from '../../Themes/'
 
 export default StyleSheet.create({
 
@@ -9,12 +9,12 @@ export default StyleSheet.create({
 
   container: {
     flex: 1,
-    marginTop: Metrics.navBarHeight,
-    // backgroundColor: Colors.background
+    marginTop: Metrics.navBarHeight
   },
 
   listView: {
-    marginTop: Metrics.smallMargin
+    paddingTop: Metrics.smallMargin,
+    paddingBottom: Metrics.smallMargin
   }
 
 })

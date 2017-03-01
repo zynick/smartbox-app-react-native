@@ -12,7 +12,8 @@ export default () => {
     search: require('./SearchRedux').reducer,
     structure: require('./StructureRedux').reducer,
     startup: require('./StartupRedux').reducer,
-    dsCallScene: require('./DsCallSceneRedux').reducer
+    dsCallScene: require('./DsCallSceneRedux').reducer,
+    gcSendCommand: require('./GcSendCommandRedux').reducer
   })
 
   const store = configureStore(rootReducer, rootSaga)
@@ -26,7 +27,8 @@ export default () => {
         search: require('./SearchRedux').reducer,
         structure: require('./StructureRedux').reducer,
         startup: require('./StartupRedux').reducer,
-        dsCallScene: require('./DsCallSceneRedux').reducer
+        dsCallScene: require('./DsCallSceneRedux').reducer,
+        gcSendCommand: require('./GcSendCommandRedux').reducer
       })
       store.replaceReducer(nextRootReducer)
     })

@@ -23,7 +23,14 @@ export default StyleSheet.create({
     borderColor: '#666'
   },
 
-  text: {
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'stretch'
+  },
+
+  title: {
     color: '#666',
     margin: Metrics.smallMargin,
     fontSize: Fonts.size.h6
@@ -33,6 +40,12 @@ export default StyleSheet.create({
     color: '#666',
     margin: Metrics.smallMargin,
     fontSize: Fonts.size.medium
+  },
+
+  button: {
+    color: '#666',
+    margin: Metrics.baseMargin,
+    fontSize: Fonts.size.regular
   }
 
 })

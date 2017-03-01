@@ -6,63 +6,61 @@ import { connect } from 'react-redux'
 import DsCallSceneActions from '../Redux/DsCallSceneRedux'
 import styles from './Styles/DigitalStromLightContainerStyle'
 
-const pattern = [300, 50]
-
 
 class DigitalStromLightContainer extends Component {
+
+  pattern = [300, 50]
+  isAttemptCall: boolean;
 
   constructor(props) {
     super(props)
     // console.tron.log(`DigitalStromLightContainer.constructor() ${JSON.stringify(props,null,2)}`)
   }
 
-  isAttemptCall: boolean;
-
   componentWillReceiveProps(newProps) {
     // console.tron.log(`DigitalStromLightContainer.componentWillReceiveProps() newProps: ${JSON.stringify(newProps,null,2)}`)
     if (this.isAttemptCall && !newProps.fetching) {
       this.isAttemptCall = false
       if (newProps.success) {
-        // do something here to indicate success if needed
+        // TODO do something here to indicate success if needed
       }
     }
 
-    console.tron.log(`DigitalStromLightContainer.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
   }
 
   onPressPreset1() {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 5)
-    Vibration.vibrate(pattern)
+    Vibration.vibrate(this.pattern)
   }
 
   onPressPreset2() {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 17)
-    Vibration.vibrate(pattern)
+    Vibration.vibrate(this.pattern)
   }
 
   onPressPreset3() {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 18)
-    Vibration.vibrate(pattern)
+    Vibration.vibrate(this.pattern)
   }
 
   onPressPreset4() {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 19)
-    Vibration.vibrate(pattern)
+    Vibration.vibrate(this.pattern)
   }
 
   onPressOff() {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 0)
-    Vibration.vibrate(pattern)
+    Vibration.vibrate(this.pattern)
   }
 
   render() {
@@ -115,7 +113,6 @@ DigitalStromLightContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   // console.tron.log(`DigitalStromLightContainer.mapStateToProps() ${JSON.stringify(state,null,2)}`)
-  console.tron.log(`DigitalStromLightContainer.mapStateToProps() ${JSON.stringify(state.dsCallScene.payload,null,2)}`)
   return {
     success: state.dsCallScene.success
   }

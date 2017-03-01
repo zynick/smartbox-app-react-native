@@ -13,6 +13,7 @@ import { LoginTypes } from '../Redux/LoginRedux'
 import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
 import { StructureTypes } from '../Redux/StructureRedux'
 import { DsCallSceneTypes } from '../Redux/DsCallSceneRedux'
+import { GcSendCommandTypes } from '../Redux/GcSendCommandRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -22,6 +23,7 @@ import { getTemperature } from './TemperatureSagas'
 import { openScreen } from './OpenScreenSagas'
 import { getStructure } from './StructureSagas'
 import { callScene } from './DsCallSceneSagas'
+import { sendCommand } from './GcSendCommandSagas'
 
 /* ------------- API ------------- */
 
@@ -42,6 +44,8 @@ export default function* root() {
     takeLatest(LoginTypes.LOGIN_REQUEST, login, api),
     takeLatest(TemperatureTypes.TEMPERATURE_REQUEST, getTemperature, weatherApi),
     takeLatest(StructureTypes.STRUCTURE_REQUEST, getStructure, api),
-    takeEvery(DsCallSceneTypes.DS_CALL_SCENE_REQUEST, callScene, api)
+
+    takeEvery(DsCallSceneTypes.DS_CALL_SCENE_REQUEST, callScene, api),
+    takeEvery(GcSendCommandTypes.GC_SEND_COMMAND_REQUEST, sendCommand, api)
   ]
 }

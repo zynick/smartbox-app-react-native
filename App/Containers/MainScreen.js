@@ -26,14 +26,8 @@ class MainScreen extends Component {
 
   constructor(props) {
     super(props)
-    /* ***********************************************************
-     * Teach datasource how to detect if rows are different
-     * Make this function fast!  Perhaps something like:
-     *   (r1, r2) => r1.id !== r2.id}
-     *************************************************************/
-    const rowHasChanged = (r1, r2) => r1.name !== r2.name
 
-    // DataSource configured
+    const rowHasChanged = (r1, r2) => r1.name !== r2.name
     const ds = new ListView.DataSource({ rowHasChanged })
 
     // Datasource is always in state
@@ -64,6 +58,13 @@ class MainScreen extends Component {
     if (!loggedIn) return NavigationActions.loginScreen()
 
     if (structure === null) return getApiStructure()
+
+    // TODO remove on production: ONLY FOR DEVELOPMENT ON ITEM CONTAINERS!
+    if (structure.length > 0) {
+      const room = structure[0]
+      const options = { title: room.name, room }
+      NavigationActions.roomScreen(options)
+    }
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(structure)

@@ -37,6 +37,7 @@ const create = (baseURL) => {
     api.addMonitor(console.tron.apisauce)
   }
 
+
   // ------
   // STEP 2
   // ------
@@ -51,14 +52,23 @@ const create = (baseURL) => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const login = (email, password) => api.post('/v1/login', { email, password })
+  const login = (email, password) => api.post('/v2/login', { email, password })
 
   const structure = token => {
     console.tron.log('Api.structure()')
     const axiosConfig = { headers: { Authorization: `Bearer ${token}` } }
-    return api.get('/v1/structure', null, axiosConfig);
+    return api.get('/v2/structure', null, axiosConfig)
   }
 
+  const structureRefresh = token => {
+    const axiosConfig = { headers: { Authorization: `Bearer ${token}` } }
+    return api.get('/v2/structure/refresh', null, axiosConfig)
+  }
+
+
+  /**
+   * DigitalStrom API
+   */
   const callScene = (token, id, groupID, sceneNumber) => {
     // console.tron.log(`Api.callScene() ${token}, ${id}, ${groupID}, ${sceneNumber}`)
 
@@ -72,8 +82,25 @@ const create = (baseURL) => {
     const path = '/json/zone/callScene'
     const parameters = { id, groupID, sceneNumber }
 
-    return api.post('/v1/ds/api', { path, parameters }, axiosConfig)
+    return api.post('/v2/ds/api', { path, parameters }, axiosConfig)
   }
+
+
+  /**
+   * Global Cache API
+   */
+  const command = (token, command) => {
+
+    const axiosConfig = {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    }
+
+    return api.post('/v2/gc/command', { command }, axiosConfig)
+  }
+
 
   // ------
   // STEP 3
@@ -90,7 +117,14 @@ const create = (baseURL) => {
   return {
     login,
     structure,
-    callScene
+    structureRefresh,
+    callScene, // TODO deprecate this
+    ds: {
+      callScene
+    },
+    gc: {
+      command
+    }
   }
 }
 

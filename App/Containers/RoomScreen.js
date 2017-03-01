@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { getToken } from '../Redux/LoginRedux'
 import AlertMessage from '../Components/AlertMessage'
 import DigitalStromComponent from '../Components/DigitalStromComponent'
-import GlobalCacheComponent from '../Components/GlobalCacheComponent'
+import GlobalCacheContainer from './GlobalCacheContainer'
 
 // Styles
 import styles from './Styles/RoomScreenStyle'
@@ -19,19 +19,17 @@ import styles from './Styles/RoomScreenStyle'
 class RoomScreen extends Component {
 
   state: {
-    dataSource: Object,
-    listDS: Object
+    dataSource: Object
   };
 
   constructor(props) {
     super(props)
-    // console.tron.log(`RoomScreen.constructor()`);
 
-    const rowHasChanged = (r1, r2) => r1.name !== r2.name // TODO fix this
+    const rowHasChanged = (r1, r2) => r1.name !== r2.name
     const ds = new ListView.DataSource({ rowHasChanged })
     const items = props.room.items || []
+
     this.state = {
-      listDs: ds,   // FIXME (quick hack!) dangerous! move it off from state (props better)
       dataSource: ds.cloneWithRows(items)
     }
   }
@@ -40,7 +38,7 @@ class RoomScreen extends Component {
     // console.tron.log(`RoomScreen.componentWillReceiveProps()`);
     const items = newProps.room.items || []
     this.setState({
-      dataSource: this.state.listDs.cloneWithRows(items)
+      dataSource: this.state.dataSource.cloneWithRows(items)
     })
   }
 
@@ -56,7 +54,7 @@ class RoomScreen extends Component {
         )
       case 'globalcache':
         return (
-          <GlobalCacheComponent item={item} token={this.props.token} />
+          <GlobalCacheContainer item={item} />
         )
       default:
         return (
@@ -79,7 +77,7 @@ class RoomScreen extends Component {
           contentContainerStyle={styles.listView}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)}
-          pageSize={15}
+          // pageSize={15}
           enableEmptySections={true} />
       </View>
     )
