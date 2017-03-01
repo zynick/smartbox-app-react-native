@@ -84,7 +84,7 @@ GlobalCacheContainer.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  console.tron.log(`GlobalCacheContainer.mapStateToProps() ${JSON.stringify(state,null,2)}`)
+  // console.tron.log(`GlobalCacheContainer.mapStateToProps() ${JSON.stringify(state,null,2)}`)
   return {
     success: state.gcSendCommand.success
   }

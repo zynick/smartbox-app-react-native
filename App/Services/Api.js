@@ -118,7 +118,7 @@ const create = (baseURL) => {
     login,
     structure,
     structureRefresh,
-    callScene, // TODO deprecate this
+    // callScene, // TODO deprecate this
     ds: {
       callScene
     },

@@ -12,7 +12,6 @@
     "name": "Aircond",
     "commands": [
       "dining_onoff",
-      "// aircond default status",
       "dining_16",
       "dining_17",
       "dining_18",
@@ -36,7 +35,6 @@
     "name": "Aircond",
     "commands": [
       "office_onoff",
-      "// aircond default status",
       "office_16",
       "office_17",
       "office_18",
@@ -51,16 +49,7 @@
       "office_27",
       "office_28",
       "office_29",
-      "office_30",
-      "// why swing?",
-      "dining_16_swing",
-      "dining_20_swing",
-      "dining_25_swing",
-      "dining_30_swing",
-      "office_16_swing",
-      "office_20_swing",
-      "office_25_swing",
-      "office_30_swing"
+      "office_30"
     ]
   }]
 }]

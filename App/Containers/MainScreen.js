@@ -60,11 +60,11 @@ class MainScreen extends Component {
     if (structure === null) return getApiStructure()
 
     // TODO remove on production: ONLY FOR DEVELOPMENT ON ITEM CONTAINERS!
-    if (structure.length > 0) {
-      const room = structure[0]
-      const options = { title: room.name, room }
-      NavigationActions.roomScreen(options)
-    }
+    // if (structure.length > 0) {
+    //   const room = structure[0]
+    //   const options = { title: room.name, room }
+    //   NavigationActions.roomScreen(options)
+    // }
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(structure)
