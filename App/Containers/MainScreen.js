@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, PropTypes } from 'react'
-import { ListView, View } from 'react-native'
+import { ListView, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
@@ -21,18 +21,21 @@ import styles from './Styles/MainScreenStyle'
 class MainScreen extends Component {
 
   state: {
-    dataSource: Object
+    mainDS: Object,
+    roomDS: Object
   };
 
   constructor(props) {
     super(props)
 
     const rowHasChanged = (r1, r2) => r1.name !== r2.name
-    const ds = new ListView.DataSource({ rowHasChanged })
+    const mainDS = new ListView.DataSource({ rowHasChanged })
+    const roomDS = new ListView.DataSource({ rowHasChanged })
 
     // Datasource is always in state
     this.state = {
-      dataSource: ds.cloneWithRows([])
+      mainDS: mainDS.cloneWithRows([]),
+      roomDS: roomDS.cloneWithRows([])
     }
   }
 
@@ -45,13 +48,18 @@ class MainScreen extends Component {
 
     if (structure === null) return getApiStructure()
 
+    const { mainDS, roomDS } = this.state
+    const { main = {}, rooms = [] } = structure
+    const { items = [] } = main
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(structure)
+      mainDS: mainDS.cloneWithRows(items),
+      roomDS: roomDS.cloneWithRows(rooms)
     })
   }
 
   componentWillReceiveProps(newProps) {
-    const { started, loggedIn, structure, getApiStructure } = newProps;
+    // console.tron.log(`MainScreen.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
+    const { started, loggedIn, structure, getApiStructure } = newProps
 
     if (!started) return
 
@@ -66,15 +74,25 @@ class MainScreen extends Component {
     //   NavigationActions.roomScreen(options)
     // }
 
+    const { mainDS, roomDS } = this.state
+    const { main = {}, rooms = [] } = structure
+    const { items = [] } = main
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(structure)
+      mainDS: mainDS.cloneWithRows(items),
+      roomDS: roomDS.cloneWithRows(rooms)
     })
+  }
+
+  renderMainItemComponent(item) {
+    return (
+      <Text>{item.name}</Text>
+    )
   }
 
   // Used for friendly AlertMessage
   // returns true if the dataSource is empty
-  noRowData() {
-    return this.state.dataSource.getRowCount() === 0
+  noRoomRowData() {
+    return this.state.roomDS.getRowCount() === 0
   }
 
   renderRoomComponent(room) {
@@ -89,13 +107,19 @@ class MainScreen extends Component {
     const loading = !this.props.started;
     return (
       <View style={styles.container}>
-        <AlertMessage title='Loading...' show={loading} />
-        <AlertMessage title='No rooms loaded. Is your home configuration setup correctly?' show={this.noRowData()} />
         <ListView
           contentContainerStyle={styles.listView}
-          dataSource={this.state.dataSource}
+          dataSource={this.state.mainDS}
+          renderRow={this.renderMainItemComponent}
+          // pageSize={15}
+          enableEmptySections={true} />
+        <AlertMessage title='Loading...' show={loading} />
+        <AlertMessage title='No rooms loaded. Is your home configuration setup correctly?' show={this.noRoomRowData()} />
+        <ListView
+          contentContainerStyle={styles.listView}
+          dataSource={this.state.roomDS}
           renderRow={this.renderRoomComponent}
-          pageSize={15}
+          // pageSize={15}
           enableEmptySections={true} />
       </View>
     )
@@ -105,7 +129,7 @@ class MainScreen extends Component {
 MainScreen.propTypes = {
   getApiStructure: PropTypes.func,
   loggedIn: PropTypes.bool,
-  structure: PropTypes.array,
+  structure: PropTypes.object,
   started: PropTypes.bool
 }
 

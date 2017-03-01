@@ -1,19 +1,43 @@
 [{
   "name": "Living Room",
   "items": [{
+    "scenes": {
+      "scene0": {
+        "name": "Lights Off"
+      },
+      "scene5": {
+        "name": "Living Lights On"
+      },
+      "scene17": {
+        "name": "Movie Mode"
+      },
+      "scene19": {
+        "name": "Living 5%"
+      },
+      "scene40": {
+        "name": "Living Fade Off"
+      }
+    },
+    "devices": [{
+      "dSID": "303505d7f8000040000374d5",
+      "name": "Living Room Lights"
+    }],
+    "groupId": 1,
+    "type": "digitalstrom",
+    "zoneId": 1
+  }, {
     "name": "TV",
     "commands": [
-      "tv_on",
-      "tv_off"
-    ]
+      "tv_onoff"
+    ],
+    "type": "globalcache"
   }]
 }, {
   "name": "Dining Area",
   "items": [{
     "name": "Aircond",
     "commands": [
-      "dining_on",
-      "dining_off",
+      "dining_onoff",
       "dining_16",
       "dining_17",
       "dining_18",
@@ -29,15 +53,15 @@
       "dining_28",
       "dining_29",
       "dining_30"
-    ]
+    ],
+    "type": "globalcache"
   }]
 }, {
   "name": "Master Bedroom",
   "items": [{
     "name": "Aircond",
     "commands": [
-      "office_on",
-      "office_off",
+      "office_onoff",
       "office_16",
       "office_17",
       "office_18",
@@ -53,6 +77,7 @@
       "office_28",
       "office_29",
       "office_30"
-    ]
+    ],
+    "type": "globalcache"
   }]
 }]
