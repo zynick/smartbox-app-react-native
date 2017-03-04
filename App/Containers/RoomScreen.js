@@ -27,7 +27,7 @@ class RoomScreen extends Component {
 
     const rowHasChanged = (r1, r2) => r1.name !== r2.name
     const ds = new ListView.DataSource({ rowHasChanged })
-    const items = props.room.items || []
+    const { items = [] } = props.room
 
     this.state = {
       dataSource: ds.cloneWithRows(items)
@@ -36,7 +36,7 @@ class RoomScreen extends Component {
 
   componentWillReceiveProps(newProps) {
     // console.tron.log(`RoomScreen.componentWillReceiveProps()`);
-    const items = newProps.room.items || []
+    const { items = [] } = newProps.room
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(items)
     })

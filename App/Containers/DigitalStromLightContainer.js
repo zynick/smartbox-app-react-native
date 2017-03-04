@@ -12,10 +12,10 @@ class DigitalStromLightContainer extends Component {
   pattern = [300, 50]
   isAttemptCall: boolean;
 
-  constructor(props) {
-    super(props)
-    // console.tron.log(`DigitalStromLightContainer.constructor() ${JSON.stringify(props,null,2)}`)
-  }
+  // constructor(props) {
+  //   super(props)
+  //   // console.tron.log(`DigitalStromLightContainer.constructor() ${JSON.stringify(props,null,2)}`)
+  // }
 
   componentWillReceiveProps(newProps) {
     // console.tron.log(`DigitalStromLightContainer.componentWillReceiveProps() newProps: ${JSON.stringify(newProps,null,2)}`)
@@ -99,7 +99,6 @@ class DigitalStromLightContainer extends Component {
         <TouchableOpacity onPress={this.onPressOff.bind(this)}>
           <Text style={styles.button}>* {scene0.name} *</Text>
         </TouchableOpacity>
-
       </View>
     )
   }

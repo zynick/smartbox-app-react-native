@@ -2,7 +2,7 @@
 
 
 const login = (email, password) => {
-  if (!email || !password) {
+  if (!email) {
     return { ok: false } // Fail - Unable to connect to SMARTBOX Server
   }
 

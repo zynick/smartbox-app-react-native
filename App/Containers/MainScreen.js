@@ -8,6 +8,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 import { isLoggedIn } from '../Redux/LoginRedux'
 import StructureActions, { getStructure } from '../Redux/StructureRedux'
 
+import DigitalStromMainContainer from './DigitalStromMainContainer'
 import AlertMessage from '../Components/AlertMessage'
 import RoomComponent from '../Components/RoomComponent'
 
@@ -84,9 +85,27 @@ class MainScreen extends Component {
   }
 
   renderMainItemComponent(item) {
-    return (
-      <Text>{item.name}</Text>
-    )
+    switch (item.type) {
+      case 'digitalstrom':
+        return (
+          <DigitalStromMainContainer name={item.name} />
+        )
+      case 'globalcache':
+        return (
+          // <GlobalCacheContainer item={item} />
+          <Text>{item.type}</Text>
+        )
+      default:
+        return (
+          <Text>{item.type}</Text>
+        )
+    }
+    // const text = `${item.name} (${item.type})`
+    // const options = { title: item.name, item, room: {} }
+    // const navigate = NavigationActions.roomScreen.bind(this, options)
+    // return (
+    //   <RoomComponent text={text} onPress={navigate} />
+    // )
   }
 
   // Used for friendly AlertMessage
