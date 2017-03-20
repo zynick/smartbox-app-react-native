@@ -1,10 +1,11 @@
 {
-  "main": {
+  "rooms": [{
+    "name": "Home",
     "items": [{
-      "type": "digitalstrom",
+      "type": "main-digitalstrom",
       "name": "Home"
     }, {
-      "type": "globalcache",
+      "type": "main-globalcache",
       "name": "Remote Control",
       "comands": [
         "tv_on",
@@ -17,10 +18,12 @@
         "office_16"
       ]
     }]
-  },
-  "rooms": [{
+  }, {
     "name": "Living Room",
     "items": [{
+      "type": "digitalstrom",
+      "groupId": 1,
+      "zoneId": 1,
       "scenes": {
         "scene0": {
           "name": "Lights Off"
@@ -41,21 +44,19 @@
       "devices": [{
         "dSID": "303505d7f8000040000374d5",
         "name": "Living Room Lights"
-      }],
-      "groupId": 1,
-      "type": "digitalstrom",
-      "zoneId": 1
+      }]
     }, {
+      "type": "globalcache",
       "name": "TV",
       "commands": [
         "tv_on",
         "tv_off"
-      ],
-      "type": "globalcache"
+      ]
     }]
   }, {
     "name": "Dining Area",
     "items": [{
+      "type": "globalcache",
       "name": "Aircond",
       "commands": [
         "dining_on",
@@ -75,12 +76,12 @@
         "dining_28",
         "dining_29",
         "dining_30"
-      ],
-      "type": "globalcache"
+      ]
     }]
   }, {
     "name": "Master Bedroom",
     "items": [{
+      "type": "globalcache",
       "name": "Aircond",
       "commands": [
         "office_on",
@@ -100,8 +101,7 @@
         "office_28",
         "office_29",
         "office_30"
-      ],
-      "type": "globalcache"
+      ]
     }]
   }]
 }

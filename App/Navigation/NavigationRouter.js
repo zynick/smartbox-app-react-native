@@ -12,6 +12,8 @@ import LoginScreen from '../Containers/LoginScreen'
 import MainScreen from '../Containers/MainScreen'
 import RoomScreen from '../Containers/RoomScreen'
 
+import TabScreen from '../Containers/TabScreen'
+
 import PresentationScreen from '../Containers/PresentationScreen'
 import AllComponentsScreen from '../Containers/AllComponentsScreen'
 import UsageExamplesScreen from '../Containers/UsageExamplesScreen'
@@ -33,11 +35,24 @@ class NavigationRouter extends Component {
     return (
       <Router>
         <Scene key='drawer' component={NavigationDrawer} open={false}>
+
           <Scene key='drawerChildrenWrapper'
             navigationBarStyle={Styles.navBar}
             titleStyle={Styles.title}
             leftButtonIconStyle={Styles.leftButton}
-            rightButtonTextStyle={Styles.rightButton}>
+            rightButtonTextStyle={Styles.rightButton}
+            >
+
+            <Scene key='tabScreen'
+              title='SMARTBOX'
+              component={TabScreen}
+              renderLeftButton={NavItems.hamburgerButton} />
+
+            <Scene key='mainScreen'
+              title='SMARTBOX'
+              component={MainScreen}
+              // initial
+              renderLeftButton={NavItems.hamburgerButton} />
 
             <Scene key='loginScreen'
               title='Login'
@@ -46,15 +61,10 @@ class NavigationRouter extends Component {
               type='replace'
               duration={1} />
 
-            <Scene key='mainScreen'
-              title='SMARTBOX'
-              component={MainScreen}
-              initial
-              renderLeftButton={NavItems.hamburgerButton} />
-
             <Scene key='roomScreen'
               title='Room'
               component={RoomScreen} />
+
 
 
 

@@ -24,6 +24,14 @@ export default {
 
   rightButton: {
     color: navbar.color
+  },
+
+  tabBarStyle: {
+    backgroundColor: '#eee'
+  },
+
+  tabBarSelectedItemStyle: {
+    backgroundColor: '#ddd'
   }
 
 }

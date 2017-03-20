@@ -67,7 +67,8 @@ class LoginScreen extends React.Component {
       if (error) {
         return this.setState({ error, password: '' })
       }
-      NavigationActions.mainScreen({ type: 'replace' })
+      // NavigationActions.mainScreen({ type: 'replace' })
+      NavigationActions.tabScreen({ type: 'replace' })
     }
   }
 

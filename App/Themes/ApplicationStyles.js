@@ -8,6 +8,7 @@ import Colors from './Colors'
 // Similar to an XML fragment layout in Android
 
 const ApplicationStyles = {
+
   screen: {
     mainContainer: {
       flex: 1,
@@ -47,6 +48,7 @@ const ApplicationStyles = {
       marginHorizontal: Metrics.smallMargin
     }
   },
+
   darkLabelContainer: {
     backgroundColor: Colors.cloud,
     padding: Metrics.smallMargin

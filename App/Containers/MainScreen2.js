@@ -4,7 +4,6 @@ import React, { Component, PropTypes } from 'react'
 import { ListView, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-// import Tabs from 'react-native-tabs'
 
 import { isLoggedIn } from '../Redux/LoginRedux'
 import StructureActions, { getStructure } from '../Redux/StructureRedux'
