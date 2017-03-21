@@ -159,7 +159,8 @@ class TabScreen extends Component {
     console.tron.log(`TabScreen._renderScene() route.key: ${route.key}`);
 
     switch (route.key) {
-      case '1':
+
+      case 'nada':
         return (
           <View style={[ styles.page, { backgroundColor: '#eee' } ]}>
             <ListView
@@ -170,8 +171,10 @@ class TabScreen extends Component {
             />
           </View>
         );
-      case '2':
+
+      case 'nada2':
         return <View style={[ styles.page, { backgroundColor: '#673ab7' } ]} />;
+
       default:
         return null;
     }
@@ -184,7 +187,7 @@ class TabScreen extends Component {
         renderBadge={this._renderBadge}
         renderIndicator={this._renderIndicator}
         style={styles.tabbar}
-        // tabStyle={styles.tab}
+        // tabStyle={styles.tab} // this will overwrite indicator, better leave it
         />
     );
   }

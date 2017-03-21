@@ -16,16 +16,14 @@ export default StyleSheet.create({
   tabbar: {
     backgroundColor: '#222'
   },
-  tab: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
 
-    // backgroundColor: '#222',
-    // borderTopWidth: 5,
-    // borderTopColor: '#AAA'
-    backgroundColor: '#666'
-  },
+  // tab: {
+  //   // padding: 5
+  //   borderWidth: 1,
+  //   borderColor: '#F00'
+  //   // backgroundColor: '#666'
+  //   // borderTopWidth: 5,
+  // },
 
   indicator: {
     flex: 1,
