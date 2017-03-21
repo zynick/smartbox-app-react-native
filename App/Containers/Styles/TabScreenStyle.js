@@ -14,9 +14,13 @@ export default StyleSheet.create({
   },
 
   tabbar: {
-    backgroundColor: '#000'
+    backgroundColor: '#222'
   },
   tab: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+
     // backgroundColor: '#222',
     // borderTopWidth: 5,
     // borderTopColor: '#AAA'
@@ -24,9 +28,13 @@ export default StyleSheet.create({
   },
 
   indicator: {
-    // flex: 1,
+    flex: 1,
+    margin: 4,
+    borderTopWidth: 4,
+    borderColor: '#FFF',
+    // backgroundColor: '#138833',
     // borderWidth: 5,
-    // borderColor: '#F00'
+    // borderRadius: 5,
   },
 
   page: {

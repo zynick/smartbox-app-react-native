@@ -55,10 +55,7 @@ class TabScreen extends Component {
       dataSource: ds.cloneWithRows(dataObjects),
 
       index: 0,
-      routes: [
-        { key: '1', title: 'First' },
-        { key: '2', title: 'Second' },
-      ],
+      routes: [{ key: '1', title: '' }, { key: '2', title: '' }],
       loaded: false
     }
 
@@ -66,44 +63,37 @@ class TabScreen extends Component {
   }
 
   componentWillMount() {
-    console.tron.log(`TabScreen.componentWillMount() 1`)
     const { started, loggedIn, structure, getApiStructure } = this.props
 
-    console.tron.log(`TabScreen.componentWillMount() 2`)
     if (!started) return // TODO is this started variable needed? maybe we can remove it?
 
-    console.tron.log(`TabScreen.componentWillMount() 3`)
     if (!loggedIn) return NavigationActions.login()
 
-    console.tron.log(`TabScreen.componentWillMount() 4`)
     if (structure === null) return getApiStructure()
 
-    console.tron.log(`TabScreen.componentWillMount() 5`)
     const { roomDS } = this.state
     const { rooms = [] } = structure
+    let routes = []
+    rooms.forEach(room => routes.push({ key: room.name, title: room.name }))
 
-    console.tron.log(`TabScreen.componentWillMount() ${JSON.stringify(rooms,null,2)}`)
+    console.tron.log(`TabScreen.componentWillMount() routes: ${JSON.stringify(routes,null,2)}`)
 
     this.setState({
-      roomDS: roomDS.cloneWithRows(rooms)
+      roomDS: roomDS.cloneWithRows(rooms),
+      routes
     })
   }
 
   componentWillReceiveProps(newProps) {
-    console.tron.log(`TabScreen.componentWillReceiveProps() 1`)
     // console.tron.log(`TabScreen.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
     const { started, loggedIn, structure, getApiStructure } = newProps
 
-    console.tron.log(`TabScreen.componentWillReceiveProps() 2`)
     if (!started) return
 
-    console.tron.log(`TabScreen.componentWillReceiveProps() 3`)
     if (!loggedIn) return NavigationActions.loginScreen()
 
-    console.tron.log(`TabScreen.componentWillReceiveProps() 4`)
     if (structure === null) return getApiStructure()
 
-    console.tron.log(`TabScreen.componentWillReceiveProps() 5`)
     // TODO remove on production: ONLY FOR DEVELOPMENT ON ITEM CONTAINERS!
     // if (structure.length > 0) {
     //   const room = structure[0]
@@ -114,20 +104,14 @@ class TabScreen extends Component {
     const { roomDS } = this.state
     const { rooms = [] } = structure
 
-    console.tron.log(`TabScreen.componentWillMount() ${JSON.stringify(rooms,null,2)}`)
+    let routes = []
+    rooms.forEach(room => routes.push({ key: room.name, title: room.name }))
 
-    let routes = [];
-    rooms.forEach((room, idx) => {
-      routes.push({ key: '' + idx, title: room.name });
-    });
+    console.tron.log(`TabScreen.componentWillReceiveProps() routes: ${JSON.stringify(routes,null,2)}`)
 
     this.setState({
       roomDS: roomDS.cloneWithRows(rooms),
       routes
-      // routes: [
-      //   { key: '1', title: 'New First' },
-      //   { key: '2', title: 'New Second' },
-      // ],
     })
   }
 
@@ -145,11 +129,12 @@ class TabScreen extends Component {
     )
   }
 
-  renderRow(rowData) {
+  renderRow(room) {
+    // console.tron.log(`TabScreen.renderRow() ${JSON.stringify(room,null,2)}`)
     return (
       <View style={styles.row}>
-        <Text style={styles.boldLabel}>{rowData.title}</Text>
-        <Text style={styles.label}>{rowData.description}</Text>
+        <Text style={styles.boldLabel}>{room.name}</Text>
+        <Text style={styles.label}>{room.description} wtf</Text>
       </View>
     )
   }
@@ -159,11 +144,12 @@ class TabScreen extends Component {
   }
 
   _renderIndicator = (props) => {
-    const { width, position } = props;
-    const translateX = Animated.multiply(position, width);
+      const { width, position } = props;
+      const translateX = Animated.multiply(position, width);
 
-    return (
-      <Animated.View style={[ styles.container, { width, transform: [ { translateX } ] } ]}>
+      return (
+          <Animated.View style={{ width, transform: [{ translateX }] }}>
+      {/*<Animated.View style={[ styles.container, { width, transform: [ { translateX } ] } ]}>*/}
         <View style={styles.indicator} />
       </Animated.View>
     );
@@ -171,6 +157,7 @@ class TabScreen extends Component {
 
   _renderScene = ({ route }) => {
     console.tron.log(`TabScreen._renderScene() route.key: ${route.key}`);
+
     switch (route.key) {
       case '1':
         return (
@@ -197,7 +184,7 @@ class TabScreen extends Component {
         renderBadge={this._renderBadge}
         renderIndicator={this._renderIndicator}
         style={styles.tabbar}
-        tabStyle={styles.tab}
+        // tabStyle={styles.tab}
         />
     );
   }
