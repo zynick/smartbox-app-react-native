@@ -26,19 +26,15 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-// we're attempting to login
 export const request = (state: Object) =>
   state.merge({ fetching: true })
 
-// we've successfully logged in
 export const success = (state: Object, { email, token }: Object) =>
   state.merge({ fetching: false, error: null, email, token })
 
-// we've had a problem logging in
 export const failure = (state: Object, { error }: Object) =>
   state.merge({ fetching: false, error })
 
-// we've logged out
 export const logout = (state: Object) =>
   INITIAL_STATE
 
@@ -55,11 +51,9 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 // Is the current user logged in?
 export const isLoggedIn = (loginState: Object) => {
-  // console.tron.log(`LoginRedux isLoggedIn: ${JSON.stringify(loginState,null,2)}`)
   return loginState.email !== null
 }
 
 export const getToken = (loginState: Object) => {
-  // console.tron.log(`LoginRedux.getToken(): ${JSON.stringify(loginState,null,2)}`)
   return loginState.token;
 }

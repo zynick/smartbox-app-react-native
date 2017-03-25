@@ -7,6 +7,7 @@ import StartupActions from '../Redux/StartupRedux'
 const updateReducers = (store: Object) => {
   const reducerVersion = ReduxPersist.reducerVersion
   const config = ReduxPersist.storeConfig
+
   const startup = () => {
     store.dispatch(StartupActions.startup())
       // store.dispatch(StructureActions.structureRequest())

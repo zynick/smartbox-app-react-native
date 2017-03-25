@@ -3,7 +3,6 @@
 import React, { Component, PropTypes } from 'react'
 import { ScrollView, Image, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
-// import { Actions as NavigationActions } from 'react-native-router-flux'
 
 import LoginActions from '../Redux/LoginRedux'
 import DrawerButton from '../Components/DrawerButton'

@@ -29,7 +29,6 @@ class MainScreen extends Component {
     const mainDS = new ListView.DataSource({ rowHasChanged })
     const roomDS = new ListView.DataSource({ rowHasChanged })
 
-    // Datasource is always in state
     this.state = {
       mainDS: mainDS.cloneWithRows([]),
       roomDS: roomDS.cloneWithRows([])
@@ -40,9 +39,7 @@ class MainScreen extends Component {
     const { started, loggedIn, structure, getApiStructure } = this.props
 
     if (!started) return // TODO is this started variable needed? maybe we can remove it?
-
     if (!loggedIn) return NavigationActions.login()
-
     if (structure === null) return getApiStructure()
 
     const { mainDS, roomDS } = this.state
@@ -55,21 +52,11 @@ class MainScreen extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // console.tron.log(`MainScreen.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
     const { started, loggedIn, structure, getApiStructure } = newProps
 
     if (!started) return
-
     if (!loggedIn) return NavigationActions.loginScreen()
-
     if (structure === null) return getApiStructure()
-
-    // TODO remove on production: ONLY FOR DEVELOPMENT ON ITEM CONTAINERS!
-    // if (structure.length > 0) {
-    //   const room = structure[0]
-    //   const options = { title: room.name, room }
-    //   NavigationActions.roomScreen(options)
-    // }
 
     const { mainDS, roomDS } = this.state
     const { main = {}, rooms = [] } = structure
@@ -88,7 +75,7 @@ class MainScreen extends Component {
         )
       case 'globalcache':
         return (
-          // <GlobalCacheContainer item={item} />
+          // <GlobalCacheMainContainer item={item} />
           <Text>{item.type}</Text>
         )
       default:
@@ -96,16 +83,8 @@ class MainScreen extends Component {
           <Text>{item.type}</Text>
         )
     }
-    // const text = `${item.name} (${item.type})`
-    // const options = { title: item.name, item, room: {} }
-    // const navigate = NavigationActions.roomScreen.bind(this, options)
-    // return (
-    //   <RoomComponent text={text} onPress={navigate} />
-    // )
   }
 
-  // Used for friendly AlertMessage
-  // returns true if the dataSource is empty
   noRoomRowData() {
     return this.state.roomDS.getRowCount() === 0
   }
@@ -126,7 +105,6 @@ class MainScreen extends Component {
           contentContainerStyle={styles.listView}
           dataSource={this.state.mainDS}
           renderRow={this.renderMainItemComponent}
-          // pageSize={15}
           enableEmptySections={true} />
         <AlertMessage title='Loading...' show={loading} />
         <AlertMessage title='No rooms loaded. Is your home configuration setup correctly?' show={this.noRoomRowData()} />
@@ -134,7 +112,6 @@ class MainScreen extends Component {
           contentContainerStyle={styles.listView}
           dataSource={this.state.roomDS}
           renderRow={this.renderRoomComponent}
-          // pageSize={15}
           enableEmptySections={true} />
       </View>
     )

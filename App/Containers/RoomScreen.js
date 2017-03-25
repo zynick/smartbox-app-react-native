@@ -3,7 +3,6 @@
 import React, { Component, PropTypes } from 'react'
 import { ListView, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-// import { Actions as NavigationActions } from 'react-native-router-flux'
 
 import AlertMessage from '../Components/AlertMessage'
 import DigitalStromComponent from '../Components/DigitalStromComponent'
@@ -55,12 +54,6 @@ class RoomScreen extends Component {
           <Text>{item.type}</Text>
         )
     }
-    // const text = `${item.name} (${item.type})`
-    // const options = { title: item.name, item, room: {} }
-    // const navigate = NavigationActions.roomScreen.bind(this, options)
-    // return (
-    //   <RoomComponent text={text} onPress={navigate} />
-    // )
   }
 
   render() {
@@ -71,7 +64,6 @@ class RoomScreen extends Component {
           contentContainerStyle={styles.listView}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)}
-          // pageSize={15}
           enableEmptySections={true} />
       </View>
     )

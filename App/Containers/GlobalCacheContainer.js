@@ -3,7 +3,9 @@
 import React, { Component, PropTypes } from 'react'
 import { ListView, View, Text, TouchableOpacity, Vibration } from 'react-native'
 import { connect } from 'react-redux'
+
 import GcSendCommandActions from '../Redux/GcSendCommandRedux'
+
 import styles from './Styles/GlobalCacheContainerStyle'
 
 
@@ -18,7 +20,6 @@ class GlobalCacheContainer extends Component {
 
   constructor(props) {
     super(props)
-    // console.tron.log(`GlobalCacheContainer.constructor() props: ${JSON.stringify(props,null,2)}`)
 
     const rowHasChanged = (r1, r2) => r1.name !== r2.name
     const ds = new ListView.DataSource({ rowHasChanged })
@@ -35,7 +36,6 @@ class GlobalCacheContainer extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // console.tron.log(`GlobalCacheContainer.componentWillReceiveProps() newProps: ${JSON.stringify(newProps,null,2)}`)
     if (this.isAttemptCall && !newProps.fetching) {
       this.isAttemptCall = false
       if (newProps.success) {
@@ -70,7 +70,6 @@ class GlobalCacheContainer extends Component {
           contentContainerStyle={styles.listView}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)}
-          // pageSize={15}
           enableEmptySections={true} />
       </View>
     )
@@ -84,7 +83,6 @@ GlobalCacheContainer.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  // console.tron.log(`GlobalCacheContainer.mapStateToProps() ${JSON.stringify(state,null,2)}`)
   return {
     success: state.gcSendCommand.success
   }

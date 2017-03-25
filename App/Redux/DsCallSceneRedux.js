@@ -24,17 +24,14 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-// request the data from an api
 export const request = (state, action) =>
   state.merge({ fetching: true, error: null, success: false })
 
-// successful api lookup
 export const success = (state, action) => {
   const { ok } = action
   return state.merge({ fetching: false, error: null, success: ok })
 }
 
-// Something went wrong somewhere.
 export const failure = (state, action) => {
   const { error } = action
   return state.merge({ fetching: false, error, success: false })

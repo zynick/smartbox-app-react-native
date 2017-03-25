@@ -57,11 +57,9 @@ class LoginScreen extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // console.tron.log(`LoginScreen.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
     const { fetching, error } = newProps
     this.forceUpdate()
 
-    // Did the login attempt complete?
     if (this.isAttemptLogin && !fetching) {
       this.isAttemptLogin = false
       if (error) {
@@ -157,12 +155,9 @@ class LoginScreen extends React.Component {
       </KeyboardAvoidingView>
     )
   }
-
 }
 
-// https://github.com/reactjs/react-redux/blob/master/docs/api.md
 const mapStateToProps = state => {
-  // console.tron.log(`LoginScreen.mapStateToProps() ${JSON.stringify(state.login,null,2)}`)
   const { error, fetching } = state.login
   return { error, fetching }
 }

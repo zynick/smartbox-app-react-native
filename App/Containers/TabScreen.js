@@ -13,6 +13,7 @@ import StructureActions, { getStructure } from '../Redux/StructureRedux'
 
 import styles from './Styles/TabScreenStyle'
 
+
 class TabScreen extends Component {
 
   constructor(props) {
@@ -20,14 +21,13 @@ class TabScreen extends Component {
 
     const rowHasChanged = (r1, r2) => r1.name !== r2.name
     const roomDS = new ListView.DataSource({ rowHasChanged })
-    // const roomDS = new ListViewDataSource({ rowHasChanged })
 
     this.state = {
       roomDS: roomDS.cloneWithRows([]),
       rooms: [],
       index: 0,
       routes: [{ key: '1', title: '' }, { key: '2', title: '' }],
-      loaded: true // wtf is this
+      loaded: true
     }
   }
 
@@ -40,10 +40,8 @@ class TabScreen extends Component {
 
     const { roomDS } = this.state
     const { rooms = [] } = structure
-    let routes = []
+    const routes = []
     rooms.forEach((room, idx) => routes.push({ key: `${idx}`, title: room.name }))
-
-    console.tron.log(`TabScreen.componentWillMount() routes: ${JSON.stringify(routes,null,2)}`)
 
     this.setState({
       roomDS: roomDS.cloneWithRows(rooms),
@@ -53,7 +51,6 @@ class TabScreen extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // console.tron.log(`TabScreen.componentWillReceiveProps() ${JSON.stringify(newProps,null,2)}`)
     const { started, loggedIn, structure, getApiStructure } = newProps
 
     if (!started) return
@@ -62,8 +59,7 @@ class TabScreen extends Component {
 
     const { roomDS } = this.state
     const { rooms = [] } = structure
-
-    let routes = []
+    const routes = []
     rooms.forEach((room, idx) => routes.push({ key: `${idx}`, title: room.name }))
 
     this.setState({
@@ -80,7 +76,6 @@ class TabScreen extends Component {
   renderIndicator = (props) => {
     const { width, position } = props
     const translateX = Animated.multiply(position, width)
-
     return (
       <Animated.View style={{ width, transform: [{ translateX }] }}>
         <View style={styles.indicator} />
@@ -91,15 +86,12 @@ class TabScreen extends Component {
   renderScene = ({ route }) => {
     const idx = parseInt(route.key)
     const room = this.state.rooms[idx] || {}
-    // console.tron.log(`TabScreen.renderScene() ${JSON.stringify(room,null,2)}`)
-
     return (
       <RoomContainer room={room} />
     )
   }
 
   renderFooter = (props) => {
-    console.tron.log(`TabScreen.renderFooter() props: ${JSON.stringify(props)}`)
     return (
       <TabBar
         {...props}
@@ -112,7 +104,6 @@ class TabScreen extends Component {
   }
 
   render() {
-    // console.tron.log(`TabScreen.render()`)
     return (
       <TabViewAnimated
         style={styles.container}

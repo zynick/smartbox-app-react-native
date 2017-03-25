@@ -17,6 +17,7 @@ const toImmutable = (raw: Object) => Immutable(raw)
 
 // the transform interface that redux-persist is expecting
 export default {
+
   out: (state: Object) => {
     // console.log({ retrieving: state })
     // --- HACKZORZ ---
@@ -31,8 +32,10 @@ export default {
     state.mergeDeep = R.identity
     return toImmutable(state)
   },
+
   in: (raw: Object) => {
     // console.log({ storing: raw })
     return fromImmutable(raw)
   }
+
 }

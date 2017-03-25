@@ -3,8 +3,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, TouchableOpacity, Vibration } from 'react-native'
 import { connect } from 'react-redux'
-// import { Actions as NavigationActions } from 'react-native-router-flux'
-// import DsCallSceneActions from '../Redux/DsCallSceneRedux'
+
 import styles from './Styles/DigitalStromMainContainerStyle'
 
 
@@ -19,11 +18,9 @@ class DigitalStromMainContainer extends Component {
   // }
 
   componentWillReceiveProps(newProps) {
-
     if (this.isAttemptCall && !newProps.fetching) { // TODO get fetching from mapStateToProps
       this.isAttemptCall = false
     }
-
   }
 
   onPressHome() {
@@ -85,15 +82,11 @@ DigitalStromMainContainer.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    // success: state.your-new-state.success
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    // callScene: 
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DigitalStromMainContainer)
