@@ -26,16 +26,16 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const request = (state: Object) =>
+export const request = state =>
   state.merge({ fetching: true })
 
-export const success = (state: Object, { email, token }: Object) =>
+export const success = (state, { email, token }) =>
   state.merge({ fetching: false, error: null, email, token })
 
-export const failure = (state: Object, { error }: Object) =>
+export const failure = (state, { error }) =>
   state.merge({ fetching: false, error })
 
-export const logout = (state: Object) =>
+export const logout = state =>
   INITIAL_STATE
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -49,11 +49,6 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 /* ------------- Selectors ------------- */
 
-// Is the current user logged in?
-export const isLoggedIn = (loginState: Object) => {
-  return loginState.email !== null
-}
+export const isLoggedIn = loginState => loginState.email !== null
 
-export const getToken = (loginState: Object) => {
-  return loginState.token;
-}
+export const getToken = loginState => loginState.token;

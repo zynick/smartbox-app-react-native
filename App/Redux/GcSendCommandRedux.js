@@ -30,10 +30,8 @@ export const request = (state, action) =>
 export const success = (state) =>
   state.merge({ fetching: false, error: null, success: true })
 
-export const failure = (state, action) => {
-  const { error } = action
-  return state.merge({ fetching: false, error, success: false })
-}
+export const failure = (state, { error }) =>
+  state.merge({ fetching: false, error, success: false })
 
 /* ------------- Hookup Reducers To Types ------------- */
 

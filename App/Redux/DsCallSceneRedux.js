@@ -27,15 +27,11 @@ export const INITIAL_STATE = Immutable({
 export const request = (state, action) =>
   state.merge({ fetching: true, error: null, success: false })
 
-export const success = (state, action) => {
-  const { ok } = action
-  return state.merge({ fetching: false, error: null, success: ok })
-}
+export const success = (state, { ok }) =>
+  state.merge({ fetching: false, error: null, success: ok })
 
-export const failure = (state, action) => {
-  const { error } = action
-  return state.merge({ fetching: false, error, success: false })
-}
+export const failure = (state, { error }) =>
+  state.merge({ fetching: false, error, success: false })
 
 /* ------------- Hookup Reducers To Types ------------- */
 

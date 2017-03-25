@@ -25,17 +25,14 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const request = state => {
-  return state.merge({ fetching: true })
-}
+export const request = state =>
+  state.merge({ fetching: true })
 
-export const success = (state, { structure }) => {
-  return state.merge({ fetching: false, structure, error: null })
-}
+export const success = (state, { structure }) =>
+  state.merge({ fetching: false, structure, error: null })
 
-export const failure = state => {
-  return state.merge({ fetching: false, error: true })
-}
+export const failure = state =>
+  state.merge({ fetching: false, error: true })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -47,10 +44,8 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 /* ------------- Selectors ------------- */
 
-export const getStructure = structureState => {
-  return structureState.structure
-}
+export const getStructure = structureState =>
+  structureState.structure
 
-export const getStructureKeys = structureState => {
-  return R.map(s => s.name, structureState.structure || [])
-}
+export const getStructureKeys = structureState =>
+  R.map(s => s.name, structureState.structure || [])
