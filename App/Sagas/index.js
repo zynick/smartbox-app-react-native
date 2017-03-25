@@ -1,6 +1,5 @@
 import { takeLatest, takeEvery } from 'redux-saga'
 import API from '../Services/Api'
-import WeatherAPI from '../Services/WeatherApi'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugSettings from '../Config/DebugSettings'
 import ApiConfig from '../Config/ApiConfig'
@@ -9,7 +8,6 @@ import ApiConfig from '../Config/ApiConfig'
 
 import { StartupTypes } from '../Redux/StartupRedux'
 import { LoginTypes } from '../Redux/LoginRedux'
-import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
 import { StructureTypes } from '../Redux/StructureRedux'
 import { DsCallSceneTypes } from '../Redux/DsCallSceneRedux'
 import { GcSendCommandTypes } from '../Redux/GcSendCommandRedux'
@@ -18,7 +16,6 @@ import { GcSendCommandTypes } from '../Redux/GcSendCommandRedux'
 
 import { startup } from './StartupSagas'
 import { login } from './LoginSagas'
-import { openScreen } from './OpenScreenSagas'
 import { getStructure } from './StructureSagas'
 import { callScene } from './DsCallSceneSagas'
 import { sendCommand } from './GcSendCommandSagas'
@@ -33,14 +30,9 @@ const api = DebugSettings.useFixtures ? FixtureAPI : API.create(ApiConfig.smartb
 
 export default function* root() {
   yield [
-    // some sagas only receive an action
-    takeLatest(OpenScreenTypes.OPEN_SCREEN, openScreen),
-
-    // some sagas receive extra parameters in addition to an action
     takeLatest(StartupTypes.STARTUP, startup, api),
     takeLatest(LoginTypes.LOGIN_REQUEST, login, api),
     takeLatest(StructureTypes.STRUCTURE_REQUEST, getStructure, api),
-
     takeEvery(DsCallSceneTypes.DS_CALL_SCENE_REQUEST, callScene, api),
     takeEvery(GcSendCommandTypes.GC_SEND_COMMAND_REQUEST, sendCommand, api)
   ]

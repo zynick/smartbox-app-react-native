@@ -8,7 +8,6 @@ export default () => {
   /* ------------- Assemble The Reducers ------------- */
   const rootReducer = combineReducers({
     login: require('./LoginRedux').reducer,
-    search: require('./SearchRedux').reducer,
     structure: require('./StructureRedux').reducer,
     startup: require('./StartupRedux').reducer,
     dsCallScene: require('./DsCallSceneRedux').reducer,
@@ -22,7 +21,6 @@ export default () => {
     module.hot.accept(() => {
       const nextRootReducer = combineReducers({
         login: require('./LoginRedux').reducer,
-        search: require('./SearchRedux').reducer,
         structure: require('./StructureRedux').reducer,
         startup: require('./StartupRedux').reducer,
         dsCallScene: require('./DsCallSceneRedux').reducer,
