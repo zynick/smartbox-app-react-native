@@ -10,12 +10,9 @@ import DigitalStromComponent from '../Components/DigitalStromComponent'
 import GlobalCacheContainer from './GlobalCacheContainer'
 
 // Styles
-import styles from './Styles/RoomScreenStyle'
+import styles from './Styles/RoomContainerStyle'
 
-// I18n
-// import I18n from 'react-native-i18n'
-
-class RoomScreen extends Component {
+class RoomContainer extends Component {
 
   state: {
     dataSource: Object
@@ -58,12 +55,6 @@ class RoomScreen extends Component {
           <Text>{item.type}</Text>
         )
     }
-    // const text = `${item.name} (${item.type})`
-    // const options = { title: item.name, item, room: {} }
-    // const navigate = NavigationActions.roomScreen.bind(this, options)
-    // return (
-    //   <RoomComponent text={text} onPress={navigate} />
-    // )
   }
 
   render() {
@@ -79,10 +70,9 @@ class RoomScreen extends Component {
       </View>
     )
   }
-
 }
 
-RoomScreen.propTypes = {
+RoomContainer.propTypes = {
   room: PropTypes.object
 }
 
@@ -94,4 +84,4 @@ const mapDispatchToProps = dispatch => {
   return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoomScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(RoomContainer)
