@@ -1,6 +1,5 @@
 import mockery from 'mockery'
 import m from 'module'
-import {keys, replace, forEach} from 'ramda'
 
 // inject __DEV__ as it is not available when running through the tests
 global.__DEV__ = true
