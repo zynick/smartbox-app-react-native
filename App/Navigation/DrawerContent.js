@@ -7,9 +7,10 @@ import { connect } from 'react-redux'
 
 import LoginActions from '../Redux/LoginRedux'
 import DrawerButton from '../Components/DrawerButton'
-
 import { Images } from '../Themes'
+
 import styles from './Styles/DrawerContentStyle'
+
 
 class DrawerContent extends Component {
 
@@ -23,11 +24,11 @@ class DrawerContent extends Component {
     })
   }
 
-  toggleDrawer = () => {
+  toggleDrawer() {
     this.context.drawer.toggle()
   }
 
-  // handlePressPresentations = () => {
+  // handlePressPresentations() {
   //   this.toggleDrawer()
   //   NavigationActions.presentationScreen()
   // }
