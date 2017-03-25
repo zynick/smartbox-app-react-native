@@ -8,7 +8,6 @@ import ApiConfig from '../Config/ApiConfig'
 /* ------------- Types ------------- */
 
 import { StartupTypes } from '../Redux/StartupRedux'
-import { TemperatureTypes } from '../Redux/TemperatureRedux'
 import { LoginTypes } from '../Redux/LoginRedux'
 import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
 import { StructureTypes } from '../Redux/StructureRedux'
@@ -19,7 +18,6 @@ import { GcSendCommandTypes } from '../Redux/GcSendCommandRedux'
 
 import { startup } from './StartupSagas'
 import { login } from './LoginSagas'
-import { getTemperature } from './TemperatureSagas'
 import { openScreen } from './OpenScreenSagas'
 import { getStructure } from './StructureSagas'
 import { callScene } from './DsCallSceneSagas'
@@ -30,7 +28,6 @@ import { sendCommand } from './GcSendCommandSagas'
 // The API we use is only used from Sagas, so we create it here and pass along
 // to the sagas which need it.
 const api = DebugSettings.useFixtures ? FixtureAPI : API.create(ApiConfig.smartboxBaseURL)
-const weatherApi = DebugSettings.useFixtures ? FixtureAPI : WeatherAPI.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
@@ -42,7 +39,6 @@ export default function* root() {
     // some sagas receive extra parameters in addition to an action
     takeLatest(StartupTypes.STARTUP, startup, api),
     takeLatest(LoginTypes.LOGIN_REQUEST, login, api),
-    takeLatest(TemperatureTypes.TEMPERATURE_REQUEST, getTemperature, weatherApi),
     takeLatest(StructureTypes.STRUCTURE_REQUEST, getStructure, api),
 
     takeEvery(DsCallSceneTypes.DS_CALL_SCENE_REQUEST, callScene, api),
