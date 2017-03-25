@@ -23,7 +23,7 @@ import Styles from './Styles/LoginScreenStyle'
 import { Images, Metrics } from '../Themes'
 import LoginActions from '../Redux/LoginRedux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-import I18n from 'react-native-i18n'
+
 
 type LoginScreenProps = {
   dispatch: () => any,
@@ -109,7 +109,7 @@ class LoginScreen extends React.Component {
               </View>
 
               <View style={Styles.row}>
-                <Text style={Styles.label}>{I18n.t('email')}</Text>
+                <Text style={Styles.label}>Email</Text>
                 <TextInput
                   ref='email'
                   style={[Styles.input, inputTextStyle]}
@@ -126,7 +126,7 @@ class LoginScreen extends React.Component {
               </View>
 
               <View style={Styles.row}>
-                <Text style={Styles.label}>{I18n.t('password')}</Text>
+                <Text style={Styles.label}>Password</Text>
                 <TextInput
                   ref='password'
                   style={[Styles.input, inputTextStyle]}
@@ -146,7 +146,7 @@ class LoginScreen extends React.Component {
               <View style={Styles.row}>
                 <TouchableOpacity onPress={this.handlePressLogin}>
                   <View style={Styles.button}>
-                    <Text style={Styles.buttonText}>{I18n.t('signIn')}</Text>
+                    <Text style={Styles.buttonText}>Sign In</Text>
                   </View>
                 </TouchableOpacity>
               </View>

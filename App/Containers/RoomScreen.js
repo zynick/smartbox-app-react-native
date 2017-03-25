@@ -9,11 +9,8 @@ import AlertMessage from '../Components/AlertMessage'
 import DigitalStromComponent from '../Components/DigitalStromComponent'
 import GlobalCacheContainer from './GlobalCacheContainer'
 
-// Styles
 import styles from './Styles/RoomScreenStyle'
 
-// I18n
-// import I18n from 'react-native-i18n'
 
 class RoomScreen extends Component {
 

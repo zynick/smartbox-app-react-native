@@ -4,7 +4,6 @@ import React, { Component, PropTypes } from 'react'
 import { ListView, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-// import Tabs from 'react-native-tabs'
 
 import { isLoggedIn } from '../Redux/LoginRedux'
 import StructureActions, { getStructure } from '../Redux/StructureRedux'
@@ -14,10 +13,6 @@ import AlertMessage from '../Components/AlertMessage'
 import RoomComponent from '../Components/RoomComponent'
 
 import styles from './Styles/MainScreenStyle'
-
-// I18n
-// import I18n from 'react-native-i18n'
-
 
 
 class MainScreen extends Component {
