@@ -2,15 +2,13 @@
 
 import React from 'react'
 import { View, Text } from 'react-native'
-import styles from './Styles/DigitalStromComponentStyle'
+
 import DigitalStromLightContainer from '../Containers/DigitalStromLightContainer'
+import styles from './Styles/DigitalStromComponentStyle'
+
 
 type DigitalStromComponentProps = {
   item: Object,
-  // text ? : string,
-  // children ? : string,
-  // onPress: () => void,
-  // styles ? : Object
 };
 
 
