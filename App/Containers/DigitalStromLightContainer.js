@@ -28,35 +28,35 @@ class DigitalStromLightContainer extends Component {
     }
   }
 
-  onPressPreset1() {
+  onPressPreset1 = () => {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 5)
     Vibration.vibrate(this.pattern)
   }
 
-  onPressPreset2() {
+  onPressPreset2 = () => {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 17)
     Vibration.vibrate(this.pattern)
   }
 
-  onPressPreset3() {
+  onPressPreset3 = () => {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 18)
     Vibration.vibrate(this.pattern)
   }
 
-  onPressPreset4() {
+  onPressPreset4 = () => {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 19)
     Vibration.vibrate(this.pattern)
   }
 
-  onPressOff() {
+  onPressOff = () => {
     const { zoneId, groupId } = this.props.item
     this.isAttemptCall = true
     this.props.callScene(zoneId, groupId, 0)
@@ -80,23 +80,23 @@ class DigitalStromLightContainer extends Component {
           <Text style={styles.button}>Device: {devices.length}</Text>
         </View>
 
-        <TouchableOpacity onPress={this.onPressPreset1.bind(this)}>
+        <TouchableOpacity onPress={this.onPressPreset1}>
           <Text style={styles.button}>* {scene5.name} *</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.onPressPreset2.bind(this)}>
+        <TouchableOpacity onPress={this.onPressPreset2}>
           <Text style={styles.button}>* {scene17.name} *</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.onPressPreset3.bind(this)}>
+        <TouchableOpacity onPress={this.onPressPreset3}>
           <Text style={styles.button}>* {scene18.name} *</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.onPressPreset4.bind(this)}>
+        <TouchableOpacity onPress={this.onPressPreset4}>
           <Text style={styles.button}>* {scene19.name} *</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.onPressOff.bind(this)}>
+        <TouchableOpacity onPress={this.onPressOff}>
           <Text style={styles.button}>* {scene0.name} *</Text>
         </TouchableOpacity>
       </View>

@@ -39,7 +39,7 @@ class RoomContainer extends Component {
     return this.state.dataSource.getRowCount() === 0
   }
 
-  renderRow(item) {
+  renderRow = item => {
     switch (item.type) {
       case 'digitalstrom':
         return (
@@ -63,7 +63,7 @@ class RoomContainer extends Component {
         <ListView
           contentContainerStyle={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)}
+          renderRow={this.renderRow}
           enableEmptySections={true} />
       </View>
     )

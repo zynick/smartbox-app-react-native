@@ -23,22 +23,22 @@ class DigitalStromMainContainer extends Component {
     }
   }
 
-  onPressHome() {
+  onPressHome = () => {
     this.isAttemptCall = true
     Vibration.vibrate(this.pattern)
   }
 
-  onPressLeave() {
+  onPressLeave = () => {
     this.isAttemptCall = true
     Vibration.vibrate(this.pattern)
   }
 
-  onPressDoorBell() {
+  onPressDoorBell = () => {
     this.isAttemptCall = true
     Vibration.vibrate(this.pattern)
   }
 
-  onPressPanic() {
+  onPressPanic = () => {
     this.isAttemptCall = true
     Vibration.vibrate(this.pattern)
   }
@@ -53,21 +53,21 @@ class DigitalStromMainContainer extends Component {
         </View>
 
         <View style={styles.row}>
-          <TouchableOpacity onPress={this.onPressHome.bind(this)}>
+          <TouchableOpacity onPress={this.onPressHome}>
             <Text style={styles.button}>* Coming Home *</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.onPressLeave.bind(this)}>
+          <TouchableOpacity onPress={this.onPressLeave}>
             <Text style={styles.button}>* Leaving Home *</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.row}>
-          <TouchableOpacity onPress={this.onPressDoorBell.bind(this)}>
+          <TouchableOpacity onPress={this.onPressDoorBell}>
             <Text style={styles.button}>* Door Bell *</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.onPressPanic.bind(this)}>
+          <TouchableOpacity onPress={this.onPressPanic}>
             <Text style={styles.button}>* Panic *</Text>
           </TouchableOpacity>
         </View>

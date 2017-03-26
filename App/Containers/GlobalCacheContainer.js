@@ -50,7 +50,7 @@ class GlobalCacheContainer extends Component {
     Vibration.vibrate(this.pattern)
   }
 
-  renderRow(row) {
+  renderRow = row => {
     return (
       <TouchableOpacity onPress={this.onPress.bind(this, row.command)}>
         <Text style={styles.button}>* {row.name} *</Text>
@@ -69,7 +69,7 @@ class GlobalCacheContainer extends Component {
         <ListView
           contentContainerStyle={styles.listView}
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)}
+          renderRow={this.renderRow}
           enableEmptySections={true} />
       </View>
     )
