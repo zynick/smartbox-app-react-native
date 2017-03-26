@@ -53,6 +53,10 @@ export default StyleSheet.create({
     color: loginColors.inputReadOnly,
   },
 
+  buttonWrapper: {
+    height: Metrics.buttonHeight
+  },
+
   button: {
     flex: 1,
     alignItems: 'center',

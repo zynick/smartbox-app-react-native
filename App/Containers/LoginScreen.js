@@ -19,10 +19,12 @@ import {
   Image
 } from 'react-native'
 import { connect } from 'react-redux'
-import Styles from './Styles/LoginScreenStyle'
-import { Images, Metrics } from '../Themes'
-import LoginActions from '../Redux/LoginRedux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
+
+import LoginActions from '../Redux/LoginRedux'
+
+import { Images, Metrics } from '../Themes'
+import styles from './Styles/LoginScreenStyle'
 
 
 class LoginScreen extends Component {
@@ -77,28 +79,27 @@ class LoginScreen extends Component {
     const { email, password, error } = this.state
     const { fetching } = this.props
     const editable = !fetching
-    const inputTextStyle = editable ? Styles.inputEdit : Styles.inputRead
+    const inputTextStyle = editable ? styles.inputEdit : styles.inputRead
 
     return (
       <KeyboardAvoidingView behavior='padding'>
-        <ScrollView style={[Styles.container, { height: this.state.scrollViewHeight }]}
-          contentContainerStyle={[Styles.flexContainer]}
-          keyboardShouldPersistTaps>
+        <ScrollView style={[styles.container, { height: this.state.scrollViewHeight }]}
+          contentContainerStyle={[styles.flexContainer]}>
 
           <View>
-            <View style={Styles.flexBox}>
+            <View style={styles.flexBox}>
 
-              <Image source={Images.logo} style={Styles.logo} />
+              <Image source={Images.logo} style={styles.logo} />
 
-              <View style={Styles.row}>
-                <Text style={Styles.error}>{error}</Text>
+              <View style={styles.row}>
+                <Text style={styles.error}>{error}</Text>
               </View>
 
-              <View style={Styles.row}>
-                <Text style={Styles.label}>Email</Text>
+              <View style={styles.row}>
+                <Text style={styles.label}>Email</Text>
                 <TextInput
                   ref='email'
-                  style={[Styles.input, inputTextStyle]}
+                  style={[styles.input, inputTextStyle]}
                   value={email}
                   editable={editable}
                   keyboardType='default'
@@ -111,11 +112,11 @@ class LoginScreen extends Component {
                   />
               </View>
 
-              <View style={Styles.row}>
-                <Text style={Styles.label}>Password</Text>
+              <View style={styles.row}>
+                <Text style={styles.label}>Password</Text>
                 <TextInput
                   ref='password'
-                  style={[Styles.input, inputTextStyle]}
+                  style={[styles.input, inputTextStyle]}
                   value={password}
                   editable={editable}
                   keyboardType='default'
@@ -129,10 +130,10 @@ class LoginScreen extends Component {
                   />
               </View>
 
-              <View style={Styles.row}>
-                <TouchableOpacity onPress={this.handlePressLogin}>
-                  <View style={Styles.button}>
-                    <Text style={Styles.buttonText}>Sign In</Text>
+              <View style={styles.row}>
+                <TouchableOpacity style={styles.buttonWrapper} onPress={this.handlePressLogin}>
+                  <View style={styles.button}>
+                    <Text style={styles.buttonText}>Sign In</Text>
                   </View>
                 </TouchableOpacity>
               </View>
