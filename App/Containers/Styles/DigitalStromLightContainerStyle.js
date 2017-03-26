@@ -18,7 +18,6 @@ export default StyleSheet.create({
 
     padding: Metrics.smallMargin,
 
-    backgroundColor: '#FFF',
     borderWidth: 1,
     borderColor: '#666'
   },

@@ -18,13 +18,12 @@ export default StyleSheet.create({
 
     padding: Metrics.smallMargin,
 
-    backgroundColor: '#FFF',
     borderWidth: 1,
     borderColor: '#666'
   },
 
   row: {
-    flex: 1,
+    // flex: 1, // css is weird, extra space will shown with this attribute
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'stretch'
@@ -36,10 +35,9 @@ export default StyleSheet.create({
     fontSize: Fonts.size.h6
   },
 
-  description: {
-    color: '#666',
-    margin: Metrics.smallMargin,
-    fontSize: Fonts.size.medium
+  listView: {
+    paddingTop: Metrics.smallMargin,
+    paddingBottom: Metrics.smallMargin
   },
 
   button: {
