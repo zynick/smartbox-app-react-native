@@ -69,7 +69,7 @@ class TabScreen extends Component {
     })
   }
 
-  handleChangeTab = (index) => {
+  handleChangeTab = index => {
     this.setState({ index })
   }
 
@@ -91,7 +91,7 @@ class TabScreen extends Component {
     )
   }
 
-  renderFooter = (props) => {
+  renderFooter = props => {
     return (
       <TabBar
         {...props}
@@ -126,7 +126,7 @@ TabScreen.propTypes = {
   position: PropTypes.number
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     loggedIn: isLoggedIn(state.login),
     structure: getStructure(state.structure),
@@ -134,7 +134,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     getApiStructure: () => dispatch(StructureActions.structureRequest())
   }
