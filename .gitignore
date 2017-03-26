@@ -1,6 +1,5 @@
 # React Ignite App
-android/
-ios/
+android/build/
 .env
 
 # OSX
