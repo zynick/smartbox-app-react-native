@@ -10,6 +10,7 @@ import DrawerButton from '../Components/DrawerButton'
 import { Images } from '../Themes'
 import styles from './Styles/DrawerContentStyle'
 
+
 class DrawerContent extends Component {
 
   componentDidMount = () => {

@@ -91,10 +91,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendCommand: command => {
-      console.tron.log(`GCContainer.sendCommand()`)
-      dispatch(GcSendCommandActions.gcSendCommandRequest(command))
-    }
+    sendCommand: command => dispatch(GcSendCommandActions.gcSendCommandRequest(command))
   }
 }
 

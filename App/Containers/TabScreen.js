@@ -16,6 +16,14 @@ import styles from './Styles/TabScreenStyle'
 
 class TabScreen extends Component {
 
+  state: {
+    roomDS: Object,
+    rooms: Array,
+    index: number,
+    routes: Array,
+    loaded: boolean
+  }
+
   constructor(props) {
     super(props)
 
@@ -31,7 +39,7 @@ class TabScreen extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     const { started, loggedIn, structure, getApiStructure } = this.props
 
     if (!started) return // TODO is this started variable needed? maybe we can remove it?
@@ -50,7 +58,7 @@ class TabScreen extends Component {
     })
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps = newProps => {
     const { started, loggedIn, structure, getApiStructure } = newProps
 
     if (!started) return
@@ -103,7 +111,7 @@ class TabScreen extends Component {
       )
   }
 
-  render() {
+  render = () => {
     return (
       <TabViewAnimated
         style={styles.container}

@@ -45,7 +45,7 @@ class LoginScreen extends Component {
     this.isAttemptLogin = false
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps = newProps => {
     const { fetching, error } = newProps
     this.forceUpdate()
 
@@ -54,7 +54,6 @@ class LoginScreen extends Component {
       if (error) {
         return this.setState({ error, password: '' })
       }
-      // NavigationActions.mainScreen({ type: 'replace' })
       NavigationActions.tabScreen({ type: 'replace' })
     }
   }
@@ -74,7 +73,7 @@ class LoginScreen extends Component {
     this.setState({ password: text })
   }
 
-  render() {
+  render = () => {
     const { email, password, error } = this.state
     const { fetching } = this.props
     const editable = !fetching

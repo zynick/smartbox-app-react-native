@@ -35,7 +35,7 @@ class MainScreen extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     const { started, loggedIn, structure, getApiStructure } = this.props
 
     if (!started) return // TODO is this started variable needed? maybe we can remove it?
@@ -51,7 +51,7 @@ class MainScreen extends Component {
     })
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps = newProps => {
     const { started, loggedIn, structure, getApiStructure } = newProps
 
     if (!started) return
@@ -67,7 +67,7 @@ class MainScreen extends Component {
     })
   }
 
-  renderMainItemComponent(item) {
+  renderMainItemComponent = item => {
     switch (item.type) {
       case 'digitalstrom':
         return (
@@ -85,11 +85,9 @@ class MainScreen extends Component {
     }
   }
 
-  noRoomRowData() {
-    return this.state.roomDS.getRowCount() === 0
-  }
+  noRoomRowData = () => this.state.roomDS.getRowCount() === 0
 
-  renderRoomComponent(room) {
+  renderRoomComponent(room) { // ignore this.. this is going to be removed anyway
     const options = { title: room.name, room }
     const navigate = NavigationActions.roomScreen.bind(this, options) // ignore this.. this is going to be removed anyway
     return (
@@ -97,7 +95,7 @@ class MainScreen extends Component {
     )
   }
 
-  render() {
+  render = () => {
     const loading = !this.props.started;
     return (
       <View style={styles.container}>

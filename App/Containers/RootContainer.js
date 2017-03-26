@@ -2,9 +2,9 @@
 
 import React, { Component, PropTypes } from 'react'
 import { View, StatusBar } from 'react-native'
-import NavigationRouter from '../Navigation/NavigationRouter'
 import { connect } from 'react-redux'
 
+import NavigationRouter from '../Navigation/NavigationRouter'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
 
@@ -13,14 +13,14 @@ import styles from './Styles/RootContainerStyle'
 
 class RootContainer extends Component {
 
-  componentDidMount() {
+  componentDidMount = () => {
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
       this.props.startup()
     }
   }
 
-  render() {
+  render = () => {
     return (
       <View style={styles.applicationView}>
         <StatusBar barStyle='light-content' />

@@ -29,15 +29,13 @@ class RoomScreen extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps = newProps => {
     const { items = [] } = newProps.room
     const dataSource = this.state.dataSource.cloneWithRows(items)
     this.setState({ dataSource })
   }
 
-  noRowData() {
-    return this.state.dataSource.getRowCount() === 0
-  }
+  noRowData = () => this.state.dataSource.getRowCount() === 0
 
   renderRow = item => {
     switch (item.type) {
@@ -56,7 +54,7 @@ class RoomScreen extends Component {
     }
   }
 
-  render() {
+  render = () => {
     return (
       <View style={styles.container}>
         <AlertMessage title="There's nothing in this room" show={this.noRowData()} />
