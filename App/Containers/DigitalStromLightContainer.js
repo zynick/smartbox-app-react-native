@@ -19,7 +19,7 @@ class DigitalStromLightContainer extends Component {
   //   this.state = {}
   // }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps = newProps => {
     if (this.isAttemptCall && !newProps.fetching) {
       this.isAttemptCall = false
       if (newProps.success) {
@@ -63,7 +63,7 @@ class DigitalStromLightContainer extends Component {
     Vibration.vibrate(this.pattern)
   }
 
-  render() {
+  render = () => {
     const { scenes, devices } = this.props.item
     const {
       scene0 = { name: 'Off' },
@@ -110,13 +110,13 @@ DigitalStromLightContainer.propTypes = {
   success: PropTypes.bool
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     success: state.dsCallScene.success
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     callScene: (zoneId, groupId, sceneNumber) =>
       dispatch(DsCallSceneActions.dsCallSceneRequest(zoneId, groupId, sceneNumber))

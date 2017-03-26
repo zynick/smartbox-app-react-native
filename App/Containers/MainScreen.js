@@ -91,7 +91,7 @@ class MainScreen extends Component {
 
   renderRoomComponent(room) {
     const options = { title: room.name, room }
-    const navigate = NavigationActions.roomScreen.bind(this, options)
+    const navigate = NavigationActions.roomScreen.bind(this, options) // ignore this.. this is going to be removed anyway
     return (
       <RoomComponent text={room.name} onPress={navigate} />
     )

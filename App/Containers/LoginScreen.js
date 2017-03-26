@@ -8,7 +8,7 @@
  * does not support potrait mode, but who cares
  */
 
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   View,
   ScrollView,
@@ -25,16 +25,7 @@ import LoginActions from '../Redux/LoginRedux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 
-type LoginScreenProps = {
-  dispatch: () => any,
-  error: string,
-  fetching: boolean,
-  attemptLogin: () => void
-};
-
-class LoginScreen extends React.Component {
-
-  props: LoginScreenProps;
+class LoginScreen extends Component {
 
   state: {
     email: string,
@@ -44,10 +35,8 @@ class LoginScreen extends React.Component {
   }
 
   isAttemptLogin: boolean
-  keyboardDidShowListener: Object
-  keyboardDidHideListener: Object;
 
-  constructor(props: LoginScreenProps) {
+  constructor(props) {
     super(props)
     this.state = {
       error: ' ',
@@ -155,6 +144,12 @@ class LoginScreen extends React.Component {
       </KeyboardAvoidingView>
     )
   }
+}
+
+LoginScreen.propTypes = {
+  attemptLogin: PropTypes.func,
+  isAttemptLogin: PropTypes.bool,
+  fetching: PropTypes.bool
 }
 
 const mapStateToProps = state => {

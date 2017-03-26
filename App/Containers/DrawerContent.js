@@ -12,7 +12,7 @@ import styles from './Styles/DrawerContentStyle'
 
 class DrawerContent extends Component {
 
-  componentDidMount() {
+  componentDidMount = () => {
     BackAndroid.addEventListener('hardwareBackPress', () => {
       if (this.context.drawer.props.open) {
         this.toggleDrawer()
@@ -36,7 +36,7 @@ class DrawerContent extends Component {
     this.props.logout()
   }
 
-  render() {
+  render = () => {
     return (
       <ScrollView style={styles.container}>
         <Image source={Images.logo} style={styles.logo} />
@@ -56,11 +56,11 @@ DrawerContent.propTypes = {
   logout: PropTypes.func
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(LoginActions.logout())
   }

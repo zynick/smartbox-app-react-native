@@ -35,7 +35,7 @@ class GlobalCacheContainer extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps = newProps => {
     if (this.isAttemptCall && !newProps.fetching) {
       this.isAttemptCall = false
       if (newProps.success) {
@@ -44,21 +44,22 @@ class GlobalCacheContainer extends Component {
     }
   }
 
-  onPress(command) {
-    this.isAttemptCall = true
-    this.props.sendCommand(command)
-    Vibration.vibrate(this.pattern)
-  }
+  onPressFunc = command =>
+    () => {
+      this.isAttemptCall = true
+      this.props.sendCommand(command)
+      Vibration.vibrate(this.pattern)
+    }
 
   renderRow = row => {
     return (
-      <TouchableOpacity onPress={this.onPress.bind(this, row.command)}>
+      <TouchableOpacity onPress={this.onPressFunc(row.command)}>
         <Text style={styles.button}>* {row.name} *</Text>
       </TouchableOpacity>
     )
   }
 
-  render() {
+  render = () => {
     const { name } = this.props.item
 
     return (
@@ -82,15 +83,18 @@ GlobalCacheContainer.propTypes = {
   success: PropTypes.bool
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     success: state.gcSendCommand.success
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    sendCommand: command => dispatch(GcSendCommandActions.gcSendCommandRequest(command))
+    sendCommand: command => {
+      console.tron.log(`GCContainer.sendCommand()`)
+      dispatch(GcSendCommandActions.gcSendCommandRequest(command))
+    }
   }
 }
 

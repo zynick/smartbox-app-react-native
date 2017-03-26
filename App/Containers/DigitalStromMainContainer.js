@@ -17,7 +17,7 @@ class DigitalStromMainContainer extends Component {
   //   this.state = {}
   // }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps  = newProps => {
     if (this.isAttemptCall && !newProps.fetching) { // TODO get fetching from mapStateToProps
       this.isAttemptCall = false
     }
@@ -43,7 +43,7 @@ class DigitalStromMainContainer extends Component {
     Vibration.vibrate(this.pattern)
   }
 
-  render () {
+  render = () => {
     const { name } = this.props
     return (
       <View style={styles.container}>
@@ -81,11 +81,11 @@ DigitalStromMainContainer.propTypes = {
   success: PropTypes.bool
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {}
 }
 
